@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/screen/page1.dart';
+import 'package:tnshealth/screen/Login_Page.dart';
 
 void main() {
-  runApp(const tnshealth());
+  runApp(const Tnshealth());
 }
 
-class tnshealth extends StatelessWidget {
-  const tnshealth({Key? key}) : super(key: key);
+class Tnshealth extends StatelessWidget {
+  const Tnshealth({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return page1();
+    return MaterialApp(
+      title: 'Flutter Login',
+      home: LoginPage(),
+    );
   }
 }
