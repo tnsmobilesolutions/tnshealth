@@ -3,7 +3,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
 const users = {
-  'amrutanshup@gmail.com': 'tns@123',
+  'amrutanshup@gmail.com': 'tns123',
   // 'hunter@gmail.com': 'hunter',
 };
 
