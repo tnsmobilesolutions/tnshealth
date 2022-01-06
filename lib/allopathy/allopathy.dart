@@ -8,6 +8,7 @@ class Allopathy extends StatefulWidget {
 }
 
 class _AllopathyState extends State<Allopathy> {
+  final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

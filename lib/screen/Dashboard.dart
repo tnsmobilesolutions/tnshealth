@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Login_Page.dart';
 import 'package:tnshealth/allopathy/allopathy.dart';
 import 'package:tnshealth/ayurvedic/ayurvedic.dart';
@@ -16,7 +17,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 3,
       child: Scaffold(
         // backgroundColor: Colors.transparent,
@@ -84,6 +85,7 @@ class _DashBoardState extends State<DashBoard> {
             ],
           ),
         ),
+
         body: TabBarView(children: [
           Padding(
             padding: const EdgeInsets.all(40.0),
@@ -177,13 +179,149 @@ class _DashBoardState extends State<DashBoard> {
               ],
             ),
           ),
-          const Icon(
-            Icons.snowboarding,
-            size: 300,
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Test Name', style: kTabBar),
+                const SizedBox(height: 20),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Test Name',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text('Patient Name', style: kTabBar),
+                const SizedBox(height: 20),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Patient Name',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text('Patient Adress', style: kTabBar),
+                const SizedBox(height: 20),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Patient Adress',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text('Mobile No.', style: kTabBar),
+                const SizedBox(height: 20),
+                IntlPhoneField(
+                  decoration: const InputDecoration(
+                    labelText: 'Phone Number',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(),
+                    ),
+                  ),
+                  initialCountryCode: 'IN',
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                )
+              ],
+            ),
           ),
-          const Icon(
-            Icons.medical_services,
-            size: 300,
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.red),
+                  height: 70.0,
+                  width: 300.0,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Allopathy();
+                          },
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Center(
+                        child: Text(
+                          'Allopathy',
+                          style: kTextStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.greenAccent),
+                  height: 70.0,
+                  width: 300.0,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Ayurvedic();
+                          },
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Center(
+                        child: Text(
+                          'Ayurvedic',
+                          style: kTextStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey),
+                  height: 70.0,
+                  width: 300.0,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Homeopathy();
+                          },
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Center(
+                        child: Text(
+                          'Homeopathy',
+                          style: kTextStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ]),
       ),
