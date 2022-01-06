@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tnshealth/screen/Login_Page.dart';
 import 'package:tnshealth/screen/allopathy.dart';
 import 'package:tnshealth/screen/ayurvedic.dart';
 import 'package:tnshealth/screen/homeopathy.dart';
@@ -43,12 +44,21 @@ class _DashBoardState extends State<DashBoard> {
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
+              title: Row(
+                children: const <Widget>[
+                  Icon(Icons.logout),
+                  Text('Logout'),
+                ],
+              ),
               onTap: () {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const LoginPage();
+                  },
+                ));
               },
             ),
           ],
