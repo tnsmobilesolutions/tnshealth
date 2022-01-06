@@ -177,8 +177,14 @@ class _DashBoardState extends State<DashBoard> {
               ],
             ),
           ),
-          Text('sagar'),
-          Text('sagar'),
+          const Icon(
+            Icons.snowboarding,
+            size: 300,
+          ),
+          const Icon(
+            Icons.medical_services,
+            size: 300,
+          ),
         ]),
       ),
     );
