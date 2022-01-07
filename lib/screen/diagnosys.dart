@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:tnshealth/screen/Dashboard.dart';
 
 class diagnosys extends StatefulWidget {
   diagnosys({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class diagnosys extends StatefulWidget {
 }
 
 class _diagnosysState extends State<diagnosys> {
+  final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,36 @@ class _diagnosysState extends State<diagnosys> {
               onChanged: (phone) {
                 print(phone.completeNumber);
               },
-            )
+            ),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20), color: Colors.red),
+                height: 50.0,
+                width: 250.0,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return DashBoard();
+                        },
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Center(
+                      child: Text(
+                        'Book an Appointment',
+                        style: kTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

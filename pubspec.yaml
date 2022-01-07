@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_login: ^3.1.0
   intl_phone_field: ^2.1.0
+  file_picker: ^4.3.0
   
 
 dev_dependencies:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:tnshealth/screen/Dashboard.dart';
 
 class medicine extends StatefulWidget {
   medicine({Key? key}) : super(key: key);
@@ -9,6 +10,8 @@ class medicine extends StatefulWidget {
 }
 
 class _medicineState extends State<medicine> {
+  final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  String dropdownValue = 'Allopathy';
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
@@ -18,28 +21,36 @@ class _medicineState extends State<medicine> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Text('Test Name', style: kTabBar),
-            // const SizedBox(height: 20),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Test Name',
+            Center(
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 3,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: <String>['Allopathy', 'Ayurvedic', 'Homeopathy']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
               ),
             ),
             const SizedBox(height: 20),
-            // Text('Patient Name', style: kTabBar),
+            Text('Upload Prescription', style: kTabBar),
+
+            const SizedBox(height: 20),
+            Text('Delivery Adress', style: kTabBar),
             // const SizedBox(height: 20),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Patient Name',
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text('Patient Adress', style: kTabBar),
-            const SizedBox(height: 20),
+
+            const SizedBox(height: 10),
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -47,6 +58,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'Adress Line 1',
               ),
             ),
+            const SizedBox(height: 10),
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -54,6 +66,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'Adress Line 2',
               ),
             ),
+            const SizedBox(height: 10),
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -61,6 +74,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'City',
               ),
             ),
+            const SizedBox(height: 10),
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -68,6 +82,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'State',
               ),
             ),
+            const SizedBox(height: 10),
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -89,6 +104,35 @@ class _medicineState extends State<medicine> {
               onChanged: (phone) {
                 print(phone.completeNumber);
               },
+            ),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20), color: Colors.red),
+                height: 50.0,
+                width: 150.0,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return DashBoard();
+                        },
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Center(
+                      child: Text(
+                        'Order',
+                        style: kTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),
