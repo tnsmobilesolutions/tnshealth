@@ -4,9 +4,10 @@ import 'package:tnshealth/screen/Login_Page.dart';
 import 'package:tnshealth/allopathy/allopathy.dart';
 import 'package:tnshealth/ayurvedic/ayurvedic.dart';
 import 'package:tnshealth/homeopathy/homeopathy.dart';
-import 'package:tnshealth/screen/consult.dart';
-import 'package:tnshealth/screen/diagnosys.dart';
-import 'package:tnshealth/screen/medicine.dart';
+
+import 'package:tnshealth/tabbar/consult.dart';
+import 'package:tnshealth/tabbar/diagnosys.dart';
+import 'package:tnshealth/tabbar/medicine.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -89,7 +90,8 @@ class _DashBoardState extends State<DashBoard> {
           ),
         ),
 
-        body: TabBarView(children: [Consult(), diagnosys(), medicine()]),
+        body: TabBarView(
+            children: [const Consult(), diagnosys(), const medicine()]),
       ),
     );
   }

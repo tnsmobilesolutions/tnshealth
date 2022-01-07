@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
-class medicine extends StatefulWidget {
-  medicine({Key? key}) : super(key: key);
+class diagnosys extends StatefulWidget {
+  diagnosys({Key? key}) : super(key: key);
 
   @override
-  _medicineState createState() => _medicineState();
+  _diagnosysState createState() => _diagnosysState();
 }
 
-class _medicineState extends State<medicine> {
+class _diagnosysState extends State<diagnosys> {
+  final testnamecontroller = TextEditingController();
+  final patientnamecontroller = TextEditingController();
   final adressline1namecontroller = TextEditingController();
   final adressline2namecontroller = TextEditingController();
   final citycontroller = TextEditingController();
@@ -17,8 +20,7 @@ class _medicineState extends State<medicine> {
   final pincodecontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
 
-  final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  String dropdownValue = 'Allopathy';
+  final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
@@ -28,40 +30,28 @@ class _medicineState extends State<medicine> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Type Of Medicine', style: kTabBar),
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  style: const TextStyle(color: Colors.deepPurple),
-                  underline: Container(
-                    height: 3,
-                    color: Colors.deepPurpleAccent,
-                  ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: <String>['Allopathy', 'Ayurvedic', 'Homeopathy']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ],
+            // Text('Test Name', style: kTabBar),
+            // const SizedBox(height: 20),
+            TextField(
+              controller: testnamecontroller,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Test Name',
+              ),
             ),
             const SizedBox(height: 20),
-            Text('Upload Prescription', style: kTabBar),
-
-            const SizedBox(height: 20),
-            Text('Delivery Adress', style: kTabBar),
+            // Text('Patient Name', style: kTabBar),
             // const SizedBox(height: 20),
-
-            const SizedBox(height: 10),
+            TextField(
+              controller: patientnamecontroller,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Patient Name',
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text('Patient Adress', style: kTabBar),
+            const SizedBox(height: 20),
             TextField(
               controller: adressline1namecontroller,
               decoration: const InputDecoration(
@@ -69,7 +59,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'Adress Line 1',
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             TextField(
               controller: adressline2namecontroller,
               decoration: const InputDecoration(
@@ -77,7 +67,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'Adress Line 2',
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             TextField(
               controller: citycontroller,
               decoration: const InputDecoration(
@@ -85,7 +75,7 @@ class _medicineState extends State<medicine> {
                 labelText: 'City',
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             TextField(
               controller: statecontroller,
               decoration: const InputDecoration(
@@ -93,8 +83,9 @@ class _medicineState extends State<medicine> {
                 labelText: 'State',
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             TextField(
+              keyboardType: TextInputType.number,
               controller: pincodecontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -120,6 +111,8 @@ class _medicineState extends State<medicine> {
             Center(
               child: ElevatedButton(
                   onPressed: () {
+                    print(testnamecontroller.text);
+                    print(patientnamecontroller.text);
                     print(adressline1namecontroller.text);
                     print(adressline2namecontroller.text);
                     print(citycontroller.text);
@@ -133,7 +126,7 @@ class _medicineState extends State<medicine> {
                     ));
                   },
                   child: const Text(
-                    'Submit',
+                    'Book Appointment',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   )),
             )
