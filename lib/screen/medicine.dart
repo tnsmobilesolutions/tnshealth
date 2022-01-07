@@ -10,6 +10,13 @@ class medicine extends StatefulWidget {
 }
 
 class _medicineState extends State<medicine> {
+  final adressline1namecontroller = TextEditingController();
+  final adressline2namecontroller = TextEditingController();
+  final citycontroller = TextEditingController();
+  final statecontroller = TextEditingController();
+  final pincodecontroller = TextEditingController();
+  final phonenumbercontroller = TextEditingController();
+
   final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   String dropdownValue = 'Allopathy';
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
@@ -21,27 +28,31 @@ class _medicineState extends State<medicine> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
-              child: DropdownButton<String>(
-                value: dropdownValue,
-                style: const TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 3,
-                  color: Colors.deepPurpleAccent,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Type Of Medicine', style: kTabBar),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  style: const TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 3,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>['Allopathy', 'Ayurvedic', 'Homeopathy']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue = newValue!;
-                  });
-                },
-                items: <String>['Allopathy', 'Ayurvedic', 'Homeopathy']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
+              ],
             ),
             const SizedBox(height: 20),
             Text('Upload Prescription', style: kTabBar),
@@ -51,41 +62,41 @@ class _medicineState extends State<medicine> {
             // const SizedBox(height: 20),
 
             const SizedBox(height: 10),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              controller: adressline1namecontroller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Adress Line 1',
               ),
             ),
             const SizedBox(height: 10),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              controller: adressline2namecontroller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Adress Line 2',
               ),
             ),
             const SizedBox(height: 10),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              controller: citycontroller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'City',
               ),
             ),
             const SizedBox(height: 10),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              controller: statecontroller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'State',
               ),
             ),
             const SizedBox(height: 10),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              controller: pincodecontroller,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'PinCode',
               ),
@@ -94,6 +105,7 @@ class _medicineState extends State<medicine> {
             // Text('Mobile No.', style: kTabBar),
             // const SizedBox(height: 20),
             IntlPhoneField(
+              controller: phonenumbercontroller,
               decoration: const InputDecoration(
                 labelText: 'Phone Number',
                 border: OutlineInputBorder(
@@ -102,16 +114,22 @@ class _medicineState extends State<medicine> {
               ),
               initialCountryCode: 'IN',
               onChanged: (phone) {
-                print(phone.completeNumber);
+                // print(phone.completeNumber);
               },
             ),
             Center(
               child: ElevatedButton(
                   onPressed: () {
+                    print(adressline1namecontroller.text);
+                    print(adressline2namecontroller.text);
+                    print(citycontroller.text);
+                    print(statecontroller.text);
+                    print(pincodecontroller.text);
+                    print(phonenumbercontroller.text);
                     DashBoard();
                   },
                   child: const Text(
-                    'Order',
+                    'Submit',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   )),
             )

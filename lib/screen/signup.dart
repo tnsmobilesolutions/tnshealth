@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
-class diagnosys extends StatefulWidget {
-  diagnosys({Key? key}) : super(key: key);
+enum SingingCharacter { Male, Female }
+
+class signuppage extends StatefulWidget {
+  signuppage({Key? key}) : super(key: key);
 
   @override
-  _diagnosysState createState() => _diagnosysState();
+  _signuppageState createState() => _signuppageState();
 }
 
-class _diagnosysState extends State<diagnosys> {
-  final testnamecontroller = TextEditingController();
-  final patientnamecontroller = TextEditingController();
-  final adressline1namecontroller = TextEditingController();
-  final adressline2namecontroller = TextEditingController();
-  final citycontroller = TextEditingController();
-  final statecontroller = TextEditingController();
-  final pincodecontroller = TextEditingController();
+class _signuppageState extends State<signuppage> {
+  @override
+  final fullnamecontroller = TextEditingController();
+  final agecontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  final confirmpasswordcontroller = TextEditingController();
+
   final phonenumbercontroller = TextEditingController();
 
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+
+  SingingCharacter? _character = SingingCharacter.Male;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,67 +34,74 @@ class _diagnosysState extends State<diagnosys> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Text('Test Name', style: kTabBar),
-            // const SizedBox(height: 20),
             TextField(
-              controller: testnamecontroller,
+              controller: fullnamecontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Test Name',
+                labelText: 'Full Name',
               ),
             ),
             const SizedBox(height: 20),
             // Text('Patient Name', style: kTabBar),
             // const SizedBox(height: 20),
             TextField(
-              controller: patientnamecontroller,
+              controller: agecontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Patient Name',
+                labelText: 'Age',
               ),
             ),
             const SizedBox(height: 20),
-            Text('Patient Adress', style: kTabBar),
+            Row(
+              children: [
+                RadioListTile<SingingCharacter>(
+                  title: const Text('Male'),
+                  value: SingingCharacter.Male,
+                  groupValue: _character,
+                  onChanged: (SingingCharacter? value) {
+                    setState(() {
+                      _character = value;
+                    });
+                  },
+                ),
+                RadioListTile<SingingCharacter>(
+                  title: const Text('Female'),
+                  value: SingingCharacter.Female,
+                  groupValue: _character,
+                  onChanged: (SingingCharacter? value) {
+                    setState(() {
+                      _character = value;
+                    });
+                  },
+                ),
+              ],
+            ),
             const SizedBox(height: 20),
             TextField(
-              controller: adressline1namecontroller,
+              controller: emailcontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Adress Line 1',
+                labelText: 'Email-Id',
               ),
             ),
             const SizedBox(height: 5),
             TextField(
-              controller: adressline2namecontroller,
+              controller: passwordcontroller,
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Adress Line 2',
+                labelText: 'Password',
               ),
             ),
             const SizedBox(height: 5),
             TextField(
-              controller: citycontroller,
+              controller: confirmpasswordcontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'City',
+                labelText: 'Confirm Password',
               ),
             ),
-            const SizedBox(height: 5),
-            TextField(
-              controller: statecontroller,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'State',
-              ),
-            ),
-            const SizedBox(height: 5),
-            TextField(
-              controller: pincodecontroller,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'PinCode',
-              ),
-            ),
+
             const SizedBox(height: 20),
             // Text('Mobile No.', style: kTabBar),
             // const SizedBox(height: 20),
@@ -109,13 +121,12 @@ class _diagnosysState extends State<diagnosys> {
             Center(
               child: ElevatedButton(
                   onPressed: () {
-                    print(testnamecontroller.text);
-                    print(patientnamecontroller.text);
-                    print(adressline1namecontroller.text);
-                    print(adressline2namecontroller.text);
-                    print(citycontroller.text);
-                    print(statecontroller.text);
-                    print(pincodecontroller.text);
+                    print(fullnamecontroller.text);
+                    print(agecontroller.text);
+                    print(emailcontroller.text);
+                    print(passwordcontroller.text);
+                    print(confirmpasswordcontroller.text);
+
                     print(phonenumbercontroller.text);
                     DashBoard();
                   },
