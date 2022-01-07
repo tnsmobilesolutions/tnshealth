@@ -117,7 +117,11 @@ class _diagnosysState extends State<diagnosys> {
                     print(statecontroller.text);
                     print(pincodecontroller.text);
                     print(phonenumbercontroller.text);
-                    DashBoard();
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return DashBoard();
+                      },
+                    ));
                   },
                   child: const Text(
                     'Book Appointment',

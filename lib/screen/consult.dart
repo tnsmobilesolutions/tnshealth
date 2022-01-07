@@ -27,7 +27,11 @@ class _ConsultState extends State<Consult> {
           Center(
             child: TextButton(
                 onPressed: () {
-                  const Allopathy();
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const Allopathy();
+                    },
+                  ));
                 },
                 child: Text(
                   'Allopathy',
@@ -37,14 +41,22 @@ class _ConsultState extends State<Consult> {
           Center(
             child: TextButton(
                 onPressed: () {
-                  const Ayurvedic();
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const Ayurvedic();
+                    },
+                  ));
                 },
                 child: Text('Ayurvedic', style: kConsultTextstyle)),
           ),
           Center(
             child: TextButton(
                 onPressed: () {
-                  const Homeopathy();
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const Homeopathy();
+                    },
+                  ));
                 },
                 child: Text(
                   'Homeopathy',
