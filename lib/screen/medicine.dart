@@ -106,33 +106,14 @@ class _medicineState extends State<medicine> {
               },
             ),
             Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20), color: Colors.red),
-                height: 50.0,
-                width: 150.0,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DashBoard();
-                        },
-                      ),
-                    );
+              child: ElevatedButton(
+                  onPressed: () {
+                    DashBoard();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Center(
-                      child: Text(
-                        'Order',
-                        style: kTextStyle,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+                  child: const Text(
+                    'Order',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  )),
             )
           ],
         ),

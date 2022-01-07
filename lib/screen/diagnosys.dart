@@ -97,34 +97,15 @@ class _diagnosysState extends State<diagnosys> {
               },
             ),
             Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20), color: Colors.red),
-                height: 50.0,
-                width: 250.0,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DashBoard();
-                        },
-                      ),
-                    );
+              child: ElevatedButton(
+                  onPressed: () {
+                    DashBoard();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Center(
-                      child: Text(
-                        'Book an Appointment',
-                        style: kTextStyle,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                  child: const Text(
+                    'Book Appointment',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  )),
+            )
           ],
         ),
       ),
