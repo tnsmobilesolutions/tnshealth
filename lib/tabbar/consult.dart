@@ -12,10 +12,9 @@ class Consult extends StatefulWidget {
 
 class _ConsultState extends State<Consult> {
   final kConsultTextstyle = const TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 45,
-      backgroundColor: Colors.black,
-      color: Colors.redAccent);
+    fontWeight: FontWeight.bold,
+    fontSize: 45,
+  );
   final kTextStyle = const TextStyle(fontSize: 40, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
@@ -25,43 +24,61 @@ class _ConsultState extends State<Consult> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Center(
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const Allopathy();
-                    },
-                  ));
-                },
-                child: Text(
-                  'Allopathy',
-                  style: kConsultTextstyle,
-                )),
+            child: Container(
+              // padding: EdgeInsets.all(5),
+              width: 350,
+              height: 60,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25), color: Colors.blue),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const Allopathy();
+                      },
+                    ));
+                  },
+                  child: Center(
+                      child: Text('Allopathy', style: kConsultTextstyle))),
+            ),
           ),
           Center(
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const Ayurvedic();
-                    },
-                  ));
-                },
-                child: Text('Ayurvedic', style: kConsultTextstyle)),
+            child: Container(
+              // padding: EdgeInsets.all(5),
+              width: 350,
+              height: 60,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25), color: Colors.blue),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const Ayurvedic();
+                      },
+                    ));
+                  },
+                  child: Center(
+                      child: Text('Ayurvedic', style: kConsultTextstyle))),
+            ),
           ),
           Center(
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const Homeopathy();
-                    },
-                  ));
-                },
-                child: Text(
-                  'Homeopathy',
-                  style: kConsultTextstyle,
-                )),
+            child: Container(
+              // padding: EdgeInsets.all(5),
+              width: 350,
+              height: 60,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25), color: Colors.blue),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const Homeopathy();
+                      },
+                    ));
+                  },
+                  child: Center(
+                      child: Text('Homeopathy', style: kConsultTextstyle))),
+            ),
           ),
         ],
       ),
