@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:image_picker/image_picker.dart';
 
 class medicine extends StatefulWidget {
   const medicine({Key? key}) : super(key: key);
@@ -55,7 +57,40 @@ class _medicineState extends State<medicine> {
               ],
             ),
             const SizedBox(height: 20),
-            Text('Upload Prescription', style: kTabBar),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Upload Prescription', style: kTabBar),
+                SpeedDial(
+                  animatedIcon: AnimatedIcons.add_event,
+                  animatedIconTheme: IconThemeData(size: 28.0),
+                  backgroundColor: Colors.green[900],
+                  visible: true,
+                  curve: Curves.bounceInOut,
+                  children: [
+                    SpeedDialChild(
+                      child: Icon(Icons.camera_alt, color: Colors.white),
+                      backgroundColor: Colors.green,
+                      onTap: () => print('Pressed Read Later'),
+                      label: 'Camera',
+                      labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.white),
+                      labelBackgroundColor: Colors.black,
+                    ),
+                    SpeedDialChild(
+                      child: Icon(Icons.image, color: Colors.white),
+                      backgroundColor: Colors.green,
+                      onTap: () => print('Pressed Write'),
+                      label: 'Gallery',
+                      labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.white),
+                      labelBackgroundColor: Colors.black,
+                    ),
+                  ],
+                ),
+              ],
+            ),
 
             const SizedBox(height: 20),
             Text('Delivery Adress', style: kTabBar),

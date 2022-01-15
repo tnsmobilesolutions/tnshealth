@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:tnshealth/screen/signup.dart';
 
 const users = {
   'amrutanshup@gmail.com': 'tns123',
@@ -10,7 +11,7 @@ const users = {
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
-  Duration get loginTime => Duration(milliseconds: 2250);
+  Duration get loginTime => const Duration(milliseconds: 2250);
 
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
@@ -25,7 +26,7 @@ class LoginPage extends StatelessWidget {
     });
   }
 
-  Future<String?> _signupUser(SignupData data) {
+  Future<String?> signuppage(SignupData data) {
     debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) {
       return null;
@@ -50,7 +51,7 @@ class LoginPage extends StatelessWidget {
         title: 'TNS-Health',
         logo: const AssetImage('images/circle.jpg'),
         onLogin: _authUser,
-        onSignup: _signupUser,
+        onSignup: signuppage,
         onSubmitAnimationCompleted: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => DashBoard(),
