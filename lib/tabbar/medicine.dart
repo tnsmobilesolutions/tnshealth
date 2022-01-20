@@ -62,7 +62,7 @@ class _medicineState extends State<medicine> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Upload Prescription', style: kTabBar),
+                Text('Prescription', style: kTabBar),
 
                 FloatingActionButton.extended(
                     label: const Text('Upload'),
@@ -74,7 +74,18 @@ class _medicineState extends State<medicine> {
                           return FileUpload();
                         },
                       ));
-                    })
+                    }),
+                // FloatingActionButton.extended(
+                //     label: const Text('View'),
+                //     icon: const Icon(Icons.file_upload_outlined),
+                //     backgroundColor: Colors.blueAccent,
+                //     onPressed: () {
+                //       Navigator.push(context, MaterialPageRoute(
+                //         builder: (context) {
+                //           return FileUpload();
+                //         },
+                //       ));
+                //     })
 
                 // SpeedDial(
                 //   animatedIcon: AnimatedIcons.add_event,
@@ -100,6 +111,15 @@ class _medicineState extends State<medicine> {
                 //       labelStyle: TextStyle(
                 //           fontWeight: FontWeight.w500, color: Colors.white),
                 //       labelBackgroundColor: Colors.black,
+                //  SpeedDialChild(
+                //       child: Icon(Icons.image, color: Colors.white),
+                //       backgroundColor: Colors.green,
+                //       onTap: () => print('Pressed Write'),
+                //       label: 'Gallery',
+                //       labelStyle: TextStyle(
+                //           fontWeight: FontWeight.w500, color: Colors.white),
+                //       labelBackgroundColor: Colors.black,
+                //     ),
                 //     ),
                 //   ],
                 // ),

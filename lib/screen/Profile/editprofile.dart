@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:tnshealth/screen/Profile/profile.dart';
 
 enum SingingCharacter { Male, Female }
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key}) : super(key: key);
+class EditProfile extends StatefulWidget {
+  const EditProfile({Key? key}) : super(key: key);
 
   @override
-  _SignupPageState createState() => _SignupPageState();
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _EditProfileState extends State<EditProfile> {
   @override
   final fullnamecontroller = TextEditingController();
   final agecontroller = TextEditingController();
@@ -29,12 +30,22 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit-Profile'),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              const Center(
+                child: CircleAvatar(
+                  radius: 80.0,
+                  backgroundImage: AssetImage('images/ben10.jpg'),
+                ),
+              ),
+              const SizedBox(height: 20),
               TextField(
                 controller: fullnamecontroller,
                 decoration: const InputDecoration(
@@ -85,21 +96,29 @@ class _SignupPageState extends State<SignupPage> {
                   labelText: 'Email-Id',
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 20),
               TextField(
                 controller: passwordcontroller,
                 obscureText: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Password',
+                  labelText: 'Old Password',
                 ),
               ),
-              const SizedBox(height: 5),
-              TextField(
-                controller: confirmpasswordcontroller,
-                decoration: const InputDecoration(
+              const SizedBox(height: 20),
+              const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Confirm Password',
+                  labelText: 'New Password',
+                ),
+              ),
+              const SizedBox(height: 20),
+              const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: ' Confirm Password',
                 ),
               ),
 
@@ -129,7 +148,17 @@ class _SignupPageState extends State<SignupPage> {
                       print(confirmpasswordcontroller.text);
 
                       print(phonenumbercontroller.text);
-                      DashBoard();
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Profile(
+                            fullname: fullnamecontroller.text,
+                            age: agecontroller.text,
+                            emailid: emailcontroller.text,
+                            password: passwordcontroller.text,
+                            phonenum: phonenumbercontroller.text,
+                          );
+                        },
+                      ));
                     },
                     child: const Text(
                       'Update',

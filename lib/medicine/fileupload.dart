@@ -10,11 +10,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tnshealth/tabbar/medicine.dart';
 
 // import 'package:video_player/video_player.dart';
 typedef void OnPickImageCallback();
 
 class FileUpload extends StatefulWidget {
+  const FileUpload({Key? key}) : super(key: key);
+
   @override
   _FileUploadState createState() => _FileUploadState();
 }
@@ -66,8 +69,6 @@ class _FileUploadState extends State<FileUpload> {
           child: ListView.builder(
             key: UniqueKey(),
             itemBuilder: (context, index) {
-              // Why network for web?
-              // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
               return Semantics(
                 label: 'image_picker_example_picked_image',
                 child: kIsWeb
@@ -138,33 +139,51 @@ class _FileUploadState extends State<FileUpload> {
             : _handlePreview(),
       ),
       floatingActionButton: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Semantics(
-            label: 'image_picker_example_from_gallery',
-            child: FloatingActionButton(
+        children: [
+          FloatingActionButton.extended(
               onPressed: () {
-                isVideo = false;
-                _onImageButtonPressed(ImageSource.gallery, context: context);
+                Navigator.pop(context);
               },
-              // heroTag: 'image0',
-              // tooltip: 'Pick Image from gallery',
-              child: const Icon(Icons.photo),
-            ),
+              label: const Text(
+                'Upload',
+                style: TextStyle(fontSize: 30),
+              )),
+          SizedBox(
+            width: 50,
           ),
-          const SizedBox(
-            width: 30,
-          ),
-          Semantics(
-            child: FloatingActionButton(
-              onPressed: () {
-                isVideo = false;
-                _onImageButtonPressed(ImageSource.camera, context: context);
-              },
-              // heroTag: 'image2',
-              // tooltip: 'Take a Photo',
-              child: const Icon(Icons.camera_alt),
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Semantics(
+                label: 'image_picker_example_from_gallery',
+                child: FloatingActionButton(
+                  onPressed: () {
+                    isVideo = false;
+                    _onImageButtonPressed(ImageSource.gallery,
+                        context: context);
+                  },
+                  // heroTag: 'image0',
+                  // tooltip: 'Pick Image from gallery',
+                  child: const Icon(Icons.photo),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Semantics(
+                child: FloatingActionButton(
+                  onPressed: () {
+                    isVideo = false;
+                    _onImageButtonPressed(ImageSource.camera, context: context);
+                  },
+                  // heroTag: 'image2',
+                  // tooltip: 'Take a Photo',
+                  child: const Icon(Icons.camera_alt),
+                ),
+              ),
+            ],
           ),
         ],
       ),

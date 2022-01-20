@@ -10,9 +10,9 @@ class Tnshealth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Login',
-      home: LoginPage(),
+      home: Scaffold(body: LoginPage()),
     );
   }
 }
