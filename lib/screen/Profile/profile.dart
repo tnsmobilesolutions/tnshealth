@@ -46,8 +46,8 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
-              child: const CircleAvatar(
+            const Center(
+              child: CircleAvatar(
                 radius: 80.0,
                 backgroundImage: AssetImage('images/ben10.jpg'),
               ),

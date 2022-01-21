@@ -150,7 +150,7 @@ class _FileUploadState extends State<FileUpload> {
                 'Upload',
                 style: TextStyle(fontSize: 30),
               )),
-          SizedBox(
+          const SizedBox(
             width: 50,
           ),
           Column(
@@ -164,8 +164,6 @@ class _FileUploadState extends State<FileUpload> {
                     _onImageButtonPressed(ImageSource.gallery,
                         context: context);
                   },
-                  // heroTag: 'image0',
-                  // tooltip: 'Pick Image from gallery',
                   child: const Icon(Icons.photo),
                 ),
               ),
@@ -178,8 +176,6 @@ class _FileUploadState extends State<FileUpload> {
                     isVideo = false;
                     _onImageButtonPressed(ImageSource.camera, context: context);
                   },
-                  // heroTag: 'image2',
-                  // tooltip: 'Take a Photo',
                   child: const Icon(Icons.camera_alt),
                 ),
               ),
