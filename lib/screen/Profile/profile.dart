@@ -57,26 +57,29 @@ class _ProfileState extends State<Profile> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Center(
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage('images/ben10.jpg'),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Center(
+                child: CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: AssetImage('images/ben10.jpg'),
+                ),
               ),
-            ),
-            Text('Name: ${widget.name}', style: kprofiletext),
-            Text('Mobile Number: ${widget.phonenum}', style: kprofiletext),
-            Text('Email Id: ${widget.emailid}', style: kprofiletext),
-            Text('Gender :${widget.gender}', style: kprofiletext),
-            Text('Date of Birth: ${widget.dateofbirth}', style: kprofiletext),
-            Text('Blood Group: ${widget.bloodgroup}', style: kprofiletext),
-            Text('Height: ${widget.height}cm', style: kprofiletext),
-            Text('Weight: ${widget.weight}Kg', style: kprofiletext),
-            Text('Adress: ${widget.adress}', style: kprofiletext),
-          ],
+              Text('Name: ${widget.name}', style: kprofiletext),
+              Text('Mobile Number: ${widget.phonenum}', style: kprofiletext),
+              Text('Email Id: ${widget.emailid}', style: kprofiletext),
+              Text('Gender :${widget.gender}', style: kprofiletext),
+              Text('Date of Birth: ${widget.dateofbirth}', style: kprofiletext),
+              Text('Blood Group: ${widget.bloodgroup}', style: kprofiletext),
+              Text('Height: ${widget.height}cm', style: kprofiletext),
+              Text('Weight: ${widget.weight}Kg', style: kprofiletext),
+              Text('Adress: ${widget.adress}', style: kprofiletext),
+            ],
+          ),
         ),
       ),
     );
