@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:tnshealth/screen/Profile/editprofile.dart';
 
 const kprofiletext = TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
@@ -6,13 +7,27 @@ const kprofiletext = TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
 class Profile extends StatefulWidget {
   Profile(
       {Key? key,
-      this.fullname,
-      this.age,
+      this.name,
+      this.gender,
       this.emailid,
-      this.password,
+      this.dateofbirth,
+      this.bloodgroup,
+      this.maritial,
+      this.height,
+      this.weight,
+      this.adress,
       this.phonenum})
       : super(key: key);
-  String? fullname, age, emailid, phonenum, password;
+  String? name,
+      gender,
+      emailid,
+      phonenum,
+      dateofbirth,
+      bloodgroup,
+      maritial,
+      height,
+      weight,
+      adress;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -48,15 +63,19 @@ class _ProfileState extends State<Profile> {
           children: <Widget>[
             const Center(
               child: CircleAvatar(
-                radius: 80.0,
+                radius: 50.0,
                 backgroundImage: AssetImage('images/ben10.jpg'),
               ),
             ),
-            Text('Name: ${widget.fullname}', style: kprofiletext),
-            Text('Age :${widget.age}', style: kprofiletext),
-            Text('Email-Id: ${widget.emailid}', style: kprofiletext),
+            Text('Name: ${widget.name}', style: kprofiletext),
             Text('Mobile Number: ${widget.phonenum}', style: kprofiletext),
-            Text('Password: ${widget.password}', style: kprofiletext),
+            Text('Email Id: ${widget.emailid}', style: kprofiletext),
+            Text('Gender :${widget.gender}', style: kprofiletext),
+            Text('Date of Birth: ${widget.dateofbirth}', style: kprofiletext),
+            Text('Blood Group: ${widget.bloodgroup}', style: kprofiletext),
+            Text('Height: ${widget.height}cm', style: kprofiletext),
+            Text('Weight: ${widget.weight}Kg', style: kprofiletext),
+            Text('Adress: ${widget.adress}', style: kprofiletext),
           ],
         ),
       ),

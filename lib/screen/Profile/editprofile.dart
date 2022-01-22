@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
@@ -13,16 +14,18 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  @override
-  final fullnamecontroller = TextEditingController();
-  final agecontroller = TextEditingController();
-  final emailcontroller = TextEditingController();
-  final passwordcontroller = TextEditingController();
-  final confirmpasswordcontroller = TextEditingController();
-
+  final namecontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final gendercontroller = TextEditingController();
+  final dateofbirthcontroller = TextEditingController();
+  final bloodgroupcontroller = TextEditingController();
+  final maritialcontroller = TextEditingController();
+  final heightcontroller = TextEditingController();
+  final weightcontroller = TextEditingController();
+  final adresscontroller = TextEditingController();
 
-  final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  final kTextStyle = const TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 
   SingingCharacter? _character = SingingCharacter.Male;
@@ -41,29 +44,52 @@ class _EditProfileState extends State<EditProfile> {
             children: <Widget>[
               const Center(
                 child: CircleAvatar(
-                  radius: 80.0,
+                  radius: 50.0,
                   backgroundImage: AssetImage('images/ben10.jpg'),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               TextField(
-                controller: fullnamecontroller,
+                controller: namecontroller,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Full Name',
+                  labelText: 'Name',
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+              IntlPhoneField(
+                controller: phonenumbercontroller,
+                decoration: const InputDecoration(
+                  labelText: 'Phone Number',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                  ),
+                ),
+                initialCountryCode: 'IN',
+                onChanged: (phone) {
+                  // print(phone.completeNumber);
+                },
+              ),
+
+              const SizedBox(height: 10),
+              TextField(
+                controller: emailcontroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email Id',
+                ),
+              ),
+              const SizedBox(height: 10),
               // Text('Patient Name', style: kTabBar),
-              // const SizedBox(height: 20),
+              // const SizedBox(height: 10),
               TextField(
-                controller: agecontroller,
+                controller: gendercontroller,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Age',
+                  labelText: 'Gender',
                 ),
               ),
-              // const SizedBox(height: 20),
+              // const SizedBox(height: 10),
               // Row(
               //   children: [
               //     RadioListTile<SingingCharacter>(
@@ -88,74 +114,93 @@ class _EditProfileState extends State<EditProfile> {
               //     ),
               //   ],
               // ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: emailcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email-Id',
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: passwordcontroller,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Old Password',
-                ),
-              ),
-              const SizedBox(height: 20),
-              const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'New Password',
-                ),
-              ),
-              const SizedBox(height: 20),
-              const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: ' Confirm Password',
-                ),
-              ),
 
-              const SizedBox(height: 20),
-              // Text('Mobile No.', style: kTabBar),
-              // const SizedBox(height: 20),
-              IntlPhoneField(
-                controller: phonenumbercontroller,
+              const SizedBox(height: 10),
+              TextField(
+                // onTap: () {
+                //   Container(
+                //     height: 100,
+                //     child: CupertinoDatePicker(
+                //       mode: CupertinoDatePickerMode.date,
+                //       initialDateTime: DateTime(1969, 1, 1),
+                //       onDateTimeChanged: (DateTime newDateTime) {
+                //         // Do something
+                //       },
+                //     ),
+                //   );
+                // },
+                controller: dateofbirthcontroller,
                 decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                  ),
+                  border: OutlineInputBorder(),
+                  labelText: 'Date Of Birth',
                 ),
-                initialCountryCode: 'IN',
-                onChanged: (phone) {
-                  // print(phone.completeNumber);
-                },
               ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: bloodgroupcontroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Blood Group',
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: maritialcontroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Marital Status',
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: heightcontroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Height',
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: weightcontroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'weight',
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: adresscontroller,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Defalult Adress',
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Text('Mobile No.', style: kTabBar),
+              // const SizedBox(height: 10),
+
               Center(
                 child: ElevatedButton(
                     onPressed: () {
-                      print(fullnamecontroller.text);
-                      print(agecontroller.text);
+                      print(namecontroller.text);
+                      print(gendercontroller.text);
                       print(emailcontroller.text);
-                      print(passwordcontroller.text);
-                      print(confirmpasswordcontroller.text);
 
                       print(phonenumbercontroller.text);
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return Profile(
-                            fullname: fullnamecontroller.text,
-                            age: agecontroller.text,
-                            emailid: emailcontroller.text,
-                            password: passwordcontroller.text,
+                            name: namecontroller.text,
                             phonenum: phonenumbercontroller.text,
+                            emailid: emailcontroller.text,
+                            gender: gendercontroller.text,
+                            dateofbirth: dateofbirthcontroller.text,
+                            bloodgroup: bloodgroupcontroller.text,
+                            maritial: maritialcontroller.text,
+                            height: heightcontroller.text,
+                            weight: weightcontroller.text,
+                            adress: adresscontroller.text,
                           );
                         },
                       ));
