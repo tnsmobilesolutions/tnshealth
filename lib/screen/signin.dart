@@ -111,6 +111,12 @@ class _SignInState extends State<SignIn> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       logo,
+                      const SizedBox(height: 5),
+                      const Text(
+                        'TNS Health',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(height: 20),
                       emailField,
                       const SizedBox(height: 20),
