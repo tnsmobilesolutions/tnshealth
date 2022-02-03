@@ -1,7 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tnshealth/screen/Login_Page.dart';
+import 'package:tnshealth/screen/signin.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const Tnshealth());
 }
 
@@ -11,8 +14,12 @@ class Tnshealth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Login',
-      home: Scaffold(body: LoginPage()),
+      title: 'TNS Health',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: SignIn(),
     );
   }
 }

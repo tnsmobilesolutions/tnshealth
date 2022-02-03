@@ -34,7 +34,13 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit-Profile'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Text('Edit-Profile'),
+            TextButton(onPressed: () {}, child: const Text('Save'))
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

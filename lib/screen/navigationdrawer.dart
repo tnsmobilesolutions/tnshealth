@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tnshealth/screen/Profile/profile.dart';
 import 'package:tnshealth/screen/signup.dart';
 
-import 'Login_Page.dart';
+import 'signin.dart';
 
 class NavigationDrawer extends StatefulWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               // Then close the drawer
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return LoginPage();
+                  return SignIn();
                 },
               ));
             },

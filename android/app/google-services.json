@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "178527485841",
+    "project_id": "tnshealthone2022",
+    "storage_bucket": "tnshealthone2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178527485841:android:02e9cdf3cd52684c08a430",
+        "android_client_info": {
+          "package_name": "com.example.tnshealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178527485841-rqhn1a85u12262ou4oun5cgvbfq1ota9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2_r-kIrtK76xhZMTqd9kC_yUUHKgkgNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178527485841-rqhn1a85u12262ou4oun5cgvbfq1ota9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

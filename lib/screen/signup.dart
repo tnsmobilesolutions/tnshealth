@@ -29,28 +29,34 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Your Profile'),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              TextField(
+              TextFormField(
                 controller: fullnamecontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Full Name',
-                ),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(15),
+                    hintText: 'Full Name',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
               ),
               const SizedBox(height: 20),
               // Text('Patient Name', style: kTabBar),
               // const SizedBox(height: 20),
-              TextField(
+              TextFormField(
                 controller: agecontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Age',
-                ),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(15),
+                    hintText: 'Age',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
               ),
               // const SizedBox(height: 20),
               // Row(
@@ -78,29 +84,32 @@ class _SignupPageState extends State<SignupPage> {
               //   ],
               // ),
               const SizedBox(height: 20),
-              TextField(
+              TextFormField(
                 controller: emailcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email-Id',
-                ),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(15),
+                    hintText: 'Email Id',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
               ),
               const SizedBox(height: 5),
               TextField(
                 controller: passwordcontroller,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(15),
+                    hintText: 'Password',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
               ),
               const SizedBox(height: 5),
               TextField(
                 controller: confirmpasswordcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Confirm Password',
-                ),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(15),
+                    hintText: 'Confirm Password',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
               ),
 
               const SizedBox(height: 20),
@@ -129,7 +138,8 @@ class _SignupPageState extends State<SignupPage> {
                       print(confirmpasswordcontroller.text);
 
                       print(phonenumbercontroller.text);
-                      DashBoard();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => DashBoard()));
                     },
                     child: const Text(
                       'Update',
