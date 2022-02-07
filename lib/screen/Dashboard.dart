@@ -39,7 +39,7 @@ class _DashBoardState extends State<DashBoard> {
               ),
               Tab(
                 child: Text(
-                  'Diagnosys',
+                  'Diagnosis',
                   style: kTabBar,
                 ),
               ),

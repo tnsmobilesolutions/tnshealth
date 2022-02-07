@@ -55,7 +55,7 @@ class _SignInState extends State<SignIn> {
       obscureText: true,
       autofocus: false,
       controller: passswordController,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.visiblePassword,
       validator: (value) {
         RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
