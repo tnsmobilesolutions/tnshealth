@@ -1,12 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
+
 import 'package:tnshealth/screen/signup.dart';
 
 class SignIn extends StatefulWidget {
-  SignIn({Key? key}) : super(key: key);
+  const SignIn({Key? key}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -14,11 +15,16 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 // firebase implementation
-  final _auth = FirebaseAuth.instance;
 
   final _formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passswordController = TextEditingController();
+  AppUser? _loggedInUser;
+
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     const logo = CircleAvatar(
@@ -80,10 +86,30 @@ class _SignInState extends State<SignIn> {
       elevation: 5,
       borderRadius: BorderRadius.circular(18),
       child: MaterialButton(
-        onPressed: () {
-          signIn(emailController.text, passswordController.text);
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const HomePage()));
+        onPressed: () async {
+          if (_formkey.currentState!.validate()) {
+            _loggedInUser = await userAPI().signIn(
+                emailController.text.trim(), passswordController.text.trim());
+
+            if (_loggedInUser != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DashBoard(),
+                ),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  elevation: 6,
+                  behavior: SnackBarBehavior.floating,
+                  content: Text(
+                    'Please check your Email/Password',
+                  ),
+                ),
+              );
+            }
+          }
         },
         child: const Text(
           'SignIn',
@@ -133,7 +159,8 @@ class _SignInState extends State<SignIn> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignupPage()));
+                                        builder: (context) =>
+                                            const SignupPage()));
                               },
                               child: const Text('SignUp',
                                   style: TextStyle(
@@ -149,20 +176,5 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
-  }
-
-  void signIn(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => DashBoard()))
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e.message);
-      });
-    }
   }
 }

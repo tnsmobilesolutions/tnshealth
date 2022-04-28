@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:tnshealth/model/usermodel.dart';
+import 'package:tnshealth/API/userAPI.dart';
+
 import 'package:tnshealth/screen/Dashboard.dart';
 
 class SignupPage extends StatefulWidget {
@@ -14,7 +13,6 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final _auth = FirebaseAuth.instance;
   String? errorMessage;
   final _formKey = GlobalKey<FormState>();
   final fullnamecontroller = TextEditingController();
@@ -135,7 +133,35 @@ class _SignupPageState extends State<SignupPage> {
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            signUp(emailcontroller.text, passwordcontroller.text);
+            final _appUser = userAPI().signUp(
+                emailcontroller.text,
+                passwordcontroller.text,
+                fullnamecontroller.text,
+                phonenumbercontroller.text);
+            if (_appUser != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Theme.of(context).iconTheme.color,
+                  behavior: SnackBarBehavior.floating,
+                  content: const Text('Account created successfully'),
+                ),
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DashBoard(),
+                ),
+              );
+            } else {
+              print('AppUser is null');
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Theme.of(context).iconTheme.color,
+                  behavior: SnackBarBehavior.floating,
+                  content: const Text('Account already exists'),
+                ),
+              );
+            }
           },
           child: const Text(
             "SignUp",
@@ -159,16 +185,16 @@ class _SignupPageState extends State<SignupPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 name,
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 email,
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 password,
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 confirmPassword,
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 IntlPhoneField(
                   validator: (value) {
-                    RegExp regex = new RegExp(r'^.{10,}$');
+                    RegExp regex = RegExp(r'^.{10,}$');
                     if (value!.isEmpty) {
                       return ("phone number cannot be Empty");
                     }
@@ -192,51 +218,14 @@ class _SignupPageState extends State<SignupPage> {
                     // print(phone.completeNumber);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 signUpButton,
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  void signUp(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()})
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
-  }
-
-  postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our data
-    // sedning these values
-
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? users = _auth.currentUser;
-
-    Data data = Data();
-
-    // writing all the values
-    data.email = users!.email;
-    data.uid = users.uid;
-    data.name = fullnamecontroller.text;
-    data.phonenumber = phonenumbercontroller.text;
-
-    await firebaseFirestore
-        .collection("users")
-        .doc(users.uid)
-        .set(data.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
-
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => DashBoard()), (route) => false);
   }
 }

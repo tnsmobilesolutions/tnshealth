@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tnshealth/model/usermodel.dart';
 
 import 'package:tnshealth/screen/signin.dart';
 import 'package:tnshealth/screen/navigationdrawer.dart';
-
-import 'package:tnshealth/screen/signup.dart';
-
 import 'package:tnshealth/tabbar/consult.dart';
 import 'package:tnshealth/tabbar/diagnosys.dart';
 import 'package:tnshealth/tabbar/medicine.dart';
 
 class DashBoard extends StatefulWidget {
+  const DashBoard({Key? key}) : super(key: key);
+
   @override
   _DashBoardState createState() => _DashBoardState();
 }
