@@ -103,6 +103,16 @@ class userAPI {
     return null;
   }
 
+  //LogOut
+
+  dynamic logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      print(e); //
+    }
+  }
+
   //Getting User UID
 
   Future<AppUser?> getAppUserFromUid(String uid) async {

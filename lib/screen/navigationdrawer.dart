@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/screen/Profile/profile.dart';
 import 'package:tnshealth/screen/signup.dart';
 
@@ -42,12 +43,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 Text('Logout'),
               ],
             ),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
+            onTap: () async {
+              await userAPI().logout();
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
+                  // ignore: prefer_const_constructors
                   return SignIn();
                 },
               ));
