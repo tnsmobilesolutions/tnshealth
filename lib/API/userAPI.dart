@@ -53,7 +53,15 @@ class userAPI {
 //SIGNUP
 
   Future<AppUser?> signUp(
-      String email, String password, String name, String mobile) async {
+      String email,
+      String password,
+      String name,
+      String mobile,
+      String adress,
+      String bloodGroup,
+      String gender,
+      String height,
+      String weight) async {
     try {
       final userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -68,6 +76,11 @@ class userAPI {
               'uid': value.user!.uid,
               'name': name,
               'mobile': mobile,
+              'adress': adress,
+              'BloodGroup': bloodGroup,
+              'Gender': gender,
+              'Height': height,
+              'Weight': weight
             },
           );
           return value;

@@ -1,19 +1,12 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// ignore_for_file: public_member_api_docs
-
 import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tnshealth/tabbar/medicine.dart';
 
 // import 'package:video_player/video_player.dart';
-typedef void OnPickImageCallback();
+typedef OnPickImageCallback = void Function();
 
 class FileUpload extends StatefulWidget {
   const FileUpload({Key? key}) : super(key: key);
@@ -143,6 +136,7 @@ class _FileUploadState extends State<FileUpload> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton.extended(
+              heroTag: 'btn3',
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -159,6 +153,7 @@ class _FileUploadState extends State<FileUpload> {
               Semantics(
                 label: 'image_picker_example_from_gallery',
                 child: FloatingActionButton(
+                  heroTag: 'btn1',
                   onPressed: () {
                     isVideo = false;
                     _onImageButtonPressed(ImageSource.gallery,
@@ -172,6 +167,7 @@ class _FileUploadState extends State<FileUpload> {
               ),
               Semantics(
                 child: FloatingActionButton(
+                  heroTag: 'btn2',
                   onPressed: () {
                     isVideo = false;
                     _onImageButtonPressed(ImageSource.camera, context: context);

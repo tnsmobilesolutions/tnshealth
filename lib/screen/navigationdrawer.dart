@@ -39,6 +39,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ListTile(
             title: Row(
               children: const <Widget>[
+                Icon(Icons.bookmark),
+                Text('Appointment'),
+              ],
+            ),
+            onTap: () async {},
+          ),
+          ListTile(
+            title: Row(
+              children: const <Widget>[
                 Icon(Icons.logout),
                 Text('Logout'),
               ],
@@ -47,7 +56,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               await userAPI().logout();
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  // ignore: prefer_const_constructors
                   return SignIn();
                 },
               ));

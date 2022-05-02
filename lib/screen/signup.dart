@@ -22,8 +22,17 @@ class _SignupPageState extends State<SignupPage> {
   final confirmpasswordcontroller = TextEditingController();
   final adresscontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
+  final bloodgroupcontroller = TextEditingController();
+  final heightcontroller = TextEditingController();
+  final weightcontroller = TextEditingController();
+  final gendercontroller = TextEditingController();
+
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,26 +113,120 @@ class _SignupPageState extends State<SignupPage> {
     //confirm password field
 
     final confirmPassword = TextFormField(
-        autofocus: false,
-        controller: confirmpasswordcontroller,
-        obscureText: true,
-        validator: (value) {
-          if (confirmpasswordcontroller.text != passwordcontroller.text) {
-            return "Password don't match";
-          }
-          return null;
-        },
-        onSaved: (value) {
-          confirmpasswordcontroller.text = value!;
-        },
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Confirm Password",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+      autofocus: false,
+      controller: confirmpasswordcontroller,
+      obscureText: true,
+      validator: (value) {
+        if (confirmpasswordcontroller.text != passwordcontroller.text) {
+          return "Password don't match";
+        }
+        return null;
+      },
+      onSaved: (value) {
+        confirmpasswordcontroller.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Confirm Password",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    //Height
+
+    final height = TextFormField(
+      keyboardType: TextInputType.number,
+      autofocus: false,
+      controller: heightcontroller,
+      onSaved: (value) {
+        heightcontroller.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Height",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+    final weight = TextFormField(
+      keyboardType: TextInputType.number,
+      autofocus: false,
+      controller: weightcontroller,
+      onSaved: (value) {
+        weightcontroller.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Weight",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    //bloodGroup
+
+    final bloodGroup = TextFormField(
+      // keyboardType: TextInputType.none,
+      autofocus: false,
+      controller: bloodgroupcontroller,
+      onSaved: (value) {
+        bloodgroupcontroller.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "BloodGroup",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    //Gender
+
+    final gender = TextFormField(
+      // keyboardType: TextInputType.none,
+      autofocus: false,
+      controller: gendercontroller,
+      onSaved: (value) {
+        gendercontroller.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Gender",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    //Adress
+
+    final adress = TextFormField(
+      // keyboardType: TextInputType.none,
+      autofocus: false,
+      controller: adresscontroller,
+      onSaved: (value) {
+        adresscontroller.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Adress",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
 //signup button
     final signUpButton = Material(
       elevation: 5,
@@ -137,7 +240,12 @@ class _SignupPageState extends State<SignupPage> {
                 emailcontroller.text,
                 passwordcontroller.text,
                 fullnamecontroller.text,
-                phonenumbercontroller.text);
+                phonenumbercontroller.text,
+                adresscontroller.text,
+                bloodgroupcontroller.text,
+                heightcontroller.text,
+                weightcontroller.text,
+                gendercontroller.text);
             if (_appUser != null) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -188,9 +296,15 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 20),
                 email,
                 const SizedBox(height: 20),
-                password,
+                height,
                 const SizedBox(height: 20),
-                confirmPassword,
+                weight,
+                const SizedBox(height: 20),
+                gender,
+                const SizedBox(height: 20),
+                bloodGroup,
+                const SizedBox(height: 20),
+                adress,
                 const SizedBox(height: 20),
                 IntlPhoneField(
                   validator: (value) {
@@ -218,6 +332,10 @@ class _SignupPageState extends State<SignupPage> {
                     // print(phone.completeNumber);
                   },
                 ),
+                const SizedBox(height: 20),
+                password,
+                const SizedBox(height: 20),
+                confirmPassword,
                 const SizedBox(height: 20),
                 signUpButton,
                 const SizedBox(height: 15),
