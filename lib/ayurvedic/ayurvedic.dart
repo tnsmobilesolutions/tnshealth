@@ -15,6 +15,7 @@ class _AyurvedicState extends State<Ayurvedic> {
       appBar: AppBar(
         title: const Text('Ayurvedic'),
       ),
+      body: const Center(),
     );
   }
 }
