@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-const kCircle =
-    CircleAvatar(radius: 80, backgroundImage: AssetImage('images/circle.jpg'));
+const kCircle80 =
+    CircleAvatar(radius: 80, backgroundImage: AssetImage('images/ben10.jpg'));
+const kCircle20 =
+    CircleAvatar(radius: 20, backgroundImage: AssetImage('images/ben10.jpg'));
 
 final kIdContainer = Container(
     width: 300,
@@ -35,3 +37,11 @@ final kSignContainer = Container(
   ),
   padding: const EdgeInsets.all(15),
 );
+
+//button
+
+final kbuttonshape = ButtonStyle(
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+            side: const BorderSide(color: Colors.red))));
