@@ -1,39 +1,35 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/phone_number.dart';
+import 'package:tnshealth/API/firestore.dart';
+
 import 'package:tnshealth/screen/Profile/editprofile.dart';
 
-const kprofiletext = TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
+const kprofiletext = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
 class Profile extends StatefulWidget {
-  Profile(
-      {Key? key,
-      this.name,
-      this.gender,
-      this.emailid,
-      this.dateofbirth,
-      this.bloodgroup,
-      this.maritial,
-      this.height,
-      this.weight,
-      this.adress,
-      this.phonenum})
-      : super(key: key);
-  String? name,
-      gender,
-      emailid,
-      phonenum,
-      dateofbirth,
-      bloodgroup,
-      maritial,
-      height,
-      weight,
-      adress;
+  Profile({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  String name = '';
+  String email = '';
+  String phonenum = '';
+  String adress = '';
+  String bloodgroup = '';
+  String gender = '';
+  String height = '';
+  String weight = '';
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,31 +53,59 @@ class _ProfileState extends State<Profile> {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Center(
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: AssetImage('images/ben10.jpg'),
+        child: Center(
+          child: FutureBuilder(
+            future: currentData(),
+            builder: (context, snapshot) {
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Name: $name', style: kprofiletext),
+                    Text('Mobile Number: $phonenum', style: kprofiletext),
+                    Text('Email Id: $email', style: kprofiletext),
+                    Text('Adress:$adress', style: kprofiletext),
+                    Text('Blood Group: $bloodgroup', style: kprofiletext),
+                    Text('Gender :$gender', style: kprofiletext),
+                    Text('Height: $height', style: kprofiletext),
+                    Text('Weight: $weight', style: kprofiletext),
+                  ],
                 ),
-              ),
-              Text('Name: ${widget.name}', style: kprofiletext),
-              Text('Mobile Number: ${widget.phonenum}', style: kprofiletext),
-              Text('Email Id: ${widget.emailid}', style: kprofiletext),
-              Text('Gender :${widget.gender}', style: kprofiletext),
-              Text('Date of Birth: ${widget.dateofbirth}', style: kprofiletext),
-              Text('Blood Group: ${widget.bloodgroup}', style: kprofiletext),
-              Text('Height: ${widget.height}cm', style: kprofiletext),
-              Text('Weight: ${widget.weight}Kg', style: kprofiletext),
-              Text('Adress: ${widget.adress}', style: kprofiletext),
-            ],
+              );
+            },
           ),
         ),
       ),
     );
+  }
+
+  currentData() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    FirestoreData firestore = FirestoreData(uid: uid);
+    final names = await firestore.getCurrentUserData();
+    if (names != null) {
+      name = names[0];
+      email = names[1];
+      phonenum = names[2];
+      adress = names[3];
+      bloodgroup = names[4];
+      gender = names[5];
+      height = names[6];
+      weight = names[7];
+
+      print('**************name = $name***********');
+      print('**********email = $email');
+      print('******************adress = $adress');
+      print('******************phonenum = $phonenum');
+      print('******************bloodgroup = $bloodgroup');
+      print('******************gender = $gender');
+      print('******************height = $height');
+      print('******************weight = $weight');
+    } else {
+      print('names = null************$uid***********');
+    }
   }
 }

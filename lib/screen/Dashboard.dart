@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/model/usermodel.dart';
 
-import 'package:tnshealth/screen/signin.dart';
 import 'package:tnshealth/screen/navigationdrawer.dart';
 import 'package:tnshealth/tabbar/consult.dart';
 import 'package:tnshealth/tabbar/diagnosys.dart';
 import 'package:tnshealth/tabbar/medicine.dart';
 
 class DashBoard extends StatefulWidget {
-  const DashBoard({Key? key}) : super(key: key);
+  const DashBoard({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _DashBoardState createState() => _DashBoardState();
@@ -24,7 +24,7 @@ class _DashBoardState extends State<DashBoard> {
       initialIndex: 0,
       length: 3,
       child: Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer: NavigationDrawer(),
         appBar: AppBar(
           title: const Text('Home'),
 

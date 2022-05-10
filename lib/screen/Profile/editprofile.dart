@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:tnshealth/screen/Dashboard.dart';
+
 import 'package:tnshealth/screen/Profile/profile.dart';
 
 enum SingingCharacter { Male, Female }
@@ -48,13 +47,6 @@ class _EditProfileState extends State<EditProfile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Center(
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: AssetImage('images/ben10.jpg'),
-                ),
-              ),
-              const SizedBox(height: 10),
               TextField(
                 controller: namecontroller,
                 decoration: const InputDecoration(
@@ -197,17 +189,17 @@ class _EditProfileState extends State<EditProfile> {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return Profile(
-                            name: namecontroller.text,
-                            phonenum: phonenumbercontroller.text,
-                            emailid: emailcontroller.text,
-                            gender: gendercontroller.text,
-                            dateofbirth: dateofbirthcontroller.text,
-                            bloodgroup: bloodgroupcontroller.text,
-                            maritial: maritialcontroller.text,
-                            height: heightcontroller.text,
-                            weight: weightcontroller.text,
-                            adress: adresscontroller.text,
-                          );
+                              // name: namecontroller.text,
+                              // phonenum: phonenumbercontroller.text,
+                              // emailid: emailcontroller.text,
+                              // gender: gendercontroller.text,
+                              // dateofbirth: dateofbirthcontroller.text,
+                              // bloodgroup: bloodgroupcontroller.text,
+                              // maritial: maritialcontroller.text,
+                              // height: heightcontroller.text,
+                              // weight: weightcontroller.text,
+                              // adress: adresscontroller.text,
+                              );
                         },
                       ));
                     },
