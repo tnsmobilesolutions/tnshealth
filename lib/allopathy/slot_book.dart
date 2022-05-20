@@ -12,12 +12,11 @@ class SlotBook extends StatefulWidget {
 class _SlotBook extends State<SlotBook> {
   String? text1;
   String? text2;
-  // ignore: unused_field
+
   String? _selectedDate;
-  // ignore: unused_field
+
   dynamic _selectedSlot;
 
-  //ignore: prefer_final_fields, unused_field
   bool _isSlotAvailable = false;
 
   DateTime selectedDate = DateTime.now();
@@ -106,18 +105,19 @@ class _SlotBook extends State<SlotBook> {
                                   ? const Color.fromARGB(255, 8, 127, 163)
                                   : Colors.white,
                               border: Border.all(
-                                width: 1.5,
-                                color: slotList.values
-                                            .toList()[index]
-                                            .isEmpty &&
-                                        slotList.keys.toList()[index] !=
-                                            'More...'
-                                    ? const Color.fromARGB(183, 224, 63, 51)
-                                    : slotList.keys.toList()[index] == 'More...'
-                                        ? const Color.fromARGB(255, 8, 127, 163)
-                                        : const Color.fromARGB(
-                                            255, 68, 236, 76),
-                              ),
+                                  width: 1.5,
+                                  color: slotList.values
+                                              .toList()[index]
+                                              .isEmpty &&
+                                          slotList.keys.toList()[index] !=
+                                              'More...'
+                                      ? const Color.fromARGB(183, 224, 63, 51)
+                                      : slotList.keys.toList()[index] ==
+                                              'More...'
+                                          ? const Color.fromARGB(
+                                              255, 8, 127, 163)
+                                          : const Color.fromARGB(
+                                              255, 68, 236, 76)),
                               borderRadius: BorderRadius.circular(7),
                             ),
                             child: slotList.keys.toList()[index] == 'More...'

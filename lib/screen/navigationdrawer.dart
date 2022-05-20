@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/screen/Profile/my_orders.dart';
 import 'package:tnshealth/screen/Profile/profile.dart';
 
 import 'signin.dart';
@@ -48,17 +49,19 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ListTile(
             title: Row(
               children: const <Widget>[
-                Icon(Icons.logout),
-                Text('Logout'),
+                Icon(Icons.collections_bookmark_rounded),
+                Text('My Orders'),
               ],
             ),
             onTap: () async {
-              await userAPI().logout();
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return const SignIn();
-                },
-              ));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const MyOrders();
+                  },
+                ),
+              );
             },
           ),
           ListTile(
@@ -69,9 +72,28 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ],
             ),
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Profile();
+                  },
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: const <Widget>[
+                Icon(Icons.logout),
+                Text('Logout'),
+              ],
+            ),
+            onTap: () async {
+              await userAPI().logout();
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return Profile();
+                  return const SignIn();
                 },
               ));
             },

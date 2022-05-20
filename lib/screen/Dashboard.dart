@@ -24,7 +24,7 @@ class _DashBoardState extends State<DashBoard> {
       initialIndex: 0,
       length: 3,
       child: Scaffold(
-        drawer: NavigationDrawer(),
+        drawer: const NavigationDrawer(),
         appBar: AppBar(
           title: const Text('Home'),
 
