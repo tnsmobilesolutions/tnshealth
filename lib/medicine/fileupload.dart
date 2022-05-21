@@ -4,9 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tnshealth/API/firebasestorage.dart';
 import 'package:tnshealth/API/firestore.dart';
-import 'package:tnshealth/tabbar/medicine.dart';
 
 class imageUploadToFirebase extends StatefulWidget {
   const imageUploadToFirebase({Key? key}) : super(key: key);
@@ -54,7 +52,7 @@ class _imageUploadToFirebaseState extends State<imageUploadToFirebase> {
                                 await uploadImagetoFirebadseStorage(
                                     previewImage!);
                               } catch (e) {
-                                return null;
+                                return;
                               }
 
                               Navigator.pop(context);
