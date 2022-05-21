@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tnshealth/API/firestore.dart';
 
-import 'package:tnshealth/screen/Profile/editprofile.dart';
-
 const kprofiletext = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
 class Profile extends StatefulWidget {
@@ -36,20 +34,20 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         title: const Text('My Profile'),
         backgroundColor: Colors.blue,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.edit,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return const EditProfile();
-                },
-              ));
-            },
-          )
+        actions: const <Widget>[
+          // IconButton(
+          //   icon: const Icon(
+          //     Icons.edit,
+          //     color: Colors.white,
+          //   ),
+          //   onPressed: () {
+          //     Navigator.push(context, MaterialPageRoute(
+          //       builder: (context) {
+          //         return EditProfile();
+          //       },
+          //     ));
+          //   },
+          // )
         ],
       ),
       body: SafeArea(

@@ -1,218 +1,248 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
-import 'package:tnshealth/screen/Profile/profile.dart';
-
-enum SingingCharacter { Male, Female }
+import 'package:tnshealth/model/usermodel.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  EditProfile({Key? key, this.currentuser}) : super(key: key);
+  final AppUser? currentuser;
 
   @override
-  _EditProfileState createState() => _EditProfileState();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  final namecontroller = TextEditingController();
-  final phonenumbercontroller = TextEditingController();
-  final emailcontroller = TextEditingController();
-  final gendercontroller = TextEditingController();
-  final dateofbirthcontroller = TextEditingController();
-  final bloodgroupcontroller = TextEditingController();
-  final maritialcontroller = TextEditingController();
-  final heightcontroller = TextEditingController();
-  final weightcontroller = TextEditingController();
-  final adresscontroller = TextEditingController();
+  final nameController = TextEditingController();
+  final mobileController = TextEditingController();
+  final emailController = TextEditingController();
+  final genderController = TextEditingController();
+  final adressController = TextEditingController();
+  final bloodGroupController = TextEditingController();
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
+  @override
+  void initState() {
+    nameController.text = AppUser().name ?? '';
 
-  final kTextStyle = const TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
-  final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-
-  SingingCharacter? _character = SingingCharacter.Male;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Text('Edit-Profile'),
-            TextButton(onPressed: () {}, child: const Text('Save'))
-          ],
-        ),
+        title: Text('Edit Profile'),
       ),
-      body: SingleChildScrollView(
+      body: SafeArea(
+          child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextField(
-                controller: namecontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name',
-                ),
-              ),
-              const SizedBox(height: 10),
-              IntlPhoneField(
-                controller: phonenumbercontroller,
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                  ),
-                ),
-                initialCountryCode: 'IN',
-                onChanged: (phone) {
-                  // print(phone.completeNumber);
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextFormField(
+                controller: nameController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Name';
+                  }
+                  return null;
                 },
-              ),
-
-              const SizedBox(height: 10),
-              TextField(
-                controller: emailcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email Id',
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
+                  labelText: 'Name',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
-              const SizedBox(height: 10),
-              // Text('Patient Name', style: kTabBar),
-              // const SizedBox(height: 10),
-              TextField(
-                controller: gendercontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+              TextFormField(
+                controller: mobileController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Your Mobile No.';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
+                  labelText: 'Mobile Number',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                ),
+              ),
+              TextFormField(
+                controller: emailController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Your Email';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
+                  labelText: 'Email-Id',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                ),
+              ),
+              TextFormField(
+                controller: adressController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Adress';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
+                  labelText: ' Enter Your Adress',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                ),
+              ),
+              TextFormField(
+                controller: bloodGroupController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter bloodGroup';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
+                  labelText: 'BloodGroup',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                ),
+              ),
+              TextFormField(
+                controller: genderController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Choose Your Gender';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
                   labelText: 'Gender',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
-              // const SizedBox(height: 10),
-              // Row(
-              //   children: [
-              //     RadioListTile<SingingCharacter>(
-              //       title: const Text('Male'),
-              //       value: SingingCharacter.Male,
-              //       groupValue: _character,
-              //       onChanged: (SingingCharacter? value) {
-              //         setState(() {
-              //           _character = value;
-              //         });
-              //       },
-              //     ),
-              //     RadioListTile<SingingCharacter>(
-              //       title: const Text('Female'),
-              //       value: SingingCharacter.Female,
-              //       groupValue: _character,
-              //       onChanged: (SingingCharacter? value) {
-              //         setState(() {
-              //           _character = value;
-              //         });
-              //       },
-              //     ),
-              //   ],
-              // ),
-
-              const SizedBox(height: 10),
-              TextField(
-                // onTap: () {
-                //   Container(
-                //     height: 100,
-                //     child: CupertinoDatePicker(
-                //       mode: CupertinoDatePickerMode.date,
-                //       initialDateTime: DateTime(1969, 1, 1),
-                //       onDateTimeChanged: (DateTime newDateTime) {
-                //         // Do something
-                //       },
-                //     ),
-                //   );
-                // },
-                controller: dateofbirthcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Date Of Birth',
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: bloodgroupcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Blood Group',
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: maritialcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Marital Status',
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: heightcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+              TextFormField(
+                controller: heightController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter your Height in Cm';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
                   labelText: 'Height',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: weightcontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'weight',
+              TextFormField(
+                controller: weightController,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Enter Your Weight in Kg';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.amber),
+                  ),
+                  contentPadding: const EdgeInsets.all(15),
+                  labelText: 'Weight',
+                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: adresscontroller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Defalult Adress',
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              // Text('Mobile No.', style: kTabBar),
-              // const SizedBox(height: 10),
-
-              Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      print(namecontroller.text);
-                      print(gendercontroller.text);
-                      print(emailcontroller.text);
-
-                      print(phonenumbercontroller.text);
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return Profile(
-                              // name: namecontroller.text,
-                              // phonenum: phonenumbercontroller.text,
-                              // emailid: emailcontroller.text,
-                              // gender: gendercontroller.text,
-                              // dateofbirth: dateofbirthcontroller.text,
-                              // bloodgroup: bloodgroupcontroller.text,
-                              // maritial: maritialcontroller.text,
-                              // height: heightcontroller.text,
-                              // weight: weightcontroller.text,
-                              // adress: adresscontroller.text,
-                              );
-                        },
-                      ));
-                    },
-                    child: const Text(
-                      'Update',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                    )),
-              )
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

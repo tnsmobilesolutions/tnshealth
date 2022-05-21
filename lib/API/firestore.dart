@@ -32,6 +32,8 @@ class FirestoreData {
     return UserCollection.snapshots();
   }
 
+  // get Data from FireBase
+
   Future getCurrentUserData() async {
     try {
       DocumentSnapshot ds = await UserCollection.doc(uid).get();

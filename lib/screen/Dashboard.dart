@@ -52,8 +52,7 @@ class _DashBoardState extends State<DashBoard> {
             ],
           ),
         ),
-        body: TabBarView(
-            children: [const Consult(), diagnosys(), const Medicine()]),
+        body: TabBarView(children: [const Consult(), diagnosys(), Medicine()]),
       ),
     );
   }
