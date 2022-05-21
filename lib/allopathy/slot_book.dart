@@ -33,6 +33,12 @@ class _SlotBook extends State<SlotBook> {
       '08/05/2022': generateRandomSlots(2),
       'More...': [],
     };
+    var slotList2 = <String, dynamic>{
+      '23/05/2022': generateRandomSlots(7),
+      '25/05/2022': generateRandomSlots(4),
+      '26/05/2022': generateRandomSlots(2),
+      '30/05/2022': generateRandomSlots(6),
+    };
 
     return Scaffold(
       appBar: AppBar(
