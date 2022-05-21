@@ -2,6 +2,9 @@ import 'dart:convert';
 
 class Orders {
   final String? orderId;
+  final String? userId;
+  final String? vendorId;
+  final String? prescriptionURL;
   final String? orderDate;
   final String? orderTime;
   final String? deliveryDate;
@@ -9,6 +12,9 @@ class Orders {
   final String? orderAddress;
   Orders({
     this.orderId,
+    this.userId,
+    this.vendorId,
+    this.prescriptionURL,
     this.orderDate,
     this.orderTime,
     this.deliveryDate,
@@ -18,6 +24,9 @@ class Orders {
 
   Orders copyWith({
     String? orderId,
+    String? userId,
+    String? vendorId,
+    String? prescriptionURL,
     String? orderDate,
     String? orderTime,
     String? deliveryDate,
@@ -26,6 +35,9 @@ class Orders {
   }) {
     return Orders(
       orderId: orderId ?? this.orderId,
+      userId: userId ?? this.userId,
+      vendorId: vendorId ?? this.vendorId,
+      prescriptionURL: prescriptionURL ?? this.prescriptionURL,
       orderDate: orderDate ?? this.orderDate,
       orderTime: orderTime ?? this.orderTime,
       deliveryDate: deliveryDate ?? this.deliveryDate,
@@ -37,6 +49,9 @@ class Orders {
   Map<String, dynamic> toMap() {
     return {
       'orderId': orderId,
+      'userId': userId,
+      'vendorId': vendorId,
+      'prescriptionURL': prescriptionURL,
       'orderDate': orderDate,
       'orderTime': orderTime,
       'deliveryDate': deliveryDate,
@@ -48,6 +63,9 @@ class Orders {
   factory Orders.fromMap(Map<String, dynamic> map) {
     return Orders(
       orderId: map['orderId'],
+      userId: map['userId'],
+      vendorId: map['vendorId'],
+      prescriptionURL: map['prescriptionURL'],
       orderDate: map['orderDate'],
       orderTime: map['orderTime'],
       deliveryDate: map['deliveryDate'],
@@ -62,7 +80,7 @@ class Orders {
 
   @override
   String toString() {
-    return 'Orders(orderId: $orderId, orderDate: $orderDate, orderTime: $orderTime, deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress)';
+    return 'Orders(orderId: $orderId, userId: $userId, vendorId: $vendorId, prescriptionURL: $prescriptionURL, orderDate: $orderDate, orderTime: $orderTime, deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress)';
   }
 
   @override
@@ -71,6 +89,9 @@ class Orders {
 
     return other is Orders &&
         other.orderId == orderId &&
+        other.userId == userId &&
+        other.vendorId == vendorId &&
+        other.prescriptionURL == prescriptionURL &&
         other.orderDate == orderDate &&
         other.orderTime == orderTime &&
         other.deliveryDate == deliveryDate &&
@@ -81,6 +102,9 @@ class Orders {
   @override
   int get hashCode {
     return orderId.hashCode ^
+        userId.hashCode ^
+        vendorId.hashCode ^
+        prescriptionURL.hashCode ^
         orderDate.hashCode ^
         orderTime.hashCode ^
         deliveryDate.hashCode ^
