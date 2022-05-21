@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/allopathy/allopathy.dart';
+
+import 'package:tnshealth/allopathy/slot_book.dart';
 import 'package:tnshealth/ayurvedic/ayurvedic.dart';
 import 'package:tnshealth/homeopathy/homeopathy.dart';
 
@@ -34,7 +35,7 @@ class _ConsultState extends State<Consult> {
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return const Allopathy();
+                        return const SlotBook();
                       },
                     ));
                   },
