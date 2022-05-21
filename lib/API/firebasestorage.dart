@@ -1,3 +1,7 @@
+// import 'package:firebase_storage/firebase_storage.dart';
+
+// import 'package:image_picker/image_picker.dart';
+
 class FirebaseAPI {
 // //uploading to firebasee
 //   Future<String?> uploadImagetoFirebadseStorage(XFile image) async {
