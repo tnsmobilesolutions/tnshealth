@@ -8,7 +8,7 @@ import 'package:tnshealth/medicine/fileupload.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
 class Medicine extends StatefulWidget {
-  Medicine({
+  const Medicine({
     Key? key,
   }) : super(key: key);
 
@@ -17,17 +17,29 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
-  String name = '';
   final adressline1namecontroller = TextEditingController();
   final adressline2namecontroller = TextEditingController();
   final citycontroller = TextEditingController();
-  final statecontroller = TextEditingController();
-  final pincodecontroller = TextEditingController();
-  final phonenumbercontroller = TextEditingController();
-
-  final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   String dropdownValue = 'Allopathy';
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  String name = '';
+  final phonenumbercontroller = TextEditingController();
+  final pincodecontroller = TextEditingController();
+  final statecontroller = TextEditingController();
+
+  currentData() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    FirestoreData firestore = FirestoreData(uid: uid);
+    final names = await firestore.getCurrentUserData();
+    if (names != null) {
+      name = names[0];
+    } else {
+      print('names = null************$uid***********');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +98,7 @@ class _MedicineState extends State<Medicine> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(
                                   builder: (context) {
-                                    return imageUploadToFirebase();
+                                    return const imageUploadToFirebase();
                                   },
                                 ));
                               }),
@@ -166,7 +178,7 @@ class _MedicineState extends State<Medicine> {
                           print(phonenumbercontroller.text);
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return DashBoard();
+                              return const DashBoard();
                             },
                           ));
                         },
@@ -188,17 +200,5 @@ class _MedicineState extends State<Medicine> {
         ),
       ),
     );
-  }
-
-  currentData() async {
-    final User? user = FirebaseAuth.instance.currentUser;
-    final uid = user?.uid;
-    FirestoreData firestore = FirestoreData(uid: uid);
-    final names = await firestore.getCurrentUserData();
-    if (names != null) {
-      name = names[0];
-    } else {
-      print('names = null************$uid***********');
-    }
   }
 }

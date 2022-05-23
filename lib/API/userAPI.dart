@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tnshealth/model/usermodel.dart';
 
+import 'firestore.dart';
+
 class userAPI {
   static AppUser? _loggedInUser;
 
@@ -159,5 +161,18 @@ class userAPI {
       print(e.toString());
     }
     return null;
+  }
+
+  String name = '';
+//current user data
+  currentData() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    FirestoreData firestore = FirestoreData(uid: uid);
+    final names = await firestore.getCurrentUserData();
+    if (names != null) {
+      name = names[0];
+    } else {}
+    // return name;
   }
 }
