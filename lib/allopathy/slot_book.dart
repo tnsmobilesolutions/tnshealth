@@ -11,7 +11,7 @@ class SlotBook extends StatefulWidget {
 
 class _SlotBook extends State<SlotBook> {
   DateTime selectedDate = DateTime.now();
-  var selectedDateFromCalender;
+  DateTime? selectedDateFromCalender;
   String? text1;
   String? text2;
 
@@ -57,10 +57,16 @@ class _SlotBook extends State<SlotBook> {
       'More...': [],
     };
     Map slotList2 = <String, List<String>>{
-      '2022-05-23 00:00:00.000': generateRandomSlots(3),
-      '2022-05-25 00:00:00.000': generateRandomSlots(4),
-      '2022-05-27 00:00:00.000': generateRandomSlots(2),
-      '2022-05-29 00:00:00.000': generateRandomSlots(6),
+      '2022-05-21': generateRandomSlots(3),
+      '2022-05-22': generateRandomSlots(4),
+      '2022-05-23': generateRandomSlots(2),
+      '2022-05-24': generateRandomSlots(6),
+      '2022-05-25': generateRandomSlots(1),
+      '2022-05-26': generateRandomSlots(2),
+      '2022-05-27': generateRandomSlots(6),
+      '2022-05-28': generateRandomSlots(9),
+      '2022-05-29': generateRandomSlots(2),
+      '2022-05-30': generateRandomSlots(3),
     };
 
     return Scaffold(
@@ -98,7 +104,6 @@ class _SlotBook extends State<SlotBook> {
                       scrollDirection: Axis.horizontal,
                       itemCount: slotList1.length,
                       itemBuilder: (context, index) {
-                        //print(slotList1.keys.toList()[index]);
                         return GestureDetector(
                           onTap: () async {
                             if (slotList1.values.toList()[index].isNotEmpty) {
@@ -120,7 +125,8 @@ class _SlotBook extends State<SlotBook> {
                                   _isDateSelected = true;
                                 },
                               );
-                              _selectedSlot = slotList2.values.toList()[0];
+
+                              _selectedSlot = slotList2.values.toList()[index];
                             } else {
                               setState(
                                 () {
@@ -242,7 +248,7 @@ class _SlotBook extends State<SlotBook> {
                                         Text(
                                           _selectedSlot[index].toString(),
                                           style: const TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 10,
                                             fontFamily: 'Product Sans',
                                           ),
                                         ),
