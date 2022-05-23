@@ -10,19 +10,42 @@ class SlotBook extends StatefulWidget {
 }
 
 class _SlotBook extends State<SlotBook> {
+  DateTime selectedDate = DateTime.now();
+  var selectedDateFromCalender;
   String? text1;
   String? text2;
 
+  bool _isDateSelected = false;
+  bool _isSlotAvailable = false;
   String? _selectedDate;
-
   dynamic _selectedSlot;
 
-  bool _isSlotAvailable = false;
+  Future<DateTime> _selectDates(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2022, 05, 01),
+      lastDate: DateTime(2022, 06, 30),
+      helpText: 'choose your slot',
+    );
+    if (selectedDate == selected) {
+      generateRandomSlots(7);
+    }
+    if (selected != null && selected != selectedDate) {
+      setState(
+        () {
+          selectedDate = selected;
 
-  DateTime selectedDate = DateTime.now();
+          //print(selectedDate);
+        },
+      );
+    }
+    return selectedDate;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var slotList = <String, dynamic>{
+    Map slotList1 = <String, List<String>>{
       '01/05/2022': generateRandomSlots(4),
       '02/05/2022': generateRandomSlots(2),
       '03/05/2022': generateRandomSlots(6),
@@ -33,11 +56,11 @@ class _SlotBook extends State<SlotBook> {
       '08/05/2022': generateRandomSlots(2),
       'More...': [],
     };
-    var slotList2 = <String, dynamic>{
-      '23/05/2022': generateRandomSlots(7),
-      '25/05/2022': generateRandomSlots(4),
-      '26/05/2022': generateRandomSlots(2),
-      '30/05/2022': generateRandomSlots(6),
+    Map slotList2 = <String, List<String>>{
+      '2022-05-23 00:00:00.000': generateRandomSlots(3),
+      '2022-05-25 00:00:00.000': generateRandomSlots(4),
+      '2022-05-27 00:00:00.000': generateRandomSlots(2),
+      '2022-05-29 00:00:00.000': generateRandomSlots(6),
     };
 
     return Scaffold(
@@ -73,33 +96,40 @@ class _SlotBook extends State<SlotBook> {
                     padding: const EdgeInsets.all(10.0),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: slotList.length,
+                      itemCount: slotList1.length,
                       itemBuilder: (context, index) {
-                        //print(slotList.keys.toList()[index]);
+                        //print(slotList1.keys.toList()[index]);
                         return GestureDetector(
-                          onTap: () {
-                            if (slotList.values.toList()[index].isNotEmpty) {
+                          onTap: () async {
+                            if (slotList1.values.toList()[index].isNotEmpty) {
                               setState(
                                 () {
                                   _isSlotAvailable = true;
                                 },
                               );
-                              _selectedDate = slotList.keys.toList()[index];
-                              //ignore: avoid_print
-                              print(_selectedDate);
-                              // ignore: unrelated_type_equality_checks
-
-                              _selectedSlot = slotList.values.toList()[index];
-                              // ignore: avoid_print
-                              print(_selectedSlot);
-                            } else if (slotList.keys.toList()[index] ==
+                              _selectedDate = slotList1.keys.toList()[index];
+                              _selectedSlot = slotList1.values.toList()[index];
+                            } else if (slotList1.keys.toList()[index] ==
                                 'More...') {
-                              _selectDates(context);
+                              selectedDateFromCalender =
+                                  await _selectDates(context);
+
+                              setState(
+                                () {
+                                  _isSlotAvailable = false;
+                                  _isDateSelected = true;
+                                },
+                              );
+                              _selectedSlot = slotList2.values.toList()[0];
                             } else {
-                              setState(() {
-                                _isSlotAvailable = false;
-                                _selectedDate = slotList.keys.toList()[index];
-                              });
+                              setState(
+                                () {
+                                  _isSlotAvailable = false;
+                                  _isDateSelected = false;
+                                  _selectedDate =
+                                      slotList1.keys.toList()[index];
+                                },
+                              );
                             }
                           },
                           child: Container(
@@ -107,18 +137,18 @@ class _SlotBook extends State<SlotBook> {
                             height: 5,
                             width: 120,
                             decoration: BoxDecoration(
-                              color: slotList.keys.toList()[index] == 'More...'
+                              color: slotList1.keys.toList()[index] == 'More...'
                                   ? const Color.fromARGB(255, 8, 127, 163)
                                   : Colors.white,
                               border: Border.all(
                                   width: 1.5,
-                                  color: slotList.values
+                                  color: slotList1.values
                                               .toList()[index]
                                               .isEmpty &&
-                                          slotList.keys.toList()[index] !=
+                                          slotList1.keys.toList()[index] !=
                                               'More...'
                                       ? const Color.fromARGB(183, 224, 63, 51)
-                                      : slotList.keys.toList()[index] ==
+                                      : slotList1.keys.toList()[index] ==
                                               'More...'
                                           ? const Color.fromARGB(
                                               255, 8, 127, 163)
@@ -126,12 +156,12 @@ class _SlotBook extends State<SlotBook> {
                                               255, 68, 236, 76)),
                               borderRadius: BorderRadius.circular(7),
                             ),
-                            child: slotList.keys.toList()[index] == 'More...'
+                            child: slotList1.keys.toList()[index] == 'More...'
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        slotList.keys.toList()[index],
+                                        slotList1.keys.toList()[index],
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
@@ -145,7 +175,7 @@ class _SlotBook extends State<SlotBook> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        slotList.keys.toList()[index],
+                                        slotList1.keys.toList()[index],
                                         style: const TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold,
@@ -154,10 +184,10 @@ class _SlotBook extends State<SlotBook> {
                                       ),
                                       const SizedBox(height: 3),
                                       Text(
-                                        slotList.keys.toList()[index] ==
+                                        slotList1.keys.toList()[index] ==
                                                 'More...'
                                             ? ''
-                                            : '${slotList.values.toList()[index].length} Slots available',
+                                            : '${slotList1.values.toList()[index].length} Slots available',
                                         style: const TextStyle(
                                           fontSize: 12,
                                           fontFamily: 'Product Sans',
@@ -172,18 +202,19 @@ class _SlotBook extends State<SlotBook> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                _isSlotAvailable
+                _isSlotAvailable || _isDateSelected
                     ? Column(
                         children: [
                           Text(
-                            '$_selectedDate',
+                            _isSlotAvailable
+                                ? '$_selectedDate'
+                                : '$selectedDateFromCalender',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           GridView.builder(
-                            //physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
@@ -211,7 +242,7 @@ class _SlotBook extends State<SlotBook> {
                                         Text(
                                           _selectedSlot[index].toString(),
                                           style: const TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 15,
                                             fontFamily: 'Product Sans',
                                           ),
                                         ),
@@ -245,26 +276,5 @@ class _SlotBook extends State<SlotBook> {
         ),
       ),
     );
-  }
-
-  _selectDates(BuildContext context) async {
-    final DateTime? selected = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2022, 05, 01),
-      lastDate: DateTime(2022, 06, 30),
-      helpText: 'choose your slot',
-    );
-    if (selectedDate == selected) {
-      generateRandomSlots(7);
-    }
-    if (selected != null && selected != selectedDate) {
-      setState(() {
-        selectedDate = selected;
-
-        // ignore: avoid_print
-        print(selectedDate);
-      });
-    }
   }
 }
