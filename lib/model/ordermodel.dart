@@ -1,37 +1,41 @@
 import 'dart:convert';
 
-class Orders {
-  Orders({
-    this.orderId,
-    this.userId,
-    this.vendorId,
-    this.prescriptionURL,
-    this.orderDate,
-    this.orderTime,
+import 'package:tnshealth/model/addressmodel.dart';
+
+class Order {
+  Order({
     this.deliveryDate,
     this.deliveryTime,
     this.orderAddress,
+    this.orderDate,
+    this.orderId,
+    this.orderTime,
+    this.prescriptionURL,
+    this.userId,
+    this.vendorId,
   });
 
-  factory Orders.fromJson(String source) => Orders.fromMap(json.decode(source));
+  factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
 
-  factory Orders.fromMap(Map<String, dynamic> map) {
-    return Orders(
-      orderId: map['orderId'],
-      userId: map['userId'],
-      vendorId: map['vendorId'],
-      prescriptionURL: map['prescriptionURL'],
-      orderDate: map['orderDate'],
-      orderTime: map['orderTime'],
+  factory Order.fromMap(Map<String, dynamic> map) {
+    return Order(
       deliveryDate: map['deliveryDate'],
       deliveryTime: map['deliveryTime'],
-      orderAddress: map['orderAddress'],
+      orderAddress: map['orderAddress'] != null
+          ? Address.fromMap(map['orderAddress'])
+          : null,
+      orderDate: map['orderDate'],
+      orderId: map['orderId'],
+      orderTime: map['orderTime'],
+      prescriptionURL: map['prescriptionURL'],
+      userId: map['userId'],
+      vendorId: map['vendorId'],
     );
   }
 
   final String? deliveryDate;
   final String? deliveryTime;
-  final String? orderAddress;
+  final Address? orderAddress;
   final String? orderDate;
   final String? orderId;
   final String? orderTime;
@@ -43,71 +47,71 @@ class Orders {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Orders &&
-        other.orderId == orderId &&
-        other.userId == userId &&
-        other.vendorId == vendorId &&
-        other.prescriptionURL == prescriptionURL &&
-        other.orderDate == orderDate &&
-        other.orderTime == orderTime &&
+    return other is Order &&
         other.deliveryDate == deliveryDate &&
         other.deliveryTime == deliveryTime &&
-        other.orderAddress == orderAddress;
+        other.orderAddress == orderAddress &&
+        other.orderDate == orderDate &&
+        other.orderId == orderId &&
+        other.orderTime == orderTime &&
+        other.prescriptionURL == prescriptionURL &&
+        other.userId == userId &&
+        other.vendorId == vendorId;
   }
 
   @override
   int get hashCode {
-    return orderId.hashCode ^
-        userId.hashCode ^
-        vendorId.hashCode ^
-        prescriptionURL.hashCode ^
-        orderDate.hashCode ^
-        orderTime.hashCode ^
-        deliveryDate.hashCode ^
+    return deliveryDate.hashCode ^
         deliveryTime.hashCode ^
-        orderAddress.hashCode;
+        orderAddress.hashCode ^
+        orderDate.hashCode ^
+        orderId.hashCode ^
+        orderTime.hashCode ^
+        prescriptionURL.hashCode ^
+        userId.hashCode ^
+        vendorId.hashCode;
   }
 
   @override
   String toString() {
-    return 'Orders(orderId: $orderId, userId: $userId, vendorId: $vendorId, prescriptionURL: $prescriptionURL, orderDate: $orderDate, orderTime: $orderTime, deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress)';
+    return 'Orders(deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress, orderDate: $orderDate, orderId: $orderId, orderTime: $orderTime, prescriptionURL: $prescriptionURL, userId: $userId, vendorId: $vendorId)';
   }
 
-  Orders copyWith({
-    String? orderId,
-    String? userId,
-    String? vendorId,
-    String? prescriptionURL,
-    String? orderDate,
-    String? orderTime,
+  Order copyWith({
     String? deliveryDate,
     String? deliveryTime,
-    String? orderAddress,
+    Address? orderAddress,
+    String? orderDate,
+    String? orderId,
+    String? orderTime,
+    String? prescriptionURL,
+    String? userId,
+    String? vendorId,
   }) {
-    return Orders(
-      orderId: orderId ?? this.orderId,
-      userId: userId ?? this.userId,
-      vendorId: vendorId ?? this.vendorId,
-      prescriptionURL: prescriptionURL ?? this.prescriptionURL,
-      orderDate: orderDate ?? this.orderDate,
-      orderTime: orderTime ?? this.orderTime,
+    return Order(
       deliveryDate: deliveryDate ?? this.deliveryDate,
       deliveryTime: deliveryTime ?? this.deliveryTime,
       orderAddress: orderAddress ?? this.orderAddress,
+      orderDate: orderDate ?? this.orderDate,
+      orderId: orderId ?? this.orderId,
+      orderTime: orderTime ?? this.orderTime,
+      prescriptionURL: prescriptionURL ?? this.prescriptionURL,
+      userId: userId ?? this.userId,
+      vendorId: vendorId ?? this.vendorId,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'orderId': orderId,
-      'userId': userId,
-      'vendorId': vendorId,
-      'prescriptionURL': prescriptionURL,
-      'orderDate': orderDate,
-      'orderTime': orderTime,
       'deliveryDate': deliveryDate,
       'deliveryTime': deliveryTime,
-      'orderAddress': orderAddress,
+      'orderAddress': orderAddress?.toMap(),
+      'orderDate': orderDate,
+      'orderId': orderId,
+      'orderTime': orderTime,
+      'prescriptionURL': prescriptionURL,
+      'userId': userId,
+      'vendorId': vendorId,
     };
   }
 

@@ -10,7 +10,7 @@ class AppUser {
   String? maritialstatus;
   String? height;
   String? weight;
-  String? adress;
+  String? address;
   AppUser({
     this.uid,
     this.name,
@@ -21,7 +21,7 @@ class AppUser {
     this.maritialstatus,
     this.height,
     this.weight,
-    this.adress,
+    this.address,
   });
 
   AppUser copyWith({
@@ -34,7 +34,7 @@ class AppUser {
     String? maritialstatus,
     String? height,
     String? weight,
-    String? adress,
+    String? address,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
@@ -46,7 +46,7 @@ class AppUser {
       maritialstatus: maritialstatus ?? this.maritialstatus,
       height: height ?? this.height,
       weight: weight ?? this.weight,
-      adress: adress ?? this.adress,
+      address: address ?? this.address,
     );
   }
 
@@ -80,8 +80,8 @@ class AppUser {
     if (weight != null) {
       result.addAll({'weight': weight});
     }
-    if (adress != null) {
-      result.addAll({'adress': adress});
+    if (address != null) {
+      result.addAll({'address': address});
     }
 
     return result;
@@ -98,7 +98,7 @@ class AppUser {
       maritialstatus: map['maritialstatus'],
       height: map['height'],
       weight: map['weight'],
-      adress: map['adress'],
+      address: map['address'],
     );
   }
 
@@ -109,7 +109,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, maritialstatus: $maritialstatus, height: $height, weight: $weight, adress: $adress)';
+    return 'AppUser(uid: $uid, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, maritialstatus: $maritialstatus, height: $height, weight: $weight, address: $address)';
   }
 
   @override
@@ -126,7 +126,7 @@ class AppUser {
         other.maritialstatus == maritialstatus &&
         other.height == height &&
         other.weight == weight &&
-        other.adress == adress;
+        other.address == address;
   }
 
   @override
@@ -140,6 +140,6 @@ class AppUser {
         maritialstatus.hashCode ^
         height.hashCode ^
         weight.hashCode ^
-        adress.hashCode;
+        address.hashCode;
   }
 }

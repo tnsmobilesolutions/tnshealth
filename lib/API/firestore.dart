@@ -11,13 +11,23 @@ class FirestoreData {
 
   //update to fireStore
 
-  Future updateUserData(String? name, email, gender, phonenum, dateofbirth,
-      bloodgroup, maritial, height, weight, adress) async {
+  Future updateUserData(
+    String? email,
+    name,
+    phonenum,
+    address,
+    bloodgroup,
+    gender,
+    height,
+    weight,
+    dateofbirth,
+    maritial,
+  ) async {
     return UserCollection.doc(uid).set({
       'email': email,
       'name': name,
       'mobile': phonenum,
-      'adress': adress,
+      'address': address,
       'BloodGroup': bloodgroup,
       'Gender': gender,
       'Height': height,
@@ -40,7 +50,7 @@ class FirestoreData {
       String name = ds.get('name');
       String email = ds.get('email');
       String mobile = ds.get('mobile');
-      String adress = ds.get('adress');
+      String address = ds.get('address');
       String bloodGroup = ds.get('BloodGroup');
       String gender = ds.get('Gender');
       String height = ds.get('Height');
@@ -50,7 +60,7 @@ class FirestoreData {
         name,
         email,
         mobile,
-        adress,
+        address,
         bloodGroup,
         gender,
         height,
@@ -65,7 +75,7 @@ class FirestoreData {
 //uid
 
   Future<String?> U_ID() async {
-    final User? user = await FirebaseAuth.instance.currentUser;
+    final User? user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
     return uid;
 

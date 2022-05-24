@@ -8,7 +8,7 @@ import 'package:tnshealth/medicine/fileupload.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
 class Medicine extends StatefulWidget {
-  Medicine({
+  const Medicine({
     Key? key,
   }) : super(key: key);
 
@@ -17,17 +17,29 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
-  String name = '';
-  final adressline1namecontroller = TextEditingController();
-  final adressline2namecontroller = TextEditingController();
+  final addressline1namecontroller = TextEditingController();
+  final addressline2namecontroller = TextEditingController();
   final citycontroller = TextEditingController();
-  final statecontroller = TextEditingController();
-  final pincodecontroller = TextEditingController();
-  final phonenumbercontroller = TextEditingController();
-
-  final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   String dropdownValue = 'Allopathy';
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  String name = '';
+  final phonenumbercontroller = TextEditingController();
+  final pincodecontroller = TextEditingController();
+  final statecontroller = TextEditingController();
+
+  currentData() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    FirestoreData firestore = FirestoreData(uid: uid);
+    final names = await firestore.getCurrentUserData();
+    if (names != null) {
+      name = names[0];
+    } else {
+      print('names = null************$uid***********');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +98,7 @@ class _MedicineState extends State<Medicine> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(
                                   builder: (context) {
-                                    return imageUploadToFirebase();
+                                    return const imageUploadToFirebase();
                                   },
                                 ));
                               }),
@@ -94,23 +106,23 @@ class _MedicineState extends State<Medicine> {
                       ),
 
                       const SizedBox(height: 20),
-                      Text('Delivery Adress', style: kTabBar),
+                      Text('Delivery Address', style: kTabBar),
                       // const SizedBox(height: 20),
 
                       const SizedBox(height: 10),
                       TextField(
-                        controller: adressline1namecontroller,
+                        controller: addressline1namecontroller,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Adress Line 1',
+                          labelText: 'Address Line 1',
                         ),
                       ),
                       const SizedBox(height: 10),
                       TextField(
-                        controller: adressline2namecontroller,
+                        controller: addressline2namecontroller,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Adress Line 2',
+                          labelText: 'Address Line 2',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -158,15 +170,15 @@ class _MedicineState extends State<Medicine> {
                           child: FloatingActionButton.extended(
                         heroTag: 'btn2',
                         onPressed: () {
-                          print(adressline1namecontroller.text);
-                          print(adressline2namecontroller.text);
+                          print(addressline1namecontroller.text);
+                          print(addressline2namecontroller.text);
                           print(citycontroller.text);
                           print(statecontroller.text);
                           print(pincodecontroller.text);
                           print(phonenumbercontroller.text);
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return DashBoard();
+                              return const DashBoard();
                             },
                           ));
                         },
@@ -188,17 +200,5 @@ class _MedicineState extends State<Medicine> {
         ),
       ),
     );
-  }
-
-  currentData() async {
-    final User? user = FirebaseAuth.instance.currentUser;
-    final uid = user?.uid;
-    FirestoreData firestore = FirestoreData(uid: uid);
-    final names = await firestore.getCurrentUserData();
-    if (names != null) {
-      name = names[0];
-    } else {
-      print('names = null************$uid***********');
-    }
   }
 }

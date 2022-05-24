@@ -5,7 +5,7 @@ import 'package:tnshealth/API/firestore.dart';
 const kprofiletext = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
 class Profile extends StatefulWidget {
-  Profile({
+  const Profile({
     Key? key,
   }) : super(key: key);
 
@@ -14,13 +14,13 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String name = '';
-  String email = '';
-  String phonenum = '';
-  String adress = '';
+  String address = '';
   String bloodgroup = '';
+  String email = '';
   String gender = '';
   String height = '';
+  String name = '';
+  String phonenum = '';
   String weight = '';
 
   @override
@@ -30,6 +30,34 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    currentData() async {
+      final User? user = FirebaseAuth.instance.currentUser;
+      final uid = user?.uid;
+      FirestoreData firestore = FirestoreData(uid: uid);
+      final names = await firestore.getCurrentUserData();
+      if (names != null) {
+        name = names[0];
+        email = names[1];
+        phonenum = names[2];
+        address = names[3];
+        bloodgroup = names[4];
+        gender = names[7];
+        height = names[5];
+        weight = names[6];
+
+        // print('**************name = $name***********');
+        // print('**********email = $email');
+        // print('******************address = $address');
+        // print('******************phonenum = $phonenum');
+        // print('******************bloodgroup = $bloodgroup');
+        // print('******************gender = $gender');
+        // print('******************height = $height');
+        // print('******************weight = $weight');
+      } else {
+        //print('names = null************$uid***********');
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Profile'),
@@ -64,7 +92,7 @@ class _ProfileState extends State<Profile> {
                     Text('Name: $name', style: kprofiletext),
                     Text('Mobile Number: $phonenum', style: kprofiletext),
                     Text('Email Id: $email', style: kprofiletext),
-                    Text('Adress:$adress', style: kprofiletext),
+                    Text('Address:$address', style: kprofiletext),
                     Text('Blood Group: $bloodgroup', style: kprofiletext),
                     Text('Gender :$gender', style: kprofiletext),
                     Text('Height: $height', style: kprofiletext),
@@ -77,33 +105,5 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
-  }
-
-  currentData() async {
-    final User? user = FirebaseAuth.instance.currentUser;
-    final uid = user?.uid;
-    FirestoreData firestore = FirestoreData(uid: uid);
-    final names = await firestore.getCurrentUserData();
-    if (names != null) {
-      name = names[0];
-      email = names[1];
-      phonenum = names[2];
-      adress = names[3];
-      bloodgroup = names[4];
-      gender = names[5];
-      height = names[6];
-      weight = names[7];
-
-      print('**************name = $name***********');
-      print('**********email = $email');
-      print('******************adress = $adress');
-      print('******************phonenum = $phonenum');
-      print('******************bloodgroup = $bloodgroup');
-      print('******************gender = $gender');
-      print('******************height = $height');
-      print('******************weight = $weight');
-    } else {
-      print('names = null************$uid***********');
-    }
   }
 }

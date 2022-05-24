@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Adsress {
+class Address {
   final String? addressId;
   final String? addressLine1;
   final String? addressLine2;
@@ -8,8 +8,8 @@ class Adsress {
   final String? city;
   final String? state;
   final int? pincode;
-  final String? contactNumber;
-  Adsress({
+  final int? contactNumber;
+  Address({
     this.addressId,
     this.addressLine1,
     this.addressLine2,
@@ -20,7 +20,7 @@ class Adsress {
     this.contactNumber,
   });
 
-  Adsress copyWith({
+  Address copyWith({
     String? addressId,
     String? addressLine1,
     String? addressLine2,
@@ -28,9 +28,9 @@ class Adsress {
     String? city,
     String? state,
     int? pincode,
-    String? contactNumber,
+    int? contactNumber,
   }) {
-    return Adsress(
+    return Address(
       addressId: addressId ?? this.addressId,
       addressLine1: addressLine1 ?? this.addressLine1,
       addressLine2: addressLine2 ?? this.addressLine2,
@@ -55,8 +55,8 @@ class Adsress {
     };
   }
 
-  factory Adsress.fromMap(Map<String, dynamic> map) {
-    return Adsress(
+  factory Address.fromMap(Map<String, dynamic> map) {
+    return Address(
       addressId: map['addressId'],
       addressLine1: map['addressLine1'],
       addressLine2: map['addressLine2'],
@@ -64,25 +64,25 @@ class Adsress {
       city: map['city'],
       state: map['state'],
       pincode: map['pincode']?.toInt(),
-      contactNumber: map['contactNumber'],
+      contactNumber: map['contactNumber']?.toInt(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Adsress.fromJson(String source) =>
-      Adsress.fromMap(json.decode(source));
+  factory Address.fromJson(String source) =>
+      Address.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Adsress(addressId: $addressId, addressLine1: $addressLine1, addressLine2: $addressLine2, addressNickName: $addressNickName, city: $city, state: $state, pincode: $pincode, contactNumber: $contactNumber)';
+    return 'Address(addressId: $addressId, addressLine1: $addressLine1, addressLine2: $addressLine2, addressNickName: $addressNickName, city: $city, state: $state, pincode: $pincode, contactNumber: $contactNumber)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Adsress &&
+    return other is Address &&
         other.addressId == addressId &&
         other.addressLine1 == addressLine1 &&
         other.addressLine2 == addressLine2 &&
