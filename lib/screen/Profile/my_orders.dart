@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tnshealth/model/addressmodel.dart';
+import 'package:tnshealth/model/ordermodel.dart';
 
 import 'order_details.dart';
 
@@ -10,12 +12,47 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-  List<String> orderDetails = [
-    '20/05/2022',
-    '7.54 PM',
-    '21/05/2022',
-    '9.38 AM',
-    'Plot - 626 / 979, AT - Naharkanta, PO - Balianta, PS - Hanshpal, Bhubaneswar, pin - 752101'
+  List<Order> orderDetails = [
+    Order(
+      orderId: '123',
+      deliveryDate: '26/05/2022',
+      deliveryTime: '05.00 PM',
+      orderDate: '25/05/2022',
+      orderTime: '08.00 PM',
+      userId: 'abc',
+      vendorId: 'ABCD',
+      prescriptionURL: 'abababab',
+      orderAddress: Address(
+        addressId: '456',
+        addressLine1: 'Plot - 626 / 979',
+        addressLine2: 'AT - Naharkanta, PO - Balianta, PS - Hanshpal',
+        addressNickName: 'Home',
+        city: 'Bhubaneswar',
+        contactNumber: 7008183804,
+        pincode: 752101,
+        state: 'Odisha',
+      ),
+    ),
+    Order(
+      orderId: '456',
+      deliveryDate: '26/05/2022',
+      deliveryTime: '05.00 PM',
+      orderDate: '25/05/2022',
+      orderTime: '08.00 PM',
+      userId: 'abc',
+      vendorId: 'ABCD',
+      prescriptionURL: 'abababab',
+      orderAddress: Address(
+        addressId: '456',
+        addressLine1: 'Plot - 626 / 979',
+        addressLine2: 'AT - Naharkanta, PO - Balianta, PS - Hanshpal',
+        addressNickName: 'Home',
+        city: 'Bhubaneswar',
+        contactNumber: 7008183804,
+        pincode: 752101,
+        state: 'Odisha',
+      ),
+    ),
   ];
 
   @override
@@ -30,7 +67,7 @@ class _MyOrdersState extends State<MyOrders> {
             const SizedBox(height: 13),
             Expanded(
               child: ListView.builder(
-                itemCount: 5,
+                itemCount: orderDetails.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     child: Padding(
@@ -41,20 +78,15 @@ class _MyOrdersState extends State<MyOrders> {
                         ),
                         textColor: Colors.white,
                         tileColor: Colors.red,
-                        title: const Text('Your 1st order'),
+                        title: Text(orderDetails[index].orderId ?? ''),
                       ),
                     ),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => OrderDetails(
-                            orderDate: orderDetails[0],
-                            orderTime: orderDetails[1],
-                            deliveryDate: orderDetails[2],
-                            deliveryTime: orderDetails[3],
-                            orderAddress: orderDetails[4],
-                          ),
+                          builder: (context) =>
+                              OrderDetails(order: orderDetails[index]),
                         ),
                       );
                     },

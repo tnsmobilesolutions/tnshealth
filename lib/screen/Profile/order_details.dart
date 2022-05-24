@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tnshealth/model/ordermodel.dart';
 import 'package:tnshealth/widget.dart';
 import 'package:uuid/uuid.dart';
 
 class OrderDetails extends StatelessWidget {
-  const OrderDetails(
-      {Key? key,
-      this.orderDate,
-      this.orderTime,
-      this.deliveryDate,
-      this.deliveryTime,
-      this.orderAddress})
-      : super(key: key);
-
-  final String? orderDate;
-  final String? orderTime;
-  final String? deliveryDate;
-  final String? deliveryTime;
-  final String? orderAddress;
+  const OrderDetails({Key? key, required this.order}) : super(key: key);
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +28,18 @@ class OrderDetails extends StatelessWidget {
                 const SizedBox(height: 16),
                 Widgets().myOrders('Order Id  :  ', uuid.v1()),
                 const SizedBox(height: 30),
-                Widgets().myOrders('Order Date : ', orderDate!),
+                Widgets().myOrders('Order Date : ', '${order.orderDate}'),
                 const SizedBox(height: 30),
-                Widgets().myOrders('Order Time  : ', orderTime!),
+                Widgets().myOrders('Order Time  : ', '${order.orderTime}'),
                 const SizedBox(height: 30),
-                Widgets().myOrders('Delivery Date  : ', deliveryDate!),
+                Widgets()
+                    .myOrders('Delivery Date  : ', '${order.deliveryDate}'),
                 const SizedBox(height: 30),
-                Widgets().myOrders('Delivery Time  :  ', deliveryTime!),
+                Widgets()
+                    .myOrders('Delivery Time  :  ', '${order.deliveryTime}'),
                 const SizedBox(height: 30),
-                Widgets().myOrders('Order Address  :  ', orderAddress!),
+                Widgets()
+                    .myOrders('Order Address  :  ', '${order.orderAddress}'),
                 const SizedBox(height: 16),
                 const Divider(color: Colors.black, thickness: 2.0),
               ],
