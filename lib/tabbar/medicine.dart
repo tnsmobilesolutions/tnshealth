@@ -17,8 +17,8 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
-  final adressline1namecontroller = TextEditingController();
-  final adressline2namecontroller = TextEditingController();
+  final addressline1namecontroller = TextEditingController();
+  final addressline2namecontroller = TextEditingController();
   final citycontroller = TextEditingController();
   String dropdownValue = 'Allopathy';
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
@@ -106,23 +106,23 @@ class _MedicineState extends State<Medicine> {
                       ),
 
                       const SizedBox(height: 20),
-                      Text('Delivery Adress', style: kTabBar),
+                      Text('Delivery Address', style: kTabBar),
                       // const SizedBox(height: 20),
 
                       const SizedBox(height: 10),
                       TextField(
-                        controller: adressline1namecontroller,
+                        controller: addressline1namecontroller,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Adress Line 1',
+                          labelText: 'Address Line 1',
                         ),
                       ),
                       const SizedBox(height: 10),
                       TextField(
-                        controller: adressline2namecontroller,
+                        controller: addressline2namecontroller,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Adress Line 2',
+                          labelText: 'Address Line 2',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -170,8 +170,8 @@ class _MedicineState extends State<Medicine> {
                           child: FloatingActionButton.extended(
                         heroTag: 'btn2',
                         onPressed: () {
-                          print(adressline1namecontroller.text);
-                          print(adressline2namecontroller.text);
+                          print(addressline1namecontroller.text);
+                          print(addressline2namecontroller.text);
                           print(citycontroller.text);
                           print(statecontroller.text);
                           print(pincodecontroller.text);

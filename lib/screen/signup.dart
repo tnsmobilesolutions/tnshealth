@@ -20,7 +20,7 @@ class _SignupPageState extends State<SignupPage> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final confirmpasswordcontroller = TextEditingController();
-  final adresscontroller = TextEditingController();
+  final addresscontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
   final bloodgroupcontroller = TextEditingController();
   final heightcontroller = TextEditingController();
@@ -96,6 +96,7 @@ class _SignupPageState extends State<SignupPage> {
         if (!regex.hasMatch(value)) {
           return ("Enter Valid Password(Min. 6 Character)");
         }
+        return null;
       },
       onSaved: (value) {
         passwordcontroller.text = value!;
@@ -208,19 +209,19 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
 
-    //Adress
+    //Address
 
-    final adress = TextFormField(
+    final address = TextFormField(
       // keyboardType: TextInputType.none,
       autofocus: false,
-      controller: adresscontroller,
+      controller: addresscontroller,
       onSaved: (value) {
-        adresscontroller.text = value!;
+        addresscontroller.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Adress",
+        hintText: "Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -241,7 +242,7 @@ class _SignupPageState extends State<SignupPage> {
                 passwordcontroller.text,
                 fullnamecontroller.text,
                 phonenumbercontroller.text,
-                adresscontroller.text,
+                addresscontroller.text,
                 bloodgroupcontroller.text,
                 heightcontroller.text,
                 weightcontroller.text,
@@ -304,7 +305,7 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 20),
                 bloodGroup,
                 const SizedBox(height: 20),
-                adress,
+                address,
                 const SizedBox(height: 20),
                 IntlPhoneField(
                   validator: (value) {

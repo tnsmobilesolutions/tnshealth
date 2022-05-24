@@ -40,10 +40,10 @@ class userAPI {
       //return uid.user?.uid;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        //print('No user found for that email.');
         return null;
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        //print('Wrong password provided for that user.');
         return null;
       }
     } on Exception catch (e) {
@@ -59,7 +59,7 @@ class userAPI {
       String password,
       String name,
       String mobile,
-      String adress,
+      String address,
       String bloodGroup,
       String gender,
       String height,
@@ -78,7 +78,7 @@ class userAPI {
               'uid': value.user!.uid,
               'name': name,
               'mobile': mobile,
-              'adress': adress,
+              'address': address,
               'BloodGroup': bloodGroup,
               'Gender': gender,
               'Height': height,

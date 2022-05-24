@@ -4,7 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
 class diagnosys extends StatefulWidget {
-  diagnosys({Key? key}) : super(key: key);
+  const diagnosys({Key? key}) : super(key: key);
 
   @override
   _diagnosysState createState() => _diagnosysState();
@@ -13,8 +13,8 @@ class diagnosys extends StatefulWidget {
 class _diagnosysState extends State<diagnosys> {
   final testnamecontroller = TextEditingController();
   final patientnamecontroller = TextEditingController();
-  final adressline1namecontroller = TextEditingController();
-  final adressline2namecontroller = TextEditingController();
+  final addressline1namecontroller = TextEditingController();
+  final addressline2namecontroller = TextEditingController();
   final citycontroller = TextEditingController();
   final statecontroller = TextEditingController();
   final pincodecontroller = TextEditingController();
@@ -50,21 +50,21 @@ class _diagnosysState extends State<diagnosys> {
               ),
             ),
             const SizedBox(height: 20),
-            Text('Patient Adress', style: kTabBar),
+            Text('Patient Address', style: kTabBar),
             const SizedBox(height: 20),
             TextField(
-              controller: adressline1namecontroller,
+              controller: addressline1namecontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Adress Line 1',
+                labelText: 'Address Line 1',
               ),
             ),
             const SizedBox(height: 5),
             TextField(
-              controller: adressline2namecontroller,
+              controller: addressline2namecontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Adress Line 2',
+                labelText: 'Address Line 2',
               ),
             ),
             const SizedBox(height: 5),
@@ -113,15 +113,15 @@ class _diagnosysState extends State<diagnosys> {
                   onPressed: () {
                     print(testnamecontroller.text);
                     print(patientnamecontroller.text);
-                    print(adressline1namecontroller.text);
-                    print(adressline2namecontroller.text);
+                    print(addressline1namecontroller.text);
+                    print(addressline2namecontroller.text);
                     print(citycontroller.text);
                     print(statecontroller.text);
                     print(pincodecontroller.text);
                     print(phonenumbercontroller.text);
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return DashBoard();
+                        return const DashBoard();
                       },
                     ));
                   },

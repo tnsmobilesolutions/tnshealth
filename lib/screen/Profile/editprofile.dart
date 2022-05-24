@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tnshealth/model/usermodel.dart';
 
 class EditProfile extends StatefulWidget {
-  EditProfile({Key? key, this.currentuser}) : super(key: key);
+  const EditProfile({Key? key, this.currentuser}) : super(key: key);
   final AppUser? currentuser;
 
   @override
@@ -15,7 +15,7 @@ class _EditProfileState extends State<EditProfile> {
   final mobileController = TextEditingController();
   final emailController = TextEditingController();
   final genderController = TextEditingController();
-  final adressController = TextEditingController();
+  final addressController = TextEditingController();
   final bloodGroupController = TextEditingController();
   final heightController = TextEditingController();
   final weightController = TextEditingController();
@@ -30,7 +30,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -51,17 +51,18 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'Name',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
@@ -76,17 +77,18 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'Mobile Number',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
@@ -101,42 +103,44 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'Email-Id',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
-                controller: adressController,
+                controller: addressController,
                 keyboardType: TextInputType.name,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please Enter Adress';
+                    return 'Please Enter Address';
                   }
                   return null;
                 },
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
-                  labelText: ' Enter Your Adress',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelText: ' Enter Your Address',
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
@@ -151,17 +155,18 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'BloodGroup',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
@@ -176,17 +181,18 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'Gender',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
@@ -201,17 +207,18 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'Height',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
               TextFormField(
@@ -226,17 +233,18 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orangeAccent,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber),
                   ),
                   contentPadding: const EdgeInsets.all(15),
                   labelText: 'Weight',
-                  labelStyle: TextStyle(fontSize: 15.0, color: Colors.black),
+                  labelStyle:
+                      const TextStyle(fontSize: 15.0, color: Colors.black),
                 ),
               ),
             ],

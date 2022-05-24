@@ -61,6 +61,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 title: Row(
                   children: const <Widget>[
                     Icon(Icons.bookmark),
+                    SizedBox(width: 5),
                     Text('Appointment'),
                   ],
                 ),
@@ -70,6 +71,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 title: Row(
                   children: const <Widget>[
                     Icon(Icons.collections_bookmark_rounded),
+                    SizedBox(width: 5),
                     Text('My Orders'),
                   ],
                 ),
@@ -88,6 +90,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 title: Row(
                   children: const <Widget>[
                     Icon(Icons.people),
+                    SizedBox(width: 5),
                     Text('Profile'),
                   ],
                 ),
@@ -96,7 +99,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return Profile();
+                        return const Profile();
                       },
                     ),
                   );
@@ -106,6 +109,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 title: Row(
                   children: const <Widget>[
                     Icon(Icons.logout),
+                    SizedBox(width: 5),
                     Text('Logout'),
                   ],
                 ),
