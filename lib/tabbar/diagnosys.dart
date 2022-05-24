@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
-class diagnosys extends StatefulWidget {
-  const diagnosys({Key? key}) : super(key: key);
+class Diagnosys extends StatefulWidget {
+  const Diagnosys({Key? key}) : super(key: key);
 
   @override
-  _diagnosysState createState() => _diagnosysState();
+  _DiagnosysState createState() => _DiagnosysState();
 }
 
-class _diagnosysState extends State<diagnosys> {
+class _DiagnosysState extends State<Diagnosys> {
   final testnamecontroller = TextEditingController();
   final patientnamecontroller = TextEditingController();
   final addressline1namecontroller = TextEditingController();
