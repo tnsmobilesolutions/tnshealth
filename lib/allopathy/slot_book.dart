@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:tnshealth/allopathy/stateless_page.dart';
@@ -28,9 +30,7 @@ class _SlotBook extends State<SlotBook> {
       lastDate: DateTime(2022, 06, 30),
       helpText: 'choose your slot',
     );
-    if (selectedDate == selected) {
-      generateRandomSlots(7);
-    }
+
     if (selected != null && selected != selectedDate) {
       setState(
         () {
@@ -53,21 +53,20 @@ class _SlotBook extends State<SlotBook> {
       '05/05/2022': generateRandomSlots(7),
       '06/05/2022': generateRandomSlots(5),
       '07/05/2022': [],
-      '08/05/2022': generateRandomSlots(2),
+      '08/05/2022': generateRandomSlots(5),
       'More...': [],
     };
-    Map slotList2 = <String, List<String>>{
-      '2022-05-21': generateRandomSlots(3),
-      '2022-05-22': generateRandomSlots(4),
-      '2022-05-23': generateRandomSlots(2),
-      '2022-05-24': generateRandomSlots(6),
-      '2022-05-25': generateRandomSlots(1),
-      '2022-05-26': generateRandomSlots(2),
-      '2022-05-27': generateRandomSlots(6),
-      '2022-05-28': generateRandomSlots(9),
-      '2022-05-29': generateRandomSlots(2),
-      '2022-05-30': generateRandomSlots(3),
-    };
+    // final slotList2 = <String, List<String>>{
+    //   '21/05/2022': generateRandomSlots(2),
+    //   '22/05/2022': generateRandomSlots(4),
+    //   '23/05/2022': [],
+    //   '24/05/2022': generateRandomSlots(2),
+    //   '25/05/2022': generateRandomSlots(1),
+    //   '26/05/2022': generateRandomSlots(6),
+    //   '27/05/2022': [],
+    //   '28/05/2022': generateRandomSlots(5),
+    //   '29/05/2022': generateRandomSlots(3),
+    // };
 
     return Scaffold(
       appBar: AppBar(
@@ -113,7 +112,8 @@ class _SlotBook extends State<SlotBook> {
                                 },
                               );
                               _selectedDate = slotList1.keys.toList()[index];
-                              _selectedSlot = slotList1.values.toList()[index];
+                              _selectedSlot =
+                                  generateRandomSlots(Random().nextInt(10));
                             } else if (slotList1.keys.toList()[index] ==
                                 'More...') {
                               selectedDateFromCalender =
@@ -125,17 +125,17 @@ class _SlotBook extends State<SlotBook> {
                                   _isDateSelected = true;
                                 },
                               );
-
-                              _selectedSlot = slotList2.values.toList()[index];
+                              _selectedSlot =
+                                  generateRandomSlots(Random().nextInt(11));
+                              //_selectedSlot = slotList2.values.toList()[index];
                             } else {
                               setState(
                                 () {
                                   _isSlotAvailable = false;
                                   _isDateSelected = false;
-                                  _selectedDate =
-                                      slotList1.keys.toList()[index];
                                 },
                               );
+                              _selectedDate = slotList1.keys.toList()[index];
                             }
                           },
                           child: Container(
@@ -193,7 +193,7 @@ class _SlotBook extends State<SlotBook> {
                                         slotList1.keys.toList()[index] ==
                                                 'More...'
                                             ? ''
-                                            : '${slotList1.values.toList()[index].length} Slots available',
+                                            : '${generateRandomSlots(Random().nextInt(11)).length} Slots available',
                                         style: const TextStyle(
                                           fontSize: 12,
                                           fontFamily: 'Product Sans',
