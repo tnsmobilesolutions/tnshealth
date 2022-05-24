@@ -93,7 +93,8 @@ List<String> generateRandomSlots(int length) {
     '10:00 AM',
     '11:00 AM',
     '03:00 PM',
-    '04:00 PM'
+    '04:00 PM',
+    '05:00 PM',
   ];
   final randomString = List.generate(length,
       (index) => availableChars[Random().nextInt(availableChars.length)]);
