@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:tnshealth/model/addressmodel.dart';
+import 'package:tnshealth/model/diagnostic_order_model.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
 class Diagnosys extends StatefulWidget {
@@ -22,6 +24,23 @@ class _DiagnosysState extends State<Diagnosys> {
 
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  List<DiagnosticOrder> patientDetails = [
+    DiagnosticOrder(
+      diagnosticOrderId: '12345',
+      diagnosticName: 'Blood Test',
+      patientName: 'abcde',
+      diagnosticOrderAddress: Address(
+        addressId: '67890',
+        addressLine1: 'ab',
+        addressLine2: 'cd',
+        addressNickName: 'home',
+        city: 'bbsr',
+        state: 'odisha',
+        pincode: 100300,
+        contactNumber: 1234567890,
+      ),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
