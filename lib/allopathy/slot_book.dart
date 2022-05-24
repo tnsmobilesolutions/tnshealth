@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-
 import 'package:tnshealth/allopathy/stateless_page.dart';
 
 class SlotBook extends StatefulWidget {
@@ -112,8 +110,7 @@ class _SlotBook extends State<SlotBook> {
                                 },
                               );
                               _selectedDate = slotList1.keys.toList()[index];
-                              _selectedSlot =
-                                  generateRandomSlots(Random().nextInt(10));
+                              _selectedSlot = slotList1.values.toList()[index];
                             } else if (slotList1.keys.toList()[index] ==
                                 'More...') {
                               selectedDateFromCalender =
@@ -193,7 +190,7 @@ class _SlotBook extends State<SlotBook> {
                                         slotList1.keys.toList()[index] ==
                                                 'More...'
                                             ? ''
-                                            : '${generateRandomSlots(Random().nextInt(11)).length} Slots available',
+                                            : '${slotList1.values.toList()[index].length} Slots available',
                                         style: const TextStyle(
                                           fontSize: 12,
                                           fontFamily: 'Product Sans',

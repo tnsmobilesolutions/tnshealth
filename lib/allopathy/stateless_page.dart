@@ -84,7 +84,7 @@ class Header extends StatelessWidget {
 }
 
 List<String> generateRandomSlots(int length) {
-  final random = Random();
+  // final random = Random();
 
   const availableChars = [
     '07:00 AM',
@@ -95,8 +95,8 @@ List<String> generateRandomSlots(int length) {
     '03:00 PM',
     '04:00 PM'
   ];
-  final randomString = List.generate(
-      length, (index) => availableChars[random.nextInt(availableChars.length)]);
+  final randomString = List.generate(length,
+      (index) => availableChars[Random().nextInt(availableChars.length)]);
 
   return randomString;
 }
