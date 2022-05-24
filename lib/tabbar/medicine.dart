@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/API/firestore.dart';
 
@@ -54,7 +55,8 @@ class _MedicineState extends State<Medicine> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Hello $name ):'),
+                      Text(DateTime.now().toString()),
+                      Text('Hello $name :'),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
