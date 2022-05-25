@@ -175,4 +175,14 @@ class userAPI {
     } else {}
     // return name;
   }
+
+  Future<String?> getDocumentID() async {
+    String? documentID;
+    var collection = FirebaseFirestore.instance.collection('orders');
+    var querySnapshots = await collection.get();
+    for (var snapshot in querySnapshots.docs) {
+      documentID = snapshot.id; // <-- Document ID
+    }
+    return documentID;
+  }
 }

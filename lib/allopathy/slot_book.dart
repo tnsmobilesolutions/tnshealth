@@ -110,7 +110,8 @@ class _SlotBook extends State<SlotBook> {
                                 },
                               );
                               _selectedDate = slotList1.keys.toList()[index];
-                              _selectedSlot = slotList1.values.toList()[index];
+                              _selectedSlot = generateRandomSlots(
+                                  slotList1.values.toList()[index].length);
                             } else if (slotList1.keys.toList()[index] ==
                                 'More...') {
                               selectedDateFromCalender =
