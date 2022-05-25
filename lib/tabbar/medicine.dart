@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 import 'package:tnshealth/API/firestoreAPI.dart';
 
@@ -69,7 +70,12 @@ class _MedicineState extends State<Medicine> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(DateTime.now().toString()),
+                      Text(DateFormat("dd-MM-yyyy").format(DateTime.now())),
+                      const SizedBox(height: 20),
+
+                      Text(DateFormat("hh:mm:ss a").format(DateTime.now())),
+                      const SizedBox(height: 20),
+
                       Text('Hello $name ):'),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,8 +164,10 @@ class _MedicineState extends State<Medicine> {
                             name: name,
                             deliveryDate: '',
                             deliveryTime: '',
-                            orderDate: DateTime.now().toString(),
-                            orderTime: DateTime.now().toString(),
+                            orderDate:
+                                DateFormat("dd-MM-yyyy").format(DateTime.now()),
+                            orderTime:
+                                DateFormat("hh:mm:ss a").format(DateTime.now()),
                             orderId: Uuid().v1(),
                             prescriptionURL: prescriptionURL,
                             userId: uid,
