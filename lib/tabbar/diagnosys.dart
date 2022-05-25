@@ -23,7 +23,7 @@ class _DiagnosysState extends State<Diagnosys> {
   final statecontroller = TextEditingController();
   final pincodecontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
-  final addressnicknamecontroller = TextEditingController();
+  final addresstypecontroller = TextEditingController();
 
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
@@ -91,10 +91,10 @@ class _DiagnosysState extends State<Diagnosys> {
             ),
             const SizedBox(height: 5),
             TextField(
-              controller: addressnicknamecontroller,
+              controller: addresstypecontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Nick name',
+                labelText: 'Address Type',
               ),
             ),
 
@@ -134,7 +134,7 @@ class _DiagnosysState extends State<Diagnosys> {
                         addressId: '67890',
                         addressLine1: addressline1namecontroller.text,
                         addressLine2: addressline2namecontroller.text,
-                        addressNickName: addressnicknamecontroller.text,
+                        addressType: addresstypecontroller.text,
                         city: citycontroller.text,
                         state: statecontroller.text,
                         pincode: int.tryParse(pincodecontroller.text),
