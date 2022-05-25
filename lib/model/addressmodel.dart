@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class Address {
+  final String? name;
   final String? addressId;
   final String? addressLine1;
   final String? addressLine2;
@@ -10,6 +11,7 @@ class Address {
   final int? pincode;
   final int? contactNumber;
   Address({
+    this.name,
     this.addressId,
     this.addressLine1,
     this.addressLine2,
@@ -21,6 +23,7 @@ class Address {
   });
 
   Address copyWith({
+    String? name,
     String? addressId,
     String? addressLine1,
     String? addressLine2,
@@ -31,6 +34,7 @@ class Address {
     int? contactNumber,
   }) {
     return Address(
+      name: name ?? this.name,
       addressId: addressId ?? this.addressId,
       addressLine1: addressLine1 ?? this.addressLine1,
       addressLine2: addressLine2 ?? this.addressLine2,
@@ -43,20 +47,42 @@ class Address {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'addressId': addressId,
-      'addressLine1': addressLine1,
-      'addressLine2': addressLine2,
-      'addressNickName': addressNickName,
-      'city': city,
-      'state': state,
-      'pincode': pincode,
-      'contactNumber': contactNumber,
-    };
+    final result = <String, dynamic>{};
+
+    if (name != null) {
+      result.addAll({'name': name});
+    }
+    if (addressId != null) {
+      result.addAll({'addressId': addressId});
+    }
+    if (addressLine1 != null) {
+      result.addAll({'addressLine1': addressLine1});
+    }
+    if (addressLine2 != null) {
+      result.addAll({'addressLine2': addressLine2});
+    }
+    if (addressNickName != null) {
+      result.addAll({'addressNickName': addressNickName});
+    }
+    if (city != null) {
+      result.addAll({'city': city});
+    }
+    if (state != null) {
+      result.addAll({'state': state});
+    }
+    if (pincode != null) {
+      result.addAll({'pincode': pincode});
+    }
+    if (contactNumber != null) {
+      result.addAll({'contactNumber': contactNumber});
+    }
+
+    return result;
   }
 
   factory Address.fromMap(Map<String, dynamic> map) {
     return Address(
+      name: map['name'],
       addressId: map['addressId'],
       addressLine1: map['addressLine1'],
       addressLine2: map['addressLine2'],
@@ -75,7 +101,7 @@ class Address {
 
   @override
   String toString() {
-    return 'Address(addressId: $addressId, addressLine1: $addressLine1, addressLine2: $addressLine2, addressNickName: $addressNickName, city: $city, state: $state, pincode: $pincode, contactNumber: $contactNumber)';
+    return 'Address(name: $name, addressId: $addressId, addressLine1: $addressLine1, addressLine2: $addressLine2, addressNickName: $addressNickName, city: $city, state: $state, pincode: $pincode, contactNumber: $contactNumber)';
   }
 
   @override
@@ -83,6 +109,7 @@ class Address {
     if (identical(this, other)) return true;
 
     return other is Address &&
+        other.name == name &&
         other.addressId == addressId &&
         other.addressLine1 == addressLine1 &&
         other.addressLine2 == addressLine2 &&
@@ -95,7 +122,8 @@ class Address {
 
   @override
   int get hashCode {
-    return addressId.hashCode ^
+    return name.hashCode ^
+        addressId.hashCode ^
         addressLine1.hashCode ^
         addressLine2.hashCode ^
         addressNickName.hashCode ^

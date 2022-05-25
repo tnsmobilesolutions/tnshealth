@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:tnshealth/API/firestore.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:tnshealth/API/firestoreAPI.dart';
 
 import 'package:tnshealth/medicine/fileupload.dart';
 
+import 'package:tnshealth/model/ordermodel.dart';
+
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:uuid/uuid.dart';
 
 class Medicine extends StatefulWidget {
   const Medicine({
@@ -18,24 +24,32 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
-  final addressline1namecontroller = TextEditingController();
-  final addressline2namecontroller = TextEditingController();
-  final citycontroller = TextEditingController();
-  String dropdownValue = 'Allopathy';
+  String? prescriptionURL;
+  XFile? imageFromUploadButton;
+  final _formKey = GlobalKey<FormState>();
+  String? medicineType;
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   String name = '';
-  final phonenumbercontroller = TextEditingController();
-  final pincodecontroller = TextEditingController();
-  final statecontroller = TextEditingController();
+  String address = '';
+  String phonenum = '';
+  String? uid;
+
+  @override
+  void initState() {
+    super.initState();
+    medicineType = 'Allopathy';
+  }
 
   currentData() async {
     final User? user = FirebaseAuth.instance.currentUser;
-    final uid = user?.uid;
+    uid = user?.uid;
     FirestoreData firestore = FirestoreData(uid: uid);
     final names = await firestore.getCurrentUserData();
     if (names != null) {
       name = names[0];
+      address = names[3];
+      phonenum = names[2];
     } else {
       print('names = null************$uid***********');
     }
@@ -56,13 +70,13 @@ class _MedicineState extends State<Medicine> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(DateTime.now().toString()),
-                      Text('Hello $name :'),
+                      Text('Hello $name ):'),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Type Of Medicine', style: kTabBar),
                           DropdownButton<String>(
-                            value: dropdownValue,
+                            value: medicineType,
                             style: const TextStyle(color: Colors.deepPurple),
                             underline: Container(
                               height: 3,
@@ -70,7 +84,7 @@ class _MedicineState extends State<Medicine> {
                             ),
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownValue = newValue!;
+                                medicineType = newValue!;
                               });
                             },
                             items: <String>[
@@ -97,8 +111,9 @@ class _MedicineState extends State<Medicine> {
                               label: const Text('Upload'),
                               icon: const Icon(Icons.file_upload_outlined),
                               backgroundColor: Colors.blueAccent,
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
+                              onPressed: () async {
+                                imageFromUploadButton = await Navigator.push(
+                                    context, MaterialPageRoute(
                                   builder: (context) {
                                     return const imageUploadToFirebase();
                                   },
@@ -112,72 +127,50 @@ class _MedicineState extends State<Medicine> {
                       // const SizedBox(height: 20),
 
                       const SizedBox(height: 10),
-                      TextField(
-                        controller: addressline1namecontroller,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Address Line 1',
-                        ),
+                      Text('Address:$address'),
+                      Text('Phone: -$phonenum'),
+                      // const SizedBox(height: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextButton.icon(
+                            onPressed: () {},
+                            icon: const Icon(Icons.add),
+                            label: const Text('Add New Address'),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      TextField(
-                        controller: addressline2namecontroller,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Address Line 2',
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextField(
-                        controller: citycontroller,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'City',
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextField(
-                        controller: statecontroller,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'State',
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextField(
-                        keyboardType: TextInputType.number,
-                        controller: pincodecontroller,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'PinCode',
-                        ),
-                      ),
+
                       const SizedBox(height: 20),
                       // Text('Mobile No.', style: kTabBar),
                       // const SizedBox(height: 20),
-                      IntlPhoneField(
-                        controller: phonenumbercontroller,
-                        decoration: const InputDecoration(
-                          labelText: 'Phone Number',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(),
-                          ),
-                        ),
-                        initialCountryCode: 'IN',
-                        onChanged: (phone) {
-                          // print(phone.completeNumber);
-                        },
-                      ),
+
                       Center(
                           child: FloatingActionButton.extended(
                         heroTag: 'btn2',
-                        onPressed: () {
-                          print(addressline1namecontroller.text);
-                          print(addressline2namecontroller.text);
-                          print(citycontroller.text);
-                          print(statecontroller.text);
-                          print(pincodecontroller.text);
-                          print(phonenumbercontroller.text);
+                        onPressed: () async {
+                          prescriptionURL = await uploadImagetoFirebadseStorage(
+                              imageFromUploadButton!);
+
+                          // if (_formKey.currentState != null &&
+                          //     _formKey.currentState!.validate()) {
+                          Order orderModel = Order(
+                            name: name,
+                            deliveryDate: '',
+                            deliveryTime: '',
+                            orderDate: DateTime.now().toString(),
+                            orderTime: DateTime.now().toString(),
+                            orderId: Uuid().v1(),
+                            prescriptionURL: prescriptionURL,
+                            userId: uid,
+                            vendorId: '',
+                          );
+                          FirestoreData().createNewOrder(orderModel);
+                          // } else {
+                          //   print(
+                          //       '*HELLO*********$uploadImagetoFirebadseStorage(previewImage!)}*********HELLO*');
+                          // }
+
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
                               return const DashBoard();
@@ -202,5 +195,18 @@ class _MedicineState extends State<Medicine> {
         ),
       ),
     );
+  }
+
+  //uploading to firebasee
+  Future<String?> uploadImagetoFirebadseStorage(XFile image) async {
+    print('**************${getImageName(image)}**************');
+    Reference db = FirebaseStorage.instance.ref('$name/${getImageName(image)}');
+    await db.putFile(File(image.path));
+    return await db.getDownloadURL();
+  }
+
+  //return image name
+  String getImageName(XFile image) {
+    return image.path.split("/").last;
   }
 }

@@ -13,6 +13,7 @@ class Order {
     this.prescriptionURL,
     this.userId,
     this.vendorId,
+    this.name,
   });
 
   factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
@@ -30,6 +31,7 @@ class Order {
       prescriptionURL: map['prescriptionURL'],
       userId: map['userId'],
       vendorId: map['vendorId'],
+      name: map['name'],
     );
   }
 
@@ -42,6 +44,7 @@ class Order {
   final String? prescriptionURL;
   final String? userId;
   final String? vendorId;
+  final String? name;
 
   @override
   bool operator ==(Object other) {
@@ -56,7 +59,8 @@ class Order {
         other.orderTime == orderTime &&
         other.prescriptionURL == prescriptionURL &&
         other.userId == userId &&
-        other.vendorId == vendorId;
+        other.vendorId == vendorId &&
+        other.name == name;
   }
 
   @override
@@ -69,12 +73,13 @@ class Order {
         orderTime.hashCode ^
         prescriptionURL.hashCode ^
         userId.hashCode ^
-        vendorId.hashCode;
+        vendorId.hashCode ^
+        name.hashCode;
   }
 
   @override
   String toString() {
-    return 'Orders(deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress, orderDate: $orderDate, orderId: $orderId, orderTime: $orderTime, prescriptionURL: $prescriptionURL, userId: $userId, vendorId: $vendorId)';
+    return 'Order(deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress, orderDate: $orderDate, orderId: $orderId, orderTime: $orderTime, prescriptionURL: $prescriptionURL, userId: $userId, vendorId: $vendorId, name: $name)';
   }
 
   Order copyWith({
@@ -87,6 +92,7 @@ class Order {
     String? prescriptionURL,
     String? userId,
     String? vendorId,
+    String? name,
   }) {
     return Order(
       deliveryDate: deliveryDate ?? this.deliveryDate,
@@ -98,21 +104,45 @@ class Order {
       prescriptionURL: prescriptionURL ?? this.prescriptionURL,
       userId: userId ?? this.userId,
       vendorId: vendorId ?? this.vendorId,
+      name: name ?? this.name,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'deliveryDate': deliveryDate,
-      'deliveryTime': deliveryTime,
-      'orderAddress': orderAddress?.toMap(),
-      'orderDate': orderDate,
-      'orderId': orderId,
-      'orderTime': orderTime,
-      'prescriptionURL': prescriptionURL,
-      'userId': userId,
-      'vendorId': vendorId,
-    };
+    final result = <String, dynamic>{};
+
+    if (deliveryDate != null) {
+      result.addAll({'deliveryDate': deliveryDate});
+    }
+    if (deliveryTime != null) {
+      result.addAll({'deliveryTime': deliveryTime});
+    }
+    if (orderAddress != null) {
+      result.addAll({'orderAddress': orderAddress!.toMap()});
+    }
+    if (orderDate != null) {
+      result.addAll({'orderDate': orderDate});
+    }
+    if (orderId != null) {
+      result.addAll({'orderId': orderId});
+    }
+    if (orderTime != null) {
+      result.addAll({'orderTime': orderTime});
+    }
+    if (prescriptionURL != null) {
+      result.addAll({'prescriptionURL': prescriptionURL});
+    }
+    if (userId != null) {
+      result.addAll({'userId': userId});
+    }
+    if (vendorId != null) {
+      result.addAll({'vendorId': vendorId});
+    }
+    if (name != null) {
+      result.addAll({'name': name});
+    }
+
+    return result;
   }
 
   String toJson() => json.encode(toMap());

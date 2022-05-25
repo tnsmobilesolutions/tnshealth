@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tnshealth/model/usermodel.dart';
 
-import 'firestore.dart';
+import 'firestoreAPI.dart';
 
 class userAPI {
   static AppUser? _loggedInUser;

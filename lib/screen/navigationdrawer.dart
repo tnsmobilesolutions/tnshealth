@@ -5,7 +5,7 @@ import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/screen/Profile/my_orders.dart';
 import 'package:tnshealth/screen/Profile/profile.dart';
 
-import '../API/firestore.dart';
+import '../API/firestoreAPI.dart';
 import 'signin.dart';
 
 class NavigationDrawer extends StatefulWidget {

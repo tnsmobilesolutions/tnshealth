@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tnshealth/model/ordermodel.dart';
 
 class FirestoreData {
   //Collection Reference
@@ -80,5 +81,23 @@ class FirestoreData {
     return uid;
 
     // here you write the codes to input the data into firestore
+  }
+
+  createNewOrder(Order orderModel) {
+    FirebaseFirestore.instance
+        .collection('orders')
+        .doc(orderModel.orderId)
+        .set({
+      'Name': orderModel.name,
+      'Address': orderModel.orderAddress,
+      'PrescriptionURL': orderModel.prescriptionURL,
+      'Order Id': orderModel.orderId,
+      'Order Time': orderModel.orderTime,
+      'Order Date': orderModel.orderDate,
+      'Delivery Date': orderModel.deliveryDate,
+      'Delivery Time': orderModel.deliveryTime,
+      'User ID': orderModel.userId,
+      'Vender Id': orderModel.vendorId
+    });
   }
 }
