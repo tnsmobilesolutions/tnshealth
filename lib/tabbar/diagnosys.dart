@@ -4,6 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/model/addressmodel.dart';
 import 'package:tnshealth/model/diagnostic_order_model.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:uuid/uuid.dart';
 
 class Diagnosys extends StatefulWidget {
   const Diagnosys({Key? key}) : super(key: key);
@@ -24,23 +25,23 @@ class _DiagnosysState extends State<Diagnosys> {
 
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  List<DiagnosticOrder> patientDetails = [
-    DiagnosticOrder(
-      diagnosticOrderId: '12345',
-      diagnosticName: 'Blood Test',
-      patientName: 'abcde',
-      diagnosticOrderAddress: Address(
-        addressId: '67890',
-        addressLine1: 'ab',
-        addressLine2: 'cd',
-        addressNickName: 'home',
-        city: 'bbsr',
-        state: 'odisha',
-        pincode: 100300,
-        contactNumber: 1234567890,
-      ),
-    ),
-  ];
+  // List<DiagnosticOrder> patientDetails = [
+  //   DiagnosticOrder(
+  //     diagnosticOrderId: '12345',
+  //     diagnosticName: 'Blood Test',
+  //     patientName: 'abcde',
+  //     diagnosticOrderAddress: Address(
+  //       addressId: '67890',
+  //       addressLine1: 'ab',
+  //       addressLine2: 'cd',
+  //       addressNickName: 'home',
+  //       city: 'bbsr',
+  //       state: 'odisha',
+  //       pincode: 100300,
+  //       contactNumber: 1234567890,
+  //     ),
+  //   ),
+  //];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -130,14 +131,22 @@ class _DiagnosysState extends State<Diagnosys> {
             Center(
               child: ElevatedButton(
                   onPressed: () {
-                    print(testnamecontroller.text);
-                    print(patientnamecontroller.text);
-                    print(addressline1namecontroller.text);
-                    print(addressline2namecontroller.text);
-                    print(citycontroller.text);
-                    print(statecontroller.text);
-                    print(pincodecontroller.text);
-                    print(phonenumbercontroller.text);
+                    DiagnosticOrder diagnosticOrderModel = DiagnosticOrder(
+                      diagnosticOrderId: const Uuid().v1(),
+                      diagnosticName: testnamecontroller.text,
+                      patientName: patientnamecontroller.text,
+                      diagnosticOrderAddress: Address(
+                        addressId: '67890',
+                        addressLine1: addressline1namecontroller.text,
+                        addressLine2: addressline2namecontroller.text,
+                        addressNickName: 'home',
+                        city: citycontroller.text,
+                        state: statecontroller.text,
+                        pincode: int.tryParse(pincodecontroller.text),
+                        contactNumber: int.tryParse(phonenumbercontroller.text),
+                      ),
+                    );
+                    print(diagnosticOrderModel);
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
                         return const DashBoard();
