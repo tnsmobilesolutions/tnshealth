@@ -30,7 +30,7 @@ class Tnshealth extends StatelessWidget {
             image: AssetImage('images/logo.png'),
           ),
           splashIconSize: 200,
-          splashTransition: SplashTransition.fadeTransition,
+          splashTransition: SplashTransition.rotationTransition,
           nextScreen: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {

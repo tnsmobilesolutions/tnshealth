@@ -234,7 +234,7 @@ class _SignupPageState extends State<SignupPage> {
           onPressed: () {
             AppUser _appUser = AppUser(
                 address: Address(
-                    name: fullnamecontroller.text,
+                    patientName: fullnamecontroller.text,
                     addressId: const Uuid().v1(),
                     addressLine1: adressline1namecontroller.text,
                     addressLine2: adressline2namecontroller.text,

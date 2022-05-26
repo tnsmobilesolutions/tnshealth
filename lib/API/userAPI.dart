@@ -80,7 +80,7 @@ class userAPI {
           'Weight': _appUser.weight,
           'Phone No.': _appUser.phonenumber,
           'Address': [
-            _appUser.address!.name,
+            _appUser.address!.patientName,
             _appUser.address!.addressId,
             _appUser.address!.addressLine1,
             _appUser.address!.addressLine2,
