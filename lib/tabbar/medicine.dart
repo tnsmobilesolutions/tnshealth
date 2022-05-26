@@ -13,6 +13,7 @@ import 'package:tnshealth/medicine/fileupload.dart';
 import 'package:tnshealth/model/ordermodel.dart';
 
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:tnshealth/screen/Profile/addNewAddress.dart';
 import 'package:uuid/uuid.dart';
 
 class Medicine extends StatefulWidget {
@@ -140,7 +141,13 @@ class _MedicineState extends State<Medicine> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddNewAddress(),
+                                  ));
+                            },
                             icon: const Icon(Icons.add),
                             label: const Text('Add New Address'),
                           ),

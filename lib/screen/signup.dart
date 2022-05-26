@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/model/addressmodel.dart';
+import 'package:tnshealth/model/usermodel.dart';
 
 import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:uuid/uuid.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -20,12 +24,17 @@ class _SignupPageState extends State<SignupPage> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final confirmpasswordcontroller = TextEditingController();
-  final addresscontroller = TextEditingController();
+  final adressline1namecontroller = TextEditingController();
+  final adressline2namecontroller = TextEditingController();
+  final citycontroller = TextEditingController();
+  final statecontroller = TextEditingController();
+  final pincodecontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
   final bloodgroupcontroller = TextEditingController();
   final heightcontroller = TextEditingController();
   final weightcontroller = TextEditingController();
   final gendercontroller = TextEditingController();
+  final addresstypecontroller = TextEditingController();
 
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
@@ -39,6 +48,7 @@ class _SignupPageState extends State<SignupPage> {
     //namefield
 
     final name = TextFormField(
+      textInputAction: TextInputAction.next,
       controller: fullnamecontroller,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(15),
@@ -62,6 +72,7 @@ class _SignupPageState extends State<SignupPage> {
     //emailfield
 
     final email = TextFormField(
+      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
           return ("Please Enter Your Email");
@@ -154,6 +165,7 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+    // Weight
     final weight = TextFormField(
       keyboardType: TextInputType.number,
       autofocus: false,
@@ -211,23 +223,6 @@ class _SignupPageState extends State<SignupPage> {
 
     //Address
 
-    final address = TextFormField(
-      // keyboardType: TextInputType.none,
-      autofocus: false,
-      controller: addresscontroller,
-      onSaved: (value) {
-        addresscontroller.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Address",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-    );
-
 //signup button
     final signUpButton = Material(
       elevation: 5,
@@ -237,16 +232,27 @@ class _SignupPageState extends State<SignupPage> {
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            final _appUser = userAPI().signUp(
-                emailcontroller.text,
-                passwordcontroller.text,
-                fullnamecontroller.text,
-                phonenumbercontroller.text,
-                addresscontroller.text,
-                bloodgroupcontroller.text,
-                heightcontroller.text,
-                weightcontroller.text,
-                gendercontroller.text);
+            AppUser _appUser = AppUser(
+                address: Address(
+                    name: fullnamecontroller.text,
+                    addressId: const Uuid().v1(),
+                    addressLine1: adressline1namecontroller.text,
+                    addressLine2: adressline2namecontroller.text,
+                    city: citycontroller.text,
+                    addressType: addresstypecontroller.text,
+                    contactNumber: int.tryParse(phonenumbercontroller.text),
+                    pincode: int.tryParse(pincodecontroller.text),
+                    state: statecontroller.text),
+                bloodgroup: bloodgroupcontroller.text,
+                email: emailcontroller.text,
+                gender: gendercontroller.text,
+                height: heightcontroller.text,
+                weight: weightcontroller.text,
+                name: fullnamecontroller.text,
+                phonenumber: phonenumbercontroller.text,
+                uid: const Uuid().v1());
+
+            userAPI().signUp(_appUser, passwordcontroller.text);
             if (_appUser != null) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -305,9 +311,63 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 20),
                 bloodGroup,
                 const SizedBox(height: 20),
-                address,
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  controller: adressline1namecontroller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Adress Line 1',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  controller: adressline2namecontroller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Adress Line 2',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  controller: citycontroller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'City',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  controller: statecontroller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'State',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.number,
+                  controller: pincodecontroller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'PinCode',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  controller: addresstypecontroller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Address Type',
+                  ),
+                ),
                 const SizedBox(height: 20),
                 IntlPhoneField(
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     RegExp regex = RegExp(r'^.{10,}$');
                     if (value!.isEmpty) {

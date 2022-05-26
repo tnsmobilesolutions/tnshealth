@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:tnshealth/model/addressmodel.dart';
+
 class AppUser {
   String? uid;
   String? name;
@@ -7,10 +9,15 @@ class AppUser {
   String? email;
   String? gender;
   String? bloodgroup;
-  String? maritialstatus;
   String? height;
   String? weight;
-  String? address;
+  Address? address;
+  // String? addressLine1;
+  // String? addressLine2;
+  // String? city;
+  // String? state;
+  // String? pincode;
+  // String? contactNumber;
   AppUser({
     this.uid,
     this.name,
@@ -18,7 +25,6 @@ class AppUser {
     this.email,
     this.gender,
     this.bloodgroup,
-    this.maritialstatus,
     this.height,
     this.weight,
     this.address,
@@ -31,10 +37,9 @@ class AppUser {
     String? email,
     String? gender,
     String? bloodgroup,
-    String? maritialstatus,
     String? height,
     String? weight,
-    String? address,
+    Address? address,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
@@ -43,7 +48,6 @@ class AppUser {
       email: email ?? this.email,
       gender: gender ?? this.gender,
       bloodgroup: bloodgroup ?? this.bloodgroup,
-      maritialstatus: maritialstatus ?? this.maritialstatus,
       height: height ?? this.height,
       weight: weight ?? this.weight,
       address: address ?? this.address,
@@ -71,9 +75,6 @@ class AppUser {
     if (bloodgroup != null) {
       result.addAll({'bloodgroup': bloodgroup});
     }
-    if (maritialstatus != null) {
-      result.addAll({'maritialstatus': maritialstatus});
-    }
     if (height != null) {
       result.addAll({'height': height});
     }
@@ -81,7 +82,7 @@ class AppUser {
       result.addAll({'weight': weight});
     }
     if (address != null) {
-      result.addAll({'address': address});
+      result.addAll({'address': address!.toMap()});
     }
 
     return result;
@@ -95,10 +96,9 @@ class AppUser {
       email: map['email'],
       gender: map['gender'],
       bloodgroup: map['bloodgroup'],
-      maritialstatus: map['maritialstatus'],
       height: map['height'],
       weight: map['weight'],
-      address: map['address'],
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
     );
   }
 
@@ -109,7 +109,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, maritialstatus: $maritialstatus, height: $height, weight: $weight, address: $address)';
+    return 'AppUser(uid: $uid, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, height: $height, weight: $weight, address: $address)';
   }
 
   @override
@@ -123,7 +123,6 @@ class AppUser {
         other.email == email &&
         other.gender == gender &&
         other.bloodgroup == bloodgroup &&
-        other.maritialstatus == maritialstatus &&
         other.height == height &&
         other.weight == weight &&
         other.address == address;
@@ -137,7 +136,6 @@ class AppUser {
         email.hashCode ^
         gender.hashCode ^
         bloodgroup.hashCode ^
-        maritialstatus.hashCode ^
         height.hashCode ^
         weight.hashCode ^
         address.hashCode;

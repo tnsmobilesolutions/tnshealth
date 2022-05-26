@@ -11,6 +11,7 @@ class Address {
   final String? state;
   final int? pincode;
   final int? contactNumber;
+
   Address({
     this.name,
     this.addressId,
@@ -48,41 +49,57 @@ class Address {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'addressId': addressId,
-      'addressLine1': addressLine1,
-      'addressLine2': addressLine2,
-      'addressType': addressType,
-      'city': city,
-      'state': state,
-      'pincode': pincode,
-      'contactNumber': contactNumber,
-    };
+    final result = <String, dynamic>{};
+
+    if (name != null) {
+      result.addAll({'name': name});
+    }
+    if (addressId != null) {
+      result.addAll({'addressId': addressId});
+    }
+    if (addressLine1 != null) {
+      result.addAll({'addressLine1': addressLine1});
+    }
+    if (addressLine2 != null) {
+      result.addAll({'addressLine2': addressLine2});
+    }
+    if (addressType != null) {
+      result.addAll({'addressType': addressType});
+    }
+    if (city != null) {
+      result.addAll({'city': city});
+    }
+    if (state != null) {
+      result.addAll({'state': state});
+    }
+    if (pincode != null) {
+      result.addAll({'pincode': pincode});
+    }
+    if (contactNumber != null) {
+      result.addAll({'contactNumber': contactNumber});
+    }
+
+    return result;
   }
 
   factory Address.fromMap(Map<String, dynamic> map) {
     return Address(
-      name: map['name'] != null ? map['name'] as String : null,
-      addressId: map['addressId'] != null ? map['addressId'] as String : null,
-      addressLine1:
-          map['addressLine1'] != null ? map['addressLine1'] as String : null,
-      addressLine2:
-          map['addressLine2'] != null ? map['addressLine2'] as String : null,
-      addressType:
-          map['addressType'] != null ? map['addressType'] as String : null,
-      city: map['city'] != null ? map['city'] as String : null,
-      state: map['state'] != null ? map['state'] as String : null,
-      pincode: map['pincode'] != null ? map['pincode'] as int : null,
-      contactNumber:
-          map['contactNumber'] != null ? map['contactNumber'] as int : null,
+      name: map['name'],
+      addressId: map['addressId'],
+      addressLine1: map['addressLine1'],
+      addressLine2: map['addressLine2'],
+      addressType: map['addressType'],
+      city: map['city'],
+      state: map['state'],
+      pincode: map['pincode']?.toInt(),
+      contactNumber: map['contactNumber']?.toInt(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory Address.fromJson(String source) =>
-      Address.fromMap(json.decode(source) as Map<String, dynamic>);
+      Address.fromMap(json.decode(source));
 
   @override
   String toString() {

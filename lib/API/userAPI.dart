@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl_phone_field/phone_number.dart';
+
 import 'package:tnshealth/model/usermodel.dart';
+import 'package:uuid/uuid.dart';
 
 import 'firestoreAPI.dart';
 
@@ -54,54 +57,94 @@ class userAPI {
 
 //SIGNUP
 
-  Future<AppUser?> signUp(
-      String email,
-      String password,
-      String name,
-      String mobile,
-      String address,
-      String bloodGroup,
-      String gender,
-      String height,
-      String weight) async {
+  signUp(
+    AppUser _appUser,
+    String password,
+  ) async {
     try {
       final userCredential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then(
-        (value) {
-          FirebaseFirestore.instance
-              .collection('users')
-              .doc(value.user!.uid)
-              .set(
-            {
-              'email': email,
-              'uid': value.user!.uid,
-              'name': name,
-              'mobile': mobile,
-              'address': address,
-              'BloodGroup': bloodGroup,
-              'Gender': gender,
-              'Height': height,
-              'Weight': weight
-            },
-          );
-          return value;
-        },
-      );
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('users');
+          .createUserWithEmailAndPassword(
+              email: _appUser.email.toString(), password: password)
+          .then((value) {
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(value.user!.uid)
+            .set({
+          'Firebase uid': value.user!.uid,
+          'userId': _appUser.uid,
+          'name': _appUser.name,
+          'Email': _appUser.email,
+          'BloodGroup': _appUser.bloodgroup,
+          'Gender': _appUser.gender,
+          'Height': _appUser.height,
+          'Weight': _appUser.weight,
+          'Phone No.': _appUser.phonenumber,
+          'Address': [
+            _appUser.address!.name,
+            _appUser.address!.addressId,
+            _appUser.address!.addressLine1,
+            _appUser.address!.addressLine2,
+            _appUser.address!.city,
+            _appUser.address!.state,
+            _appUser.address!.pincode,
+            _appUser.address!.contactNumber,
+            _appUser.address!.addressType
+          ],
+        });
+        return value;
+        print(value);
+      });
+      //   .then(
+      // (value) {
+      // final userID = const Uuid().v1();
+      // FirebaseFirestore.instance
+      // .collection('users')
+      // .doc(value.user!.uid)
+      // .set(
+      // {
+      // 'Firebase uid': value.user!.uid,
+      // 'userId': _appUser.uid,
+      // 'name': _appUser.name,
+      // 'Email': _appUser.email,
+      // 'BloodGroup': _appUser.bloodgroup,
+      // 'Gender': _appUser.gender,
+      // 'Height': _appUser.height,
+      // 'Weight': _appUser.weight,
+      // 'Phone No.': _appUser.phonenumber,
+      // 'Address': [_appUser.address],
 
-      final user =
-          users.where("uid", isEqualTo: userCredential.user?.uid).get().then(
-        (querySnapshot) {
-          final userData =
-              querySnapshot.docs.first.data() as Map<String, dynamic>;
-          final user = AppUser.fromMap(userData);
-          _loggedInUser = user;
-          return user;
-        },
-      );
-      return user;
+      // 'userID': userID,
+
+      // 'addressId': const Uuid().v1,
+      // 'address': {
+      //   name,
+      //   addressLine1,
+      //   addressLine2,
+      //   city,
+      //   state,
+      //   pincode,
+      //   PhoneNumber,
+      // },
+      //   // },
+      // );
+
+      //   },
+      // );
+
+      // CollectionReference users =
+      //     FirebaseFirestore.instance.collection('users');
+
+      // final user =
+      //     users.where("uid", isEqualTo: userCredential.user?.uid).get().then(
+      //   (querySnapshot) {
+      //     final userData =
+      //         querySnapshot.docs.first.data() as Map<String, dynamic>;
+      //     final user = AppUser.fromMap(userData);
+      //     _loggedInUser = user;
+      //     return user;
+      //   },
+      // );
+      // return user;
 
       //return uid.user?.uid;
     } on FirebaseAuthException catch (e) {
