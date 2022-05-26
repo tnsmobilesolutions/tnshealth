@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:tnshealth/screen/navigationdrawer.dart';
 import 'package:tnshealth/tabbar/consult.dart';
-import 'package:tnshealth/tabbar/diagnosys.dart';
+import 'package:tnshealth/tabbar/diagnosis.dart';
 import 'package:tnshealth/tabbar/medicine.dart';
 
 class DashBoard extends StatefulWidget {
