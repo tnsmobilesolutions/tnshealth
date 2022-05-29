@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
-import 'package:tnshealth/screen/Profile/add_new_address.dart';
 import 'package:tnshealth/screen/Profile/editprofile.dart';
 import 'package:tnshealth/widget.dart';
 
@@ -25,10 +24,12 @@ class _ProfileState extends State<Profile> {
   String name = '';
   String phonenum = '';
   String weight = '';
+  bool _isEditButtonPressed = false;
 
   @override
   void initState() {
     super.initState();
+    _isEditButtonPressed = false;
   }
 
   @override
@@ -56,18 +57,13 @@ class _ProfileState extends State<Profile> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(
-              Icons.add,
+              Icons.edit,
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const AddNewAddress();
-                  },
-                ),
-              );
+              setState(() {
+                _isEditButtonPressed = true;
+              });
             },
           )
         ],
@@ -85,9 +81,24 @@ class _ProfileState extends State<Profile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //const Divider(color: Colors.black, thickness: 2.0),
-                      Container(
-                        child: Row(
-                          children: const [TextField()],
+                      TextFormField(
+                        autofocus: _isEditButtonPressed ? true : false,
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: const BorderSide(
+                              color: Colors.orange,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: const BorderSide(color: Colors.orange),
+                          ),
+                          contentPadding: const EdgeInsets.all(15),
+                          labelText:
+                              _isEditButtonPressed ? '' : 'Atanu Sabyasachi',
+                          labelStyle: const TextStyle(
+                              fontSize: 15.0, color: Colors.black),
                         ),
                       ),
                       const SizedBox(height: 16),
