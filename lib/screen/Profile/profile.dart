@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
+import 'package:tnshealth/model/addressmodel.dart';
+import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Profile/editprofile.dart';
+import 'package:tnshealth/screen/Profile/userAddress.dart';
 import 'package:tnshealth/widget.dart';
 
 const kprofiletext = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
@@ -16,6 +19,18 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  AppUser? userDetails = AppUser(
+    name: 'Atanu',
+    phonenumber: '7008183804',
+    email: 'jena.atanusabyasachi@gmail.com',
+    gender: 'Male',
+    bloodgroup: 'O+',
+    height: '5.7',
+    weight: '70 kg',
+  );
+
+  Address? currentAddress = Address(addressLine1: 'a');
+
   String address = '';
   String bloodgroup = '';
   String email = '';
@@ -61,9 +76,14 @@ class _ProfileState extends State<Profile> {
               color: Colors.white,
             ),
             onPressed: () {
-              setState(() {
-                _isEditButtonPressed = true;
-              });
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return EditProfile();
+                  },
+                ),
+              );
             },
           )
         ],
@@ -81,41 +101,26 @@ class _ProfileState extends State<Profile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //const Divider(color: Colors.black, thickness: 2.0),
-                      TextFormField(
-                        autofocus: _isEditButtonPressed ? true : false,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: const BorderSide(
-                              color: Colors.orange,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(color: Colors.orange),
-                          ),
-                          contentPadding: const EdgeInsets.all(15),
-                          labelText:
-                              _isEditButtonPressed ? '' : 'Atanu Sabyasachi',
-                          labelStyle: const TextStyle(
-                              fontSize: 15.0, color: Colors.black),
-                        ),
-                      ),
+
                       const SizedBox(height: 16),
-                      Widgets().myOrders('Name  :  ', 'Atanu Sabyasachi'),
-                      const SizedBox(height: 30),
-                      Widgets().myOrders('Mobile Number : ', '7008183804'),
+                      Widgets().myOrders('Name  :  ', userDetails?.name ?? ''),
                       const SizedBox(height: 30),
                       Widgets().myOrders(
-                          'Email Id : ', 'jena.atanusabyasachi@gmail.com'),
+                          'Mobile Number : ', userDetails?.phonenumber ?? ''),
                       const SizedBox(height: 30),
-                      Widgets().myOrders('Blood Group: ', 'O+'),
+                      Widgets()
+                          .myOrders('Email Id : ', userDetails?.email ?? ''),
                       const SizedBox(height: 30),
-                      Widgets().myOrders('Gender :', 'Male'),
+                      Widgets().myOrders(
+                          'Blood Group: ', userDetails?.bloodgroup ?? ''),
                       const SizedBox(height: 30),
-                      Widgets().myOrders('Height:  ', '5.7'),
+                      Widgets().myOrders('Gender :', userDetails?.gender ?? ''),
+                      const SizedBox(height: 30),
+                      Widgets()
+                          .myOrders('Height:  ', userDetails?.height ?? ''),
                       const SizedBox(height: 16),
-                      Widgets().myOrders('Weight:  ', '70'),
+                      Widgets()
+                          .myOrders('Weight:  ', userDetails?.weight ?? ''),
                       const SizedBox(height: 16),
                       //const Divider(color: Colors.black, thickness: 2.0),
                       Card(
@@ -148,7 +153,8 @@ class _ProfileState extends State<Profile> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) {
-                                              return const EditProfile();
+                                              return UserAddress(
+                                                  userAddress: currentAddress);
                                             },
                                           ),
                                         );
@@ -174,7 +180,16 @@ class _ProfileState extends State<Profile> {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Add New Address'),
         icon: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return UserAddress();
+              },
+            ),
+          );
+        },
       ),
     );
   }
