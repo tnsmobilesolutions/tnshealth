@@ -7,7 +7,7 @@ import 'package:tnshealth/screen/Profile/editprofile.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
 import 'package:tnshealth/widget.dart';
 
-const kprofiletext = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+const kprofiletext = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 
 class Profile extends StatefulWidget {
   const Profile({
@@ -88,92 +88,85 @@ class _ProfileState extends State<Profile> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: FutureBuilder(
-              future: currentData(),
-              builder: (context, snapshot) {
-                return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //const Divider(color: Colors.black, thickness: 2.0),
+      body: Center(
+        child: SingleChildScrollView(
+          child: FutureBuilder(
+            future: currentData(),
+            builder: (context, snapshot) {
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //const Divider(color: Colors.black, thickness: 2.0),
 
-                      const SizedBox(height: 16),
-                      Widgets().myOrders('Name  :  ', userDetails?.name ?? ''),
-                      const SizedBox(height: 30),
-                      Widgets().myOrders(
-                          'Mobile Number : ', userDetails?.phonenumber ?? ''),
-                      const SizedBox(height: 30),
-                      Widgets()
-                          .myOrders('Email Id : ', userDetails?.email ?? ''),
-                      const SizedBox(height: 30),
-                      Widgets().myOrders(
-                          'Blood Group: ', userDetails?.bloodgroup ?? ''),
-                      const SizedBox(height: 30),
-                      Widgets().myOrders('Gender :', userDetails?.gender ?? ''),
-                      const SizedBox(height: 30),
-                      Widgets()
-                          .myOrders('Height:  ', userDetails?.height ?? ''),
-                      const SizedBox(height: 16),
-                      Widgets()
-                          .myOrders('Weight:  ', userDetails?.weight ?? ''),
-                      const SizedBox(height: 16),
-                      //const Divider(color: Colors.black, thickness: 2.0),
-                      Card(
-                        elevation: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: const [
-                                  Text('Name: Atanu', style: kprofiletext),
-                                  Text('Mobile Number: 7008183804',
-                                      style: kprofiletext),
-                                  Text(
-                                      'Email Id: jena.atanusabyasachi@gmail.com',
-                                      style: kprofiletext),
-                                  Text('Blood Group: O+', style: kprofiletext),
-                                  Text('Gender : Male', style: kprofiletext),
-                                  Text('Height: 5.7', style: kprofiletext),
-                                  Text('Weight: 70', style: kprofiletext),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return UserAddress(
-                                                  userAddress: currentAddress);
-                                            },
-                                          ),
-                                        );
-                                      },
-                                      child: const Text('Edit')),
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text('Remove'))
-                                ],
-                              )
-                            ],
-                          ),
+                    //const SizedBox(height: 16),
+                    Widgets().myOrders('Name  :  ', userDetails?.name ?? ''),
+                    const SizedBox(height: 30),
+                    Widgets().myOrders(
+                        'Mobile Number : ', userDetails?.phonenumber ?? ''),
+                    const SizedBox(height: 30),
+                    Widgets().myOrders('Email Id : ', userDetails?.email ?? ''),
+                    const SizedBox(height: 30),
+                    Widgets().myOrders(
+                        'Blood Group: ', userDetails?.bloodgroup ?? ''),
+                    const SizedBox(height: 30),
+                    Widgets().myOrders('Gender :', userDetails?.gender ?? ''),
+                    const SizedBox(height: 30),
+                    Widgets().myOrders('Height:  ', userDetails?.height ?? ''),
+                    const SizedBox(height: 16),
+                    Widgets().myOrders('Weight:  ', userDetails?.weight ?? ''),
+                    const SizedBox(height: 16),
+                    //const Divider(color: Colors.black, thickness: 2.0),
+                    Card(
+                      elevation: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Column(
+                              children: const [
+                                Text('Name: Atanu', style: kprofiletext),
+                                Text('Mobile Number: 7008183804',
+                                    style: kprofiletext),
+                                Text('Email Id: jena.atanusabyasachi@gmail.com',
+                                    style: kprofiletext),
+                                Text('Blood Group: O+', style: kprofiletext),
+                                Text('Gender : Male', style: kprofiletext),
+                                Text('Height: 5.7', style: kprofiletext),
+                                Text('Weight: 70', style: kprofiletext),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return UserAddress(
+                                                userAddress: currentAddress);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: const Text('Edit')),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text('Remove'))
+                              ],
+                            )
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
