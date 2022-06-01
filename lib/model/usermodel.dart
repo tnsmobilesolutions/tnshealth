@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:tnshealth/model/addressmodel.dart';
 
 class AppUser {
-  String? uid;
+  String? firebaseUID;
+  String? userID;
   String? name;
   String? phonenumber;
   String? email;
@@ -19,7 +20,8 @@ class AppUser {
   // String? pincode;
   // String? contactNumber;
   AppUser({
-    this.uid,
+    this.firebaseUID,
+    this.userID,
     this.name,
     this.phonenumber,
     this.email,
@@ -31,7 +33,8 @@ class AppUser {
   });
 
   AppUser copyWith({
-    String? uid,
+    String? firebaseUID,
+    String? userID,
     String? name,
     String? phonenumber,
     String? email,
@@ -42,7 +45,8 @@ class AppUser {
     Address? address,
   }) {
     return AppUser(
-      uid: uid ?? this.uid,
+      firebaseUID: firebaseUID ?? this.firebaseUID,
+      userID: userID ?? this.userID,
       name: name ?? this.name,
       phonenumber: phonenumber ?? this.phonenumber,
       email: email ?? this.email,
@@ -57,8 +61,11 @@ class AppUser {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    if (uid != null) {
-      result.addAll({'uid': uid});
+    if (firebaseUID != null) {
+      result.addAll({'firebaseUID': firebaseUID});
+    }
+    if (userID != null) {
+      result.addAll({'userID': userID});
     }
     if (name != null) {
       result.addAll({'name': name});
@@ -90,7 +97,8 @@ class AppUser {
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
-      uid: map['uid'],
+      firebaseUID: map['firebaseUID'],
+      userID: map['userID'],
       name: map['name'],
       phonenumber: map['phonenumber'],
       email: map['email'],
@@ -109,7 +117,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, height: $height, weight: $weight, address: $address)';
+    return 'AppUser(firebaseUID: $firebaseUID, userID: $userID, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, height: $height, weight: $weight, address: $address)';
   }
 
   @override
@@ -117,7 +125,8 @@ class AppUser {
     if (identical(this, other)) return true;
 
     return other is AppUser &&
-        other.uid == uid &&
+        other.firebaseUID == firebaseUID &&
+        other.userID == userID &&
         other.name == name &&
         other.phonenumber == phonenumber &&
         other.email == email &&
@@ -130,7 +139,8 @@ class AppUser {
 
   @override
   int get hashCode {
-    return uid.hashCode ^
+    return firebaseUID.hashCode ^
+        userID.hashCode ^
         name.hashCode ^
         phonenumber.hashCode ^
         email.hashCode ^

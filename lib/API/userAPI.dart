@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
-import 'package:uuid/uuid.dart';
 
 import 'firestoreAPI.dart';
 
@@ -68,10 +66,10 @@ class userAPI {
           .then((value) {
         FirebaseFirestore.instance
             .collection('users')
-            .doc(value.user!.uid)
+            .doc(_appUser.userID)
             .set({
           'Firebase uid': value.user!.uid,
-          'userId': _appUser.uid,
+          'userId': _appUser.userID,
           'name': _appUser.name,
           'Email': _appUser.email,
           'BloodGroup': _appUser.bloodgroup,
@@ -79,17 +77,17 @@ class userAPI {
           'Height': _appUser.height,
           'Weight': _appUser.weight,
           'Phone No.': _appUser.phonenumber,
-          'Address': [
-            _appUser.address!.patientName,
-            _appUser.address!.addressId,
-            _appUser.address!.addressLine1,
-            _appUser.address!.addressLine2,
-            _appUser.address!.city,
-            _appUser.address!.state,
-            _appUser.address!.pincode,
-            _appUser.address!.contactNumber,
-            _appUser.address!.addressType
-          ],
+          'Address': {
+            'patientName': _appUser.address!.patientName,
+            'addressId': _appUser.address!.addressId,
+            'addressLine1': _appUser.address!.addressLine1,
+            'addressLine2': _appUser.address!.addressLine2,
+            'city': _appUser.address!.city,
+            'addressType': _appUser.address!.state,
+            'contactNumber': _appUser.address!.pincode,
+            'pincode': _appUser.address!.contactNumber,
+            'state': _appUser.address!.addressType
+          }
         });
         return value;
         print(value);

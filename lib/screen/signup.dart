@@ -232,24 +232,25 @@ class _SignupPageState extends State<SignupPage> {
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
             AppUser _appUser = AppUser(
-                address: Address(
-                    patientName: fullnamecontroller.text,
-                    addressId: const Uuid().v1(),
-                    addressLine1: adressline1namecontroller.text,
-                    addressLine2: adressline2namecontroller.text,
-                    city: citycontroller.text,
-                    addressType: addresstypecontroller.text,
-                    contactNumber: int.tryParse(phonenumbercontroller.text),
-                    pincode: int.tryParse(pincodecontroller.text),
-                    state: statecontroller.text),
-                bloodgroup: bloodgroupcontroller.text,
-                email: emailcontroller.text,
-                gender: gendercontroller.text,
-                height: heightcontroller.text,
-                weight: weightcontroller.text,
-                name: fullnamecontroller.text,
-                phonenumber: phonenumbercontroller.text,
-                uid: const Uuid().v1());
+              name: fullnamecontroller.text,
+              email: emailcontroller.text,
+              phonenumber: phonenumbercontroller.text,
+              userID: const Uuid().v1(),
+              address: Address(
+                  patientName: fullnamecontroller.text,
+                  addressId: const Uuid().v1(),
+                  addressLine1: adressline1namecontroller.text,
+                  addressLine2: adressline2namecontroller.text,
+                  city: citycontroller.text,
+                  addressType: addresstypecontroller.text,
+                  contactNumber: int.tryParse(phonenumbercontroller.text),
+                  pincode: int.tryParse(pincodecontroller.text),
+                  state: statecontroller.text),
+              bloodgroup: bloodgroupcontroller.text,
+              gender: gendercontroller.text,
+              height: heightcontroller.text,
+              weight: weightcontroller.text,
+            );
 
             userAPI().signUp(_appUser, passwordcontroller.text);
             if (_appUser != null) {
