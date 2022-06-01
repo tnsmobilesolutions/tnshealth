@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:tnshealth/model/addressmodel.dart';
 
 class AppUser {
-  String? firebaseUID;
+  String? uid;
   String? userID;
   String? name;
   String? phonenumber;
@@ -20,7 +20,7 @@ class AppUser {
   // String? pincode;
   // String? contactNumber;
   AppUser({
-    this.firebaseUID,
+    this.uid,
     this.userID,
     this.name,
     this.phonenumber,
@@ -33,7 +33,7 @@ class AppUser {
   });
 
   AppUser copyWith({
-    String? firebaseUID,
+    String? uid,
     String? userID,
     String? name,
     String? phonenumber,
@@ -45,7 +45,7 @@ class AppUser {
     Address? address,
   }) {
     return AppUser(
-      firebaseUID: firebaseUID ?? this.firebaseUID,
+      uid: uid ?? this.uid,
       userID: userID ?? this.userID,
       name: name ?? this.name,
       phonenumber: phonenumber ?? this.phonenumber,
@@ -61,8 +61,8 @@ class AppUser {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    if (firebaseUID != null) {
-      result.addAll({'firebaseUID': firebaseUID});
+    if (uid != null) {
+      result.addAll({'uid': uid});
     }
     if (userID != null) {
       result.addAll({'userID': userID});
@@ -97,7 +97,7 @@ class AppUser {
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
-      firebaseUID: map['firebaseUID'],
+      uid: map['uid'],
       userID: map['userID'],
       name: map['name'],
       phonenumber: map['phonenumber'],
@@ -117,7 +117,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(firebaseUID: $firebaseUID, userID: $userID, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, height: $height, weight: $weight, address: $address)';
+    return 'AppUser(uid: $uid, userID: $userID, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, height: $height, weight: $weight, address: $address)';
   }
 
   @override
@@ -125,7 +125,7 @@ class AppUser {
     if (identical(this, other)) return true;
 
     return other is AppUser &&
-        other.firebaseUID == firebaseUID &&
+        other.uid == uid &&
         other.userID == userID &&
         other.name == name &&
         other.phonenumber == phonenumber &&
@@ -139,7 +139,7 @@ class AppUser {
 
   @override
   int get hashCode {
-    return firebaseUID.hashCode ^
+    return uid.hashCode ^
         userID.hashCode ^
         name.hashCode ^
         phonenumber.hashCode ^
