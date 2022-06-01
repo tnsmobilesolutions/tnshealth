@@ -92,59 +92,6 @@ class userAPI {
         return value;
         print(value);
       });
-      //   .then(
-      // (value) {
-      // final userID = const Uuid().v1();
-      // FirebaseFirestore.instance
-      // .collection('users')
-      // .doc(value.user!.uid)
-      // .set(
-      // {
-      // 'Firebase uid': value.user!.uid,
-      // 'userId': _appUser.uid,
-      // 'name': _appUser.name,
-      // 'Email': _appUser.email,
-      // 'BloodGroup': _appUser.bloodgroup,
-      // 'Gender': _appUser.gender,
-      // 'Height': _appUser.height,
-      // 'Weight': _appUser.weight,
-      // 'Phone No.': _appUser.phonenumber,
-      // 'Address': [_appUser.address],
-
-      // 'userID': userID,
-
-      // 'addressId': const Uuid().v1,
-      // 'address': {
-      //   name,
-      //   addressLine1,
-      //   addressLine2,
-      //   city,
-      //   state,
-      //   pincode,
-      //   PhoneNumber,
-      // },
-      //   // },
-      // );
-
-      //   },
-      // );
-
-      // CollectionReference users =
-      //     FirebaseFirestore.instance.collection('users');
-
-      // final user =
-      //     users.where("uid", isEqualTo: userCredential.user?.uid).get().then(
-      //   (querySnapshot) {
-      //     final userData =
-      //         querySnapshot.docs.first.data() as Map<String, dynamic>;
-      //     final user = AppUser.fromMap(userData);
-      //     _loggedInUser = user;
-      //     return user;
-      //   },
-      // );
-      // return user;
-
-      //return uid.user?.uid;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         print('Email already is in use');
