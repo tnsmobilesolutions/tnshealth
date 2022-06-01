@@ -21,11 +21,11 @@ class _UserAddressState extends State<UserAddress> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextFormField(
-                //controller: nameController,
+                controller: TextEditingController(),
                 keyboardType: TextInputType.name,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -50,11 +50,11 @@ class _UserAddressState extends State<UserAddress> {
                       const TextStyle(fontSize: 15.0, color: Colors.red),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextFormField(
-                //controller: nameController,
+                controller: TextEditingController(),
                 keyboardType: TextInputType.name,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -79,7 +79,7 @@ class _UserAddressState extends State<UserAddress> {
                       const TextStyle(fontSize: 15.0, color: Colors.red),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextFormField(
@@ -108,15 +108,15 @@ class _UserAddressState extends State<UserAddress> {
                       const TextStyle(fontSize: 15.0, color: Colors.red),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextFormField(
-                //controller: nameController,
+                controller: TextEditingController(),
                 keyboardType: TextInputType.name,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please Enter Address';
+                    return 'Please Enter correct state';
                   }
                   return null;
                 },
@@ -137,15 +137,15 @@ class _UserAddressState extends State<UserAddress> {
                       const TextStyle(fontSize: 15.0, color: Colors.red),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextFormField(
-                //controller: nameController,
+                controller: TextEditingController(),
                 keyboardType: TextInputType.name,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please Enter correct state ';
+                    return 'Please Enter correct country';
                   }
                   return null;
                 },
@@ -166,12 +166,12 @@ class _UserAddressState extends State<UserAddress> {
                       const TextStyle(fontSize: 15.0, color: Colors.red),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextFormField(
-                //controller: nameController,
-                keyboardType: TextInputType.name,
+                keyboardType: TextInputType.number,
+                controller: TextEditingController(),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter correct pin';
