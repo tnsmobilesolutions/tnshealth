@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -63,37 +65,41 @@ class userAPI {
       final userCredential = await _auth
           .createUserWithEmailAndPassword(
               email: _appUser.email.toString(), password: password)
-          .then((value) {
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(_appUser.userID)
-            .set({
-          'uid': value.user!.uid,
-          'userId': _appUser.userID,
-          'name': _appUser.name,
-          'Email': _appUser.email,
-          'BloodGroup': _appUser.bloodgroup,
-          'Gender': _appUser.gender,
-          'Height': _appUser.height,
-          'Weight': _appUser.weight,
-          'PhoneNumber.': _appUser.phonenumber,
-          'Address': [
+          .then(
+        (value) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(_appUser.userID)
+              .set(
             {
-              'patientName': _appUser.address!.patientName,
-              'addressId': _appUser.address!.addressId,
-              'addressLine1': _appUser.address!.addressLine1,
-              'addressLine2': _appUser.address!.addressLine2,
-              'city': _appUser.address!.city,
-              'addressType': _appUser.address!.state,
-              'contactNumber': _appUser.address!.pincode,
-              'pincode': _appUser.address!.contactNumber,
-              'state': _appUser.address!.addressType
-            }
-          ]
-        });
-        return value;
-        print(value);
-      });
+              'uid': value.user!.uid,
+              'userId': _appUser.userID,
+              'name': _appUser.name,
+              'Email': _appUser.email,
+              'BloodGroup': _appUser.bloodgroup,
+              'Gender': _appUser.gender,
+              'Height': _appUser.height,
+              'Weight': _appUser.weight,
+              'PhoneNumber.': _appUser.phonenumber,
+              'Address': [
+                {
+                  'patientName': _appUser.address!.patientName,
+                  'addressId': _appUser.address!.addressId,
+                  'addressLine1': _appUser.address!.addressLine1,
+                  'addressLine2': _appUser.address!.addressLine2,
+                  'city': _appUser.address!.city,
+                  'addressType': _appUser.address!.state,
+                  'contactNumber': _appUser.address!.pincode,
+                  'pincode': _appUser.address!.contactNumber,
+                  'state': _appUser.address!.addressType
+                }
+              ]
+            },
+          );
+          return value;
+          print(value);
+        },
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         print('Email already is in use');
@@ -124,8 +130,6 @@ class userAPI {
     try {
       CollectionReference users =
           FirebaseFirestore.instance.collection('users');
-
-      //TODO : replace this logic with collection map
 
       final user = users.where("uid", isEqualTo: uid).get().then(
         (querySnapshot) {
@@ -174,5 +178,18 @@ class userAPI {
       documentID = snapshot.id; // <-- Document ID
     }
     return documentID;
+  }
+
+  Future<String?> getVendorID() async {
+    String? vendorID;
+    var vendorCollection = FirebaseFirestore.instance.collection('vendors');
+    var querySnapshots = await vendorCollection
+        .where('ServiceType', isEqualTo: 'Medicine')
+        .get();
+    for (var snapshot in querySnapshots.docs) {
+      vendorID = snapshot.id; // <-- Document ID
+    }
+    print('===$vendorID===');
+    return vendorID;
   }
 }

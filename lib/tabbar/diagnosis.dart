@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/model/addressmodel.dart';
 import 'package:tnshealth/model/diagnosis_order_model.dart';
+import 'package:tnshealth/screen/Dashboard.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -223,11 +224,11 @@ class _DiagnosysState extends State<Diagnosys> {
                                 content: Text('error')));
                       }
 
-                      // Navigator.push(context, MaterialPageRoute(
-                      //   builder: (context) {
-                      //     return const DashBoard();
-                      //   },
-                      // ));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const DashBoard();
+                        },
+                      ));
                     },
                     child: const Text(
                       'Book',

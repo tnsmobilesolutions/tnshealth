@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import 'package:tnshealth/API/firestoreAPI.dart';
+import 'package:tnshealth/API/userAPI.dart';
 
 import 'package:tnshealth/medicine/fileupload.dart';
 
@@ -36,6 +37,7 @@ class _MedicineState extends State<Medicine> {
   String address = '';
   String phonenum = '';
   String? uid;
+  String? vendorID;
 
   @override
   void initState() {
@@ -162,6 +164,7 @@ class _MedicineState extends State<Medicine> {
                           child: FloatingActionButton.extended(
                         heroTag: 'btn2',
                         onPressed: () async {
+                          vendorID = await userAPI().getVendorID();
                           prescriptionURL = await uploadImagetoFirebadseStorage(
                               imageFromUploadButton!);
 
@@ -175,10 +178,10 @@ class _MedicineState extends State<Medicine> {
                                 DateFormat("dd-MM-yyyy").format(DateTime.now()),
                             orderTime:
                                 DateFormat("hh:mm:ss a").format(DateTime.now()),
-                            orderId: Uuid().v1(),
+                            orderId: const Uuid().v1(),
                             prescriptionURL: prescriptionURL,
                             userId: uid,
-                            vendorId: '',
+                            vendorId: vendorID,
                           );
                           FirestoreData().createNewOrder(orderModel);
                           // } else {
@@ -214,7 +217,7 @@ class _MedicineState extends State<Medicine> {
 
   //uploading to firebasee
   Future<String?> uploadImagetoFirebadseStorage(XFile image) async {
-    print('**************${getImageName(image)}**************');
+    // print('**************${getImageName(image)}**************');
     Reference db = FirebaseStorage.instance.ref('$name/${getImageName(image)}');
     await db.putFile(File(image.path));
     return await db.getDownloadURL();
