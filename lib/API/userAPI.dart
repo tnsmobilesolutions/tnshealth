@@ -192,4 +192,19 @@ class userAPI {
     print('===$vendorID===');
     return vendorID;
   }
+
+  Future<String?> getUserID() async {
+    String? userID;
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+
+    var vendorCollection = FirebaseFirestore.instance.collection('users');
+    var querySnapshots =
+        await vendorCollection.where('uid', isEqualTo: uid).get();
+    for (var snapshot in querySnapshots.docs) {
+      userID = snapshot.id; // <-- Document ID
+    }
+    print('===$userID===');
+    return userID;
+  }
 }

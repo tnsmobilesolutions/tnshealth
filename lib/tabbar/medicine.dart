@@ -29,7 +29,7 @@ class Medicine extends StatefulWidget {
 class _MedicineState extends State<Medicine> {
   String? prescriptionURL;
   XFile? imageFromUploadButton;
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   String? medicineType;
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -38,6 +38,8 @@ class _MedicineState extends State<Medicine> {
   String phonenum = '';
   String? uid;
   String? vendorID;
+  String currentDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
+  String currentTime = DateFormat("hh:mm:ss a").format(DateTime.now());
 
   @override
   void initState() {
@@ -172,12 +174,10 @@ class _MedicineState extends State<Medicine> {
                           //     _formKey.currentState!.validate()) {
                           Order orderModel = Order(
                             name: name,
-                            deliveryDate: '',
-                            deliveryTime: '',
-                            orderDate:
-                                DateFormat("dd-MM-yyyy").format(DateTime.now()),
-                            orderTime:
-                                DateFormat("hh:mm:ss a").format(DateTime.now()),
+                            deliveryDate: currentDate,
+                            deliveryTime: currentTime,
+                            orderDate: currentDate,
+                            orderTime: currentTime,
                             orderId: const Uuid().v1(),
                             prescriptionURL: prescriptionURL,
                             userId: uid,
