@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -237,16 +236,18 @@ class _SignupPageState extends State<SignupPage> {
               email: emailcontroller.text.trim(),
               phonenumber: phonenumbercontroller.text,
               userID: const Uuid().v1(),
-              address: Address(
-                  patientName: fullnamecontroller.text.trim(),
-                  addressId: const Uuid().v1(),
-                  addressLine1: adressline1namecontroller.text,
-                  addressLine2: adressline2namecontroller.text,
-                  city: citycontroller.text,
-                  addressType: addresstypecontroller.text,
-                  contactNumber: int.tryParse(phonenumbercontroller.text),
-                  pincode: int.tryParse(pincodecontroller.text),
-                  state: statecontroller.text),
+              address: [
+                Address(
+                    patientName: fullnamecontroller.text.trim(),
+                    addressId: const Uuid().v1(),
+                    addressLine1: adressline1namecontroller.text,
+                    addressLine2: adressline2namecontroller.text,
+                    city: citycontroller.text,
+                    addressType: addresstypecontroller.text,
+                    contactNumber: int.tryParse(phonenumbercontroller.text),
+                    pincode: int.tryParse(pincodecontroller.text),
+                    state: statecontroller.text)
+              ],
               bloodgroup: bloodgroupcontroller.text,
               gender: gendercontroller.text,
               height: heightcontroller.text,

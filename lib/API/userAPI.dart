@@ -80,20 +80,21 @@ class userAPI {
               'Gender': _appUser.gender,
               'Height': _appUser.height,
               'Weight': _appUser.weight,
-              'PhoneNumber.': _appUser.phonenumber,
-              'Address': [
-                {
-                  'patientName': _appUser.address!.patientName,
-                  'addressId': _appUser.address!.addressId,
-                  'addressLine1': _appUser.address!.addressLine1,
-                  'addressLine2': _appUser.address!.addressLine2,
-                  'city': _appUser.address!.city,
-                  'addressType': _appUser.address!.state,
-                  'contactNumber': _appUser.address!.pincode,
-                  'pincode': _appUser.address!.contactNumber,
-                  'state': _appUser.address!.addressType
-                }
-              ]
+              'PhoneNumber': _appUser.phonenumber,
+              'Address': _appUser.address,
+              // 'Address': [
+              //   {
+              //   'patientName': _appUser.address!.patientName,
+              //   'addressId': _appUser.address!.addressId,
+              //   'addressLine1': _appUser.address!.addressLine1,
+              //   'addressLine2': _appUser.address!.addressLine2,
+              //   'city': _appUser.address!.city,
+              //   'addressType': _appUser.address!.state,
+              //   'contactNumber': _appUser.address!.pincode,
+              //   'pincode': _appUser.address!.contactNumber,
+              //   'state': _appUser.address!.addressType
+              // }
+              // ]
             },
           );
           return value;
@@ -198,9 +199,9 @@ class userAPI {
     final User? user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
 
-    var vendorCollection = FirebaseFirestore.instance.collection('users');
+    var userCollection = FirebaseFirestore.instance.collection('users');
     var querySnapshots =
-        await vendorCollection.where('uid', isEqualTo: uid).get();
+        await userCollection.where('uid', isEqualTo: uid).get();
     for (var snapshot in querySnapshots.docs) {
       userID = snapshot.id; // <-- Document ID
     }

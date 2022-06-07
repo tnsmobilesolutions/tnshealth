@@ -10,6 +10,7 @@ import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/API/userAPI.dart';
 
 import 'package:tnshealth/medicine/fileupload.dart';
+import 'package:tnshealth/model/addressmodel.dart';
 
 import 'package:tnshealth/model/ordermodel.dart';
 
@@ -34,7 +35,7 @@ class _MedicineState extends State<Medicine> {
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   String name = '';
-  String address = '';
+  List<Address?>? address;
   String phonenum = '';
   String? uid;
   String? vendorID;
@@ -75,10 +76,10 @@ class _MedicineState extends State<Medicine> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(DateFormat("dd-MM-yyyy").format(DateTime.now())),
+                      Text('Order Date : $currentDate'),
                       const SizedBox(height: 20),
 
-                      Text(DateFormat("hh:mm:ss a").format(DateTime.now())),
+                      Text('Order Time : $currentTime'),
                       const SizedBox(height: 20),
 
                       Text('Hello $name ):'),
@@ -175,7 +176,8 @@ class _MedicineState extends State<Medicine> {
                           Order orderModel = Order(
                             name: name,
                             deliveryDate: currentDate,
-                            deliveryTime: currentTime,
+                            deliveryTime: DateFormat("hh:mm:ss a").format(
+                                DateTime.now().add(const Duration(hours: 1))),
                             orderDate: currentDate,
                             orderTime: currentTime,
                             orderId: const Uuid().v1(),

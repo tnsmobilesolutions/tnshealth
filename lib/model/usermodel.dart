@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:tnshealth/model/addressmodel.dart';
 
 class AppUser {
@@ -12,7 +14,7 @@ class AppUser {
   String? bloodgroup;
   String? height;
   String? weight;
-  Address? address;
+  List<Address?>? address;
   // String? addressLine1;
   // String? addressLine2;
   // String? city;
@@ -42,7 +44,7 @@ class AppUser {
     String? bloodgroup,
     String? height,
     String? weight,
-    Address? address,
+    List<Address?>? address,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
@@ -89,7 +91,7 @@ class AppUser {
       result.addAll({'weight': weight});
     }
     if (address != null) {
-      result.addAll({'address': address!.toMap()});
+      result.addAll({'address': address!.map((x) => x?.toMap()).toList()});
     }
 
     return result;
@@ -106,7 +108,9 @@ class AppUser {
       bloodgroup: map['bloodgroup'],
       height: map['height'],
       weight: map['weight'],
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+      address: map['address'] != null
+          ? List<Address?>.from(map['address']?.map((x) => Address?.fromMap(x)))
+          : null,
     );
   }
 
@@ -134,7 +138,7 @@ class AppUser {
         other.bloodgroup == bloodgroup &&
         other.height == height &&
         other.weight == weight &&
-        other.address == address;
+        listEquals(other.address, address);
   }
 
   @override

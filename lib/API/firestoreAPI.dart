@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/model/addressmodel.dart';
 import 'package:tnshealth/model/ordermodel.dart';
+import 'package:tnshealth/model/usermodel.dart';
 
 class FirestoreData {
   //Collection Reference
@@ -44,16 +46,34 @@ class FirestoreData {
     return UserCollection.snapshots();
   }
 
+//  Stream<List<Student>> get firebaseStudents {
+//     return Firestore.instance.collection('students').snapshots().map(_firebaseStudentsFromSnapshot);
+//   }
+
+//   List<Student> _firebaseStudentsFromSnapshot(QuerySnapshot snapshot) {
+//     return snapshot.documents.map((doc) {
+//       return Student(
+//         name: doc.data['name'] ?? '',
+//         subject: doc.data['subject'] ?? '',
+
+//         //trying to figure out how to map the marks!
+
+//       );
+//     }).toList();
+//   }
+
   // get Data from FireBase
 
   Future getCurrentUserData() async {
     String? userID = await userAPI().getUserID();
+    List<Address?>? address;
     try {
       DocumentSnapshot ds = await UserCollection.doc(userID).get();
+
       String name = ds.get('name');
+      address = ds.get('Address');
       String email = ds.get('Email');
       String mobile = ds.get('PhoneNumber');
-      // String address = ds.get('address');
       String bloodGroup = ds.get('BloodGroup');
       String gender = ds.get('Gender');
       String height = ds.get('Height');
@@ -63,7 +83,7 @@ class FirestoreData {
         name,
         email,
         mobile,
-        // address,
+        address,
         bloodGroup,
         gender,
         height,
