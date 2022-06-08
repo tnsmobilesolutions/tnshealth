@@ -61,40 +61,18 @@ class AppUser {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (uid != null) {
-      result.addAll({'uid': uid});
-    }
-    if (userID != null) {
-      result.addAll({'userID': userID});
-    }
-    if (name != null) {
-      result.addAll({'name': name});
-    }
-    if (phonenumber != null) {
-      result.addAll({'phonenumber': phonenumber});
-    }
-    if (email != null) {
-      result.addAll({'email': email});
-    }
-    if (gender != null) {
-      result.addAll({'gender': gender});
-    }
-    if (bloodgroup != null) {
-      result.addAll({'bloodgroup': bloodgroup});
-    }
-    if (height != null) {
-      result.addAll({'height': height});
-    }
-    if (weight != null) {
-      result.addAll({'weight': weight});
-    }
-    if (address != null) {
-      result.addAll({'address': address!.map((x) => x?.toMap()).toList()});
-    }
-
-    return result;
+    return {
+      'uid': uid,
+      'userID': userID,
+      'name': name,
+      'phonenumber': phonenumber,
+      'email': email,
+      'gender': gender,
+      'bloodgroup': bloodgroup,
+      'height': height,
+      'weight': weight,
+      'address': address?.map((x) => x?.toMap()).toList(),
+    };
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {

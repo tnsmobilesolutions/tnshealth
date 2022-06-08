@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/model/addressmodel.dart';
 import 'package:tnshealth/model/diagnosis_order_model.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
@@ -16,6 +17,12 @@ class Diagnosys extends StatefulWidget {
 }
 
 class _DiagnosysState extends State<Diagnosys> {
+  @override
+  void initState() {
+    super.initState();
+    FirestoreData().getCurrentUserData();
+  }
+
   final testnamecontroller = TextEditingController();
   final patientnamecontroller = TextEditingController();
   final addressline1namecontroller = TextEditingController();

@@ -34,9 +34,9 @@ class _MedicineState extends State<Medicine> {
   String? medicineType;
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  String name = '';
+  String? name;
   List<Address?>? address;
-  String phonenum = '';
+  String? phonenum;
   String? uid;
   String? vendorID;
   String currentDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
@@ -45,25 +45,26 @@ class _MedicineState extends State<Medicine> {
   @override
   void initState() {
     super.initState();
+    // FirestoreData().getCurrentUserData();
     medicineType = 'Allopathy';
-  }
-
-  currentData() async {
-    final User? user = FirebaseAuth.instance.currentUser;
-    uid = user?.uid;
-    FirestoreData firestore = FirestoreData(uid: uid);
-    final names = await firestore.getCurrentUserData();
-    if (names != null) {
-      name = names[0];
-      address = names[3];
-      phonenum = names[2];
-    } else {
-      print('names = null************$uid***********');
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    currentData() async {
+      final User? user = FirebaseAuth.instance.currentUser;
+      uid = user?.uid;
+      FirestoreData firestore = FirestoreData(uid: uid);
+      final names = await FirestoreData().getCurrentUserData();
+      if (names != null) {
+        name = names.name;
+        phonenum = names.phonenumber;
+        address = names.address;
+      } else {
+        print('names = null************$uid***********');
+      }
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -82,7 +83,7 @@ class _MedicineState extends State<Medicine> {
                       Text('Order Time : $currentTime'),
                       const SizedBox(height: 20),
 
-                      Text('Hello $name ):'),
+                      Text('$name '),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

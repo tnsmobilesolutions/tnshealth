@@ -95,11 +95,11 @@ class _imageUploadToFirebaseState extends State<imageUploadToFirebase> {
     final uid = user?.uid;
     FirestoreData firestore = FirestoreData(uid: uid);
     final names = await firestore.getCurrentUserData();
-    if (names != null) {
-      return names[0];
-    } else {
-      print('names = null************$uid***********');
-    }
+    // if (names != null) {
+    //   return names[0];
+    // } else {
+    //   print('names = null************$uid***********');
+    // }
   }
 }
 

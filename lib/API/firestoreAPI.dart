@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tnshealth/API/userAPI.dart';
@@ -11,7 +13,7 @@ class FirestoreData {
   final String? uid;
   FirestoreData({this.uid});
 
-  final UserCollection = FirebaseFirestore.instance.collection('users');
+  final userCollection = FirebaseFirestore.instance.collection('users');
 
   //update to fireStore
 
@@ -27,7 +29,7 @@ class FirestoreData {
     dateofbirth,
     maritial,
   ) async {
-    return UserCollection.doc(uid).set({
+    return userCollection.doc(uid).set({
       'email': email,
       'name': name,
       'mobile': phonenum,
@@ -43,7 +45,7 @@ class FirestoreData {
 
   //Get user Stream
   Stream<QuerySnapshot> get users {
-    return UserCollection.snapshots();
+    return userCollection.snapshots();
   }
 
 //  Stream<List<Student>> get firebaseStudents {
@@ -60,38 +62,35 @@ class FirestoreData {
 
 //       );
 //     }).toList();
-//   }
+//   }jena
 
   // get Data from FireBase
 
-  Future getCurrentUserData() async {
+  Future<AppUser?> getCurrentUserData() async {
     String? userID = await userAPI().getUserID();
     List<Address?>? address;
+    AppUser? _appUser;
     try {
-      DocumentSnapshot ds = await UserCollection.doc(userID).get();
+      DocumentSnapshot ds = await userCollection.doc(userID).get();
+      // print(currentUser);
 
-      String name = ds.get('name');
-      address = ds.get('Address');
-      String email = ds.get('Email');
-      String mobile = ds.get('PhoneNumber');
-      String bloodGroup = ds.get('BloodGroup');
-      String gender = ds.get('Gender');
-      String height = ds.get('Height');
-      String weight = ds.get('Weight');
-
-      return [
-        name,
-        email,
-        mobile,
-        address,
-        bloodGroup,
-        gender,
-        height,
-        weight,
-      ];
+      _appUser = AppUser(
+        name: ds.get('name'),
+        email: ds.get('Email'),
+        phonenumber: ds.get('PhoneNumber'),
+        bloodgroup: ds.get('BloodGroup'),
+        gender: ds.get('Gender'),
+        height: ds.get('Height'),
+        uid: ds.get('uid'),
+        userID: ds.get('userId'),
+        weight: ds.get('Weight'),
+        //address: ds.get('Address'),
+      );
+      print(_appUser);
+      return _appUser;
     } catch (e) {
       print(e.toString());
-      return null;
+      return _appUser;
     }
   }
 

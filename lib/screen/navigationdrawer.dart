@@ -23,9 +23,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     final uid = user?.uid;
     FirestoreData firestore = FirestoreData(uid: uid);
     final names = await firestore.getCurrentUserData();
-    if (names != null) {
-      name = names[0];
-    } else {}
+    // if (names != null) {
+    //   name = names[0];
+    // } else {}
     // return name;
   }
 

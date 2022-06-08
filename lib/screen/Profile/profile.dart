@@ -54,16 +54,16 @@ class _ProfileState extends State<Profile> {
       final uid = user?.uid;
       FirestoreData firestore = FirestoreData(uid: uid);
       final names = await firestore.getCurrentUserData();
-      if (names != null) {
-        name = names[0];
-        email = names[1];
-        phonenum = names[2];
-        address = names[3];
-        bloodgroup = names[4];
-        gender = names[7];
-        height = names[5];
-        weight = names[6];
-      } else {}
+      // if (names != null) {
+      //   name = names[0];
+      //   email = names[1];
+      //   phonenum = names[2];
+      //   address = names[3];
+      //   bloodgroup = names[4];
+      //   gender = names[7];
+      //   height = names[5];
+      //   weight = names[6];
+      // } else {}
     }
 
     return Scaffold(
