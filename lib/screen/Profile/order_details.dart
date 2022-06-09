@@ -38,8 +38,7 @@ class OrderDetails extends StatelessWidget {
                 Widgets()
                     .myOrders('Delivery Time  :  ', '${order.deliveryTime}'),
                 const SizedBox(height: 30),
-                Widgets()
-                    .myOrders('Order Address  :  ', '${order.orderAddress}'),
+                Widgets().myOrders('Order Address  :  ', '${order.address}'),
                 const SizedBox(height: 16),
                 const Divider(color: Colors.black, thickness: 2.0),
               ],

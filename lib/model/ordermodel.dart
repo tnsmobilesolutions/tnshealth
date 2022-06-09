@@ -1,12 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:tnshealth/model/addressmodel.dart';
 
 class Order {
   Order({
     this.deliveryDate,
     this.deliveryTime,
-    this.orderAddress,
+    this.address,
     this.orderDate,
     this.orderId,
     this.orderTime,
@@ -22,8 +24,8 @@ class Order {
     return Order(
       deliveryDate: map['deliveryDate'],
       deliveryTime: map['deliveryTime'],
-      orderAddress: map['orderAddress'] != null
-          ? Address.fromMap(map['orderAddress'])
+      address: map['address'] != null
+          ? List<Address?>.from(map['address']?.map((x) => Address?.fromMap(x)))
           : null,
       orderDate: map['orderDate'],
       orderId: map['orderId'],
@@ -37,7 +39,7 @@ class Order {
 
   final String? deliveryDate;
   final String? deliveryTime;
-  final Address? orderAddress;
+  final List<Address?>? address;
   final String? orderDate;
   final String? orderId;
   final String? orderTime;
@@ -53,7 +55,7 @@ class Order {
     return other is Order &&
         other.deliveryDate == deliveryDate &&
         other.deliveryTime == deliveryTime &&
-        other.orderAddress == orderAddress &&
+        listEquals(other.address, address) &&
         other.orderDate == orderDate &&
         other.orderId == orderId &&
         other.orderTime == orderTime &&
@@ -67,7 +69,7 @@ class Order {
   int get hashCode {
     return deliveryDate.hashCode ^
         deliveryTime.hashCode ^
-        orderAddress.hashCode ^
+        address.hashCode ^
         orderDate.hashCode ^
         orderId.hashCode ^
         orderTime.hashCode ^
@@ -79,13 +81,13 @@ class Order {
 
   @override
   String toString() {
-    return 'Order(deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, orderAddress: $orderAddress, orderDate: $orderDate, orderId: $orderId, orderTime: $orderTime, prescriptionURL: $prescriptionURL, userId: $userId, vendorId: $vendorId, name: $name)';
+    return 'Order(deliveryDate: $deliveryDate, deliveryTime: $deliveryTime, address: $address, orderDate: $orderDate, orderId: $orderId, orderTime: $orderTime, prescriptionURL: $prescriptionURL, userId: $userId, vendorId: $vendorId, name: $name)';
   }
 
   Order copyWith({
     String? deliveryDate,
     String? deliveryTime,
-    Address? orderAddress,
+    List<Address?>? address,
     String? orderDate,
     String? orderId,
     String? orderTime,
@@ -97,7 +99,7 @@ class Order {
     return Order(
       deliveryDate: deliveryDate ?? this.deliveryDate,
       deliveryTime: deliveryTime ?? this.deliveryTime,
-      orderAddress: orderAddress ?? this.orderAddress,
+      address: address ?? this.address,
       orderDate: orderDate ?? this.orderDate,
       orderId: orderId ?? this.orderId,
       orderTime: orderTime ?? this.orderTime,
@@ -109,40 +111,18 @@ class Order {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (deliveryDate != null) {
-      result.addAll({'deliveryDate': deliveryDate});
-    }
-    if (deliveryTime != null) {
-      result.addAll({'deliveryTime': deliveryTime});
-    }
-    if (orderAddress != null) {
-      result.addAll({'orderAddress': orderAddress!.toMap()});
-    }
-    if (orderDate != null) {
-      result.addAll({'orderDate': orderDate});
-    }
-    if (orderId != null) {
-      result.addAll({'orderId': orderId});
-    }
-    if (orderTime != null) {
-      result.addAll({'orderTime': orderTime});
-    }
-    if (prescriptionURL != null) {
-      result.addAll({'prescriptionURL': prescriptionURL});
-    }
-    if (userId != null) {
-      result.addAll({'userId': userId});
-    }
-    if (vendorId != null) {
-      result.addAll({'vendorId': vendorId});
-    }
-    if (name != null) {
-      result.addAll({'name': name});
-    }
-
-    return result;
+    return {
+      'deliveryDate': deliveryDate,
+      'deliveryTime': deliveryTime,
+      'address': address?.map((x) => x?.toMap()).toList(),
+      'orderDate': orderDate,
+      'orderId': orderId,
+      'orderTime': orderTime,
+      'prescriptionURL': prescriptionURL,
+      'userId': userId,
+      'vendorId': vendorId,
+      'name': name,
+    };
   }
 
   String toJson() => json.encode(toMap());

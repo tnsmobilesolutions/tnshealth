@@ -185,7 +185,7 @@ class _MedicineState extends State<Medicine> {
                               prescriptionURL: prescriptionURL,
                               userId: uid,
                               vendorId: vendorID,
-                              orderAddress: null);
+                              address: null);
                           FirestoreData().createNewOrder(orderModel);
                           // } else {
                           //   print(

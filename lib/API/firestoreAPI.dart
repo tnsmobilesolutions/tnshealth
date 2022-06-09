@@ -113,7 +113,7 @@ class FirestoreData {
         .doc(orderModel.orderId)
         .set({
       'Name': orderModel.name,
-      'Address': orderModel.orderAddress,
+      'Address': orderModel.address,
       'PrescriptionURL': orderModel.prescriptionURL,
       'OrderId': orderModel.orderId,
       'OrderTime': orderModel.orderTime,
