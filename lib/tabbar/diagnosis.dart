@@ -210,7 +210,7 @@ class _DiagnosysState extends State<Diagnosys> {
                             city: citycontroller.text,
                             state: statecontroller.text,
                             pincode: int.tryParse(pincodecontroller.text),
-                            contactNumber:
+                            phoneNumber:
                                 int.tryParse(phonenumbercontroller.text),
                           ),
                         );

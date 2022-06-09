@@ -67,38 +67,38 @@ class userAPI {
               email: _appUser.email.toString(), password: password)
           .then(
         (value) {
+          print('******${_appUser.address}******');
+          final _address = _appUser.address?[0];
           FirebaseFirestore.instance
               .collection('users')
-              .doc(_appUser.userID)
+              .doc(_appUser.userId)
               .set(
             {
-              'uid': value.user!.uid,
-              'userId': _appUser.userID,
+              'uid': value.user?.uid,
+              'userId': _appUser.userId,
               'name': _appUser.name,
-              'Email': _appUser.email,
-              'BloodGroup': _appUser.bloodgroup,
-              'Gender': _appUser.gender,
-              'Height': _appUser.height,
-              'Weight': _appUser.weight,
-              'PhoneNumber': _appUser.phonenumber,
-              'Address': _appUser.address,
-              // 'Address': [
-              //   {
-              //   'patientName': _appUser.address!.patientName,
-              //   'addressId': _appUser.address!.addressId,
-              //   'addressLine1': _appUser.address!.addressLine1,
-              //   'addressLine2': _appUser.address!.addressLine2,
-              //   'city': _appUser.address!.city,
-              //   'addressType': _appUser.address!.state,
-              //   'contactNumber': _appUser.address!.pincode,
-              //   'pincode': _appUser.address!.contactNumber,
-              //   'state': _appUser.address!.addressType
-              // }
-              // ]
+              'email': _appUser.email,
+              'bloodGroup': _appUser.bloodGroup,
+              'gender': _appUser.gender,
+              'height': _appUser.height,
+              'weight': _appUser.weight,
+              'phoneNumber': _appUser.phoneNumber,
+              'address': [
+                {
+                  'patientName': _address?.patientName,
+                  'addressId': _address?.addressId,
+                  'addressLine1': _address?.addressLine1,
+                  'addressLine2': _address?.addressLine2,
+                  'city': _address?.city,
+                  'addressType': _address?.addressType,
+                  'contactNumber': _address?.phoneNumber,
+                  'pincode': _address?.pincode,
+                  'state': _address?.state
+                }
+              ]
             },
           );
           return value;
-          print(value);
         },
       );
     } on FirebaseAuthException catch (e) {
@@ -112,7 +112,7 @@ class userAPI {
     } on Exception catch (e) {
       print(e.toString());
     }
-    return null;
+    return UserCredential;
   }
 
   //LogOut

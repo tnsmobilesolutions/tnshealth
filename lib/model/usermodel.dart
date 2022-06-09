@@ -6,12 +6,12 @@ import 'package:tnshealth/model/addressmodel.dart';
 
 class AppUser {
   String? uid;
-  String? userID;
+  String? userId;
   String? name;
-  String? phonenumber;
+  String? phoneNumber;
   String? email;
   String? gender;
-  String? bloodgroup;
+  String? bloodGroup;
   String? height;
   String? weight;
   List<Address?>? address;
@@ -23,12 +23,12 @@ class AppUser {
   // String? contactNumber;
   AppUser({
     this.uid,
-    this.userID,
+    this.userId,
     this.name,
-    this.phonenumber,
+    this.phoneNumber,
     this.email,
     this.gender,
-    this.bloodgroup,
+    this.bloodGroup,
     this.height,
     this.weight,
     this.address,
@@ -36,24 +36,24 @@ class AppUser {
 
   AppUser copyWith({
     String? uid,
-    String? userID,
+    String? userId,
     String? name,
-    String? phonenumber,
+    String? phoneNumber,
     String? email,
     String? gender,
-    String? bloodgroup,
+    String? bloodGroup,
     String? height,
     String? weight,
     List<Address?>? address,
   }) {
     return AppUser(
       uid: uid ?? this.uid,
-      userID: userID ?? this.userID,
+      userId: userId ?? this.userId,
       name: name ?? this.name,
-      phonenumber: phonenumber ?? this.phonenumber,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
       email: email ?? this.email,
       gender: gender ?? this.gender,
-      bloodgroup: bloodgroup ?? this.bloodgroup,
+      bloodGroup: bloodGroup ?? this.bloodGroup,
       height: height ?? this.height,
       weight: weight ?? this.weight,
       address: address ?? this.address,
@@ -63,12 +63,12 @@ class AppUser {
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
-      'userID': userID,
+      'userId': userId,
       'name': name,
-      'phonenumber': phonenumber,
+      'phoneNumber': phoneNumber,
       'email': email,
       'gender': gender,
-      'bloodgroup': bloodgroup,
+      'bloodGroup': bloodGroup,
       'height': height,
       'weight': weight,
       'address': address?.map((x) => x?.toMap()).toList(),
@@ -78,12 +78,12 @@ class AppUser {
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
       uid: map['uid'],
-      userID: map['userID'],
+      userId: map['userId'],
       name: map['name'],
-      phonenumber: map['phonenumber'],
+      phoneNumber: map['phoneNumber'],
       email: map['email'],
       gender: map['gender'],
-      bloodgroup: map['bloodgroup'],
+      bloodGroup: map['bloodGroup'],
       height: map['height'],
       weight: map['weight'],
       address: map['address'] != null
@@ -99,7 +99,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, userID: $userID, name: $name, phonenumber: $phonenumber, email: $email, gender: $gender, bloodgroup: $bloodgroup, height: $height, weight: $weight, address: $address)';
+    return 'AppUser(uid: $uid, userId: $userId, name: $name, phoneNumber: $phoneNumber, email: $email, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, address: $address)';
   }
 
   @override
@@ -108,12 +108,12 @@ class AppUser {
 
     return other is AppUser &&
         other.uid == uid &&
-        other.userID == userID &&
+        other.userId == userId &&
         other.name == name &&
-        other.phonenumber == phonenumber &&
+        other.phoneNumber == phoneNumber &&
         other.email == email &&
         other.gender == gender &&
-        other.bloodgroup == bloodgroup &&
+        other.bloodGroup == bloodGroup &&
         other.height == height &&
         other.weight == weight &&
         listEquals(other.address, address);
@@ -122,12 +122,12 @@ class AppUser {
   @override
   int get hashCode {
     return uid.hashCode ^
-        userID.hashCode ^
+        userId.hashCode ^
         name.hashCode ^
-        phonenumber.hashCode ^
+        phoneNumber.hashCode ^
         email.hashCode ^
         gender.hashCode ^
-        bloodgroup.hashCode ^
+        bloodGroup.hashCode ^
         height.hashCode ^
         weight.hashCode ^
         address.hashCode;

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Address {
@@ -10,7 +9,7 @@ class Address {
   final String? city;
   final String? state;
   final int? pincode;
-  final int? contactNumber;
+  final int? phoneNumber;
 
   Address({
     this.patientName,
@@ -21,7 +20,7 @@ class Address {
     this.city,
     this.state,
     this.pincode,
-    this.contactNumber,
+    this.phoneNumber,
   });
 
   Address copyWith({
@@ -33,7 +32,7 @@ class Address {
     String? city,
     String? state,
     int? pincode,
-    int? contactNumber,
+    int? phoneNumber,
   }) {
     return Address(
       patientName: patientName ?? this.patientName,
@@ -44,7 +43,7 @@ class Address {
       city: city ?? this.city,
       state: state ?? this.state,
       pincode: pincode ?? this.pincode,
-      contactNumber: contactNumber ?? this.contactNumber,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
@@ -75,8 +74,8 @@ class Address {
     if (pincode != null) {
       result.addAll({'pincode': pincode});
     }
-    if (contactNumber != null) {
-      result.addAll({'contactNumber': contactNumber});
+    if (phoneNumber != null) {
+      result.addAll({'phoneNumber': phoneNumber});
     }
 
     return result;
@@ -92,7 +91,7 @@ class Address {
       city: map['city'],
       state: map['state'],
       pincode: map['pincode']?.toInt(),
-      contactNumber: map['contactNumber']?.toInt(),
+      phoneNumber: map['phoneNumber']?.toInt(),
     );
   }
 
@@ -103,7 +102,7 @@ class Address {
 
   @override
   String toString() {
-    return 'Address(patientName: $patientName, addressId: $addressId, addressLine1: $addressLine1, addressLine2: $addressLine2, addressType: $addressType, city: $city, state: $state, pincode: $pincode, contactNumber: $contactNumber)';
+    return 'Address(patientName: $patientName, addressId: $addressId, addressLine1: $addressLine1, addressLine2: $addressLine2, addressType: $addressType, city: $city, state: $state, pincode: $pincode, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -119,7 +118,7 @@ class Address {
         other.city == city &&
         other.state == state &&
         other.pincode == pincode &&
-        other.contactNumber == contactNumber;
+        other.phoneNumber == phoneNumber;
   }
 
   @override
@@ -132,6 +131,6 @@ class Address {
         city.hashCode ^
         state.hashCode ^
         pincode.hashCode ^
-        contactNumber.hashCode;
+        phoneNumber.hashCode;
   }
 }

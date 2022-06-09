@@ -116,8 +116,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                           addressLine1: adressline1namecontroller.text,
                           addressLine2: adressline2namecontroller.text,
                           city: citycontroller.text,
-                          contactNumber:
-                              int.tryParse(phonenumbercontroller.text),
+                          phoneNumber: int.tryParse(phonenumbercontroller.text),
                           patientName: fullnamecontroller.text,
                           pincode: int.tryParse(pincodecontroller.text),
                           state: statecontroller.text,

@@ -28,12 +28,12 @@ class _EditProfileState extends State<EditProfile> {
         nameController.text =
             widget.currentuser != null ? widget.currentuser!.name ?? '' : '';
         mobileController.text = widget.currentuser != null
-            ? widget.currentuser!.phonenumber ?? ''
+            ? widget.currentuser!.phoneNumber ?? ''
             : '';
         emailController.text =
             widget.currentuser != null ? widget.currentuser!.email ?? '' : '';
         bloodGroupController.text = widget.currentuser != null
-            ? widget.currentuser!.bloodgroup ?? ''
+            ? widget.currentuser!.bloodGroup ?? ''
             : '';
         genderController.text =
             widget.currentuser != null ? widget.currentuser!.gender ?? '' : '';

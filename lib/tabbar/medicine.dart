@@ -58,7 +58,7 @@ class _MedicineState extends State<Medicine> {
       final names = await FirestoreData().getCurrentUserData();
       if (names != null) {
         name = names.name;
-        phonenum = names.phonenumber;
+        phonenum = names.phoneNumber;
         address = names.address;
       } else {
         print('names = null************$uid***********');
@@ -175,17 +175,17 @@ class _MedicineState extends State<Medicine> {
                           // if (_formKey.currentState != null &&
                           //     _formKey.currentState!.validate()) {
                           Order orderModel = Order(
-                            name: name,
-                            deliveryDate: currentDate,
-                            deliveryTime: DateFormat("hh:mm:ss a").format(
-                                DateTime.now().add(const Duration(hours: 1))),
-                            orderDate: currentDate,
-                            orderTime: currentTime,
-                            orderId: const Uuid().v1(),
-                            prescriptionURL: prescriptionURL,
-                            userId: uid,
-                            vendorId: vendorID,
-                          );
+                              name: name,
+                              deliveryDate: currentDate,
+                              deliveryTime: DateFormat("hh:mm:ss a").format(
+                                  DateTime.now().add(const Duration(hours: 1))),
+                              orderDate: currentDate,
+                              orderTime: currentTime,
+                              orderId: const Uuid().v1(),
+                              prescriptionURL: prescriptionURL,
+                              userId: uid,
+                              vendorId: vendorID,
+                              orderAddress: null);
                           FirestoreData().createNewOrder(orderModel);
                           // } else {
                           //   print(

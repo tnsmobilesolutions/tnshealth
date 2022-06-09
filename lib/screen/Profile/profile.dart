@@ -21,10 +21,10 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   AppUser? userDetails = AppUser(
     name: 'Atanu',
-    phonenumber: '7008183804',
+    phoneNumber: '7008183804',
     email: 'jena.atanusabyasachi@gmail.com',
     gender: 'Male',
-    bloodgroup: 'O+',
+    bloodGroup: 'O+',
     height: '5.7',
     weight: '70 kg',
   );
@@ -105,12 +105,12 @@ class _ProfileState extends State<Profile> {
                     Widgets().myOrders('Name  :  ', userDetails?.name ?? ''),
                     const SizedBox(height: 30),
                     Widgets().myOrders(
-                        'Mobile Number : ', userDetails?.phonenumber ?? ''),
+                        'Mobile Number : ', userDetails?.phoneNumber ?? ''),
                     const SizedBox(height: 30),
                     Widgets().myOrders('Email Id : ', userDetails?.email ?? ''),
                     const SizedBox(height: 30),
                     Widgets().myOrders(
-                        'Blood Group: ', userDetails?.bloodgroup ?? ''),
+                        'Blood Group: ', userDetails?.bloodGroup ?? ''),
                     const SizedBox(height: 30),
                     Widgets().myOrders('Gender :', userDetails?.gender ?? ''),
                     const SizedBox(height: 30),
