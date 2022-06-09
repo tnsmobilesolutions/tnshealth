@@ -91,7 +91,7 @@ class userAPI {
                   'addressLine2': _address?.addressLine2,
                   'city': _address?.city,
                   'addressType': _address?.addressType,
-                  'contactNumber': _address?.phoneNumber,
+                  'phoneNumber': _address?.phoneNumber,
                   'pincode': _address?.pincode,
                   'state': _address?.state
                 }

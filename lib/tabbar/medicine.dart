@@ -140,8 +140,34 @@ class _MedicineState extends State<Medicine> {
                       // const SizedBox(height: 20),
 
                       const SizedBox(height: 10),
-                      Text('Address:$address'),
-                      Text('Phone: -$phonenum'),
+
+                      const SizedBox(height: 10),
+                      Text(address != null
+                          ? 'Patient Name : ${address![0]?.patientName}'
+                          : ''),
+                      Text(address != null
+                          ? 'Contact Number : ${address![0]?.phoneNumber}'
+                          : ''),
+                      Text(
+                          address != null ? 'City : ${address![0]?.city}' : ''),
+                      Text(address != null
+                          ? 'State : ${address![0]?.state}'
+                          : ''),
+                      Text(address != null
+                          ? 'Pincode : ${address![0]?.pincode}'
+                          : ''),
+                      Text(address != null
+                          ? 'Address Type : ${address![0]?.addressType}'
+                          : ''),
+                      Text(address != null
+                          ? 'Address ID : ${address![0]?.addressId}'
+                          : ''),
+                      Text(address != null
+                          ? 'Address : ${address![0]?.addressLine1}  '
+                              '${address![0]?.addressLine2}'
+                          : ''),
+
+                      //Text('Phone: -$phonenum'),
                       // const SizedBox(height: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -185,7 +211,7 @@ class _MedicineState extends State<Medicine> {
                               prescriptionURL: prescriptionURL,
                               userId: uid,
                               vendorId: vendorID,
-                              address: null);
+                              address: address);
                           FirestoreData().createNewOrder(orderModel);
                           // } else {
                           //   print(
