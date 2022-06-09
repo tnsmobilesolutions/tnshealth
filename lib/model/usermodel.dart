@@ -15,12 +15,6 @@ class AppUser {
   String? height;
   String? weight;
   List<Address?>? address;
-  // String? addressLine1;
-  // String? addressLine2;
-  // String? city;
-  // String? state;
-  // String? pincode;
-  // String? contactNumber;
   AppUser({
     this.uid,
     this.userId,

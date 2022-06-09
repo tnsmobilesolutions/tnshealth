@@ -146,7 +146,7 @@ class _MedicineState extends State<Medicine> {
                           ? 'Patient Name : ${address![0]?.patientName}'
                           : ''),
                       Text(address != null
-                          ? 'Contact Number : ${address![0]?.phoneNumber}'
+                          ? 'phone Number : ${address![0]?.phoneNumber}'
                           : ''),
                       Text(
                           address != null ? 'City : ${address![0]?.city}' : ''),
@@ -201,17 +201,30 @@ class _MedicineState extends State<Medicine> {
                           // if (_formKey.currentState != null &&
                           //     _formKey.currentState!.validate()) {
                           Order orderModel = Order(
-                              name: name,
-                              deliveryDate: currentDate,
-                              deliveryTime: DateFormat("hh:mm:ss a").format(
-                                  DateTime.now().add(const Duration(hours: 1))),
-                              orderDate: currentDate,
-                              orderTime: currentTime,
-                              orderId: const Uuid().v1(),
-                              prescriptionURL: prescriptionURL,
-                              userId: uid,
-                              vendorId: vendorID,
-                              address: address);
+                            name: name,
+                            deliveryDate: currentDate,
+                            deliveryTime: DateFormat("hh:mm:ss a").format(
+                                DateTime.now().add(const Duration(hours: 1))),
+                            orderDate: currentDate,
+                            orderTime: currentTime,
+                            orderId: const Uuid().v1(),
+                            prescriptionURL: prescriptionURL,
+                            userId: uid,
+                            vendorId: vendorID,
+                            address: [
+                              Address(
+                                patientName: address?[0]?.patientName,
+                                addressId: address?[0]?.addressId,
+                                addressLine1: address?[0]?.addressLine1,
+                                addressLine2: address?[0]?.addressLine2,
+                                addressType: address?[0]?.addressType,
+                                city: address?[0]?.city,
+                                state: address?[0]?.state,
+                                pincode: address?[0]?.pincode,
+                                phoneNumber: address?[0]?.phoneNumber,
+                              )
+                            ],
+                          );
                           FirestoreData().createNewOrder(orderModel);
                           // } else {
                           //   print(
