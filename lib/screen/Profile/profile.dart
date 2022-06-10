@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/model/addressmodel.dart';
-import 'package:tnshealth/model/usermodel.dart';
+
 import 'package:tnshealth/screen/Profile/editprofile.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
 import 'package:tnshealth/widget.dart';
@@ -19,32 +19,20 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  AppUser? userDetails = AppUser(
-    name: 'Atanu',
-    phoneNumber: '7008183804',
-    email: 'jena.atanusabyasachi@gmail.com',
-    gender: 'Male',
-    bloodGroup: 'O+',
-    height: '5.7',
-    weight: '70 kg',
-  );
-
-  Address? currentAddress = Address(addressLine1: 'a');
-
-  String address = '';
-  String bloodgroup = '';
-  String email = '';
-  String gender = '';
-  String height = '';
-  String name = '';
-  String phonenum = '';
-  String weight = '';
-  bool _isEditButtonPressed = false;
+  List<Address?>? address;
+  String? bloodgroup;
+  String? email;
+  String? gender;
+  String? height;
+  String? name;
+  String? phoneNumber;
+  String? weight;
+  String? bloodGroup;
+  String? country;
 
   @override
   void initState() {
     super.initState();
-    _isEditButtonPressed = false;
   }
 
   @override
@@ -54,16 +42,17 @@ class _ProfileState extends State<Profile> {
       final uid = user?.uid;
       FirestoreData firestore = FirestoreData(uid: uid);
       final names = await firestore.getCurrentUserData();
-      // if (names != null) {
-      //   name = names[0];
-      //   email = names[1];
-      //   phonenum = names[2];
-      //   address = names[3];
-      //   bloodgroup = names[4];
-      //   gender = names[7];
-      //   height = names[5];
-      //   weight = names[6];
-      // } else {}
+      if (names != null) {
+        name = names.name;
+        email = names.email;
+        height = names.height;
+        weight = names.weight;
+        gender = names.gender;
+        bloodGroup = names.bloodGroup;
+        country = names.country;
+        address = names.address;
+        phoneNumber = names.phoneNumber;
+      } else {}
     }
 
     return Scaffold(
@@ -102,21 +91,19 @@ class _ProfileState extends State<Profile> {
                     //const Divider(color: Colors.black, thickness: 2.0),
 
                     //const SizedBox(height: 16),
-                    Widgets().myOrders('Name  :  ', userDetails?.name ?? ''),
+                    Text('Name : - $name'),
                     const SizedBox(height: 30),
-                    Widgets().myOrders(
-                        'Mobile Number : ', userDetails?.phoneNumber ?? ''),
+                    Text('Email : - $email'),
                     const SizedBox(height: 30),
-                    Widgets().myOrders('Email Id : ', userDetails?.email ?? ''),
+                    Text('Height : - $height'),
                     const SizedBox(height: 30),
-                    Widgets().myOrders(
-                        'Blood Group: ', userDetails?.bloodGroup ?? ''),
+                    Text('Weight : - $weight'),
                     const SizedBox(height: 30),
-                    Widgets().myOrders('Gender :', userDetails?.gender ?? ''),
+                    Text('Gender : - $gender'),
                     const SizedBox(height: 30),
-                    Widgets().myOrders('Height:  ', userDetails?.height ?? ''),
+                    Text('BloodGroup : - $bloodGroup'),
                     const SizedBox(height: 16),
-                    Widgets().myOrders('Weight:  ', userDetails?.weight ?? ''),
+                    Text('Country : - $country'),
                     const SizedBox(height: 16),
                     //const Divider(color: Colors.black, thickness: 2.0),
                     Card(
@@ -126,16 +113,32 @@ class _ProfileState extends State<Profile> {
                         child: Column(
                           children: [
                             Column(
-                              children: const [
-                                Text('Name: Atanu', style: kprofiletext),
-                                Text('Mobile Number: 7008183804',
-                                    style: kprofiletext),
-                                Text('Email Id: jena.atanusabyasachi@gmail.com',
-                                    style: kprofiletext),
-                                Text('Blood Group: O+', style: kprofiletext),
-                                Text('Gender : Male', style: kprofiletext),
-                                Text('Height: 5.7', style: kprofiletext),
-                                Text('Weight: 70', style: kprofiletext),
+                              children: [
+                                Text(address != null
+                                    ? 'Patient Name : ${address![0]?.patientName}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'phone Number : ${address![0]?.phoneNumber}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'City : ${address![0]?.city}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'State : ${address![0]?.state}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'Pincode : ${address![0]?.pincode}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'Address Type : ${address![0]?.addressType}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'Address ID : ${address![0]?.addressId}'
+                                    : ''),
+                                Text(address != null
+                                    ? 'Address : ${address![0]?.addressLine1}  '
+                                        '${address![0]?.addressLine2}'
+                                    : ''),
                               ],
                             ),
                             Row(
@@ -143,15 +146,15 @@ class _ProfileState extends State<Profile> {
                               children: [
                                 ElevatedButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return UserAddress(
-                                                userAddress: currentAddress);
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return UserAddress(
+                                      //           userAddress: currentAddress);
+                                      //     },
+                                      //   ),
+                                      // );
                                     },
                                     child: const Text('Edit')),
                                 ElevatedButton(
