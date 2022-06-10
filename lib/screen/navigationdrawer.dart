@@ -16,17 +16,17 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  String name = '';
+  String? name;
 
   currentData() async {
     final User? user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
     FirestoreData firestore = FirestoreData(uid: uid);
     final names = await firestore.getCurrentUserData();
-    // if (names != null) {
-    //   name = names[0];
-    // } else {}
-    // return name;
+    if (names != null) {
+      name = names.name;
+    } else {}
+    return name;
   }
 
   @override
@@ -50,7 +50,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      name,
+                      '$name ',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
