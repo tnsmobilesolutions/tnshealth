@@ -142,30 +142,42 @@ class _MedicineState extends State<Medicine> {
                       const SizedBox(height: 10),
 
                       const SizedBox(height: 10),
-                      Text(address != null
-                          ? 'Patient Name : ${address![0]?.patientName}'
-                          : ''),
-                      Text(address != null
-                          ? 'phone Number : ${address![0]?.phoneNumber}'
-                          : ''),
-                      Text(
-                          address != null ? 'City : ${address![0]?.city}' : ''),
-                      Text(address != null
-                          ? 'State : ${address![0]?.state}'
-                          : ''),
-                      Text(address != null
-                          ? 'Pincode : ${address![0]?.pincode}'
-                          : ''),
-                      Text(address != null
-                          ? 'Address Type : ${address![0]?.addressType}'
-                          : ''),
-                      Text(address != null
-                          ? 'Address ID : ${address![0]?.addressId}'
-                          : ''),
-                      Text(address != null
-                          ? 'Address : ${address![0]?.addressLine1}  '
-                              '${address![0]?.addressLine2}'
-                          : ''),
+                      Card(
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(address != null
+                                  ? 'Name : ${address![0]?.patientName}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'phone Number : ${address![0]?.phoneNumber}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'City : ${address![0]?.city}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'State : ${address![0]?.state}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'Pincode : ${address![0]?.pincode}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'Address Type : ${address![0]?.addressType}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'Address ID : ${address![0]?.addressId}'
+                                  : ''),
+                              Text(address != null
+                                  ? 'Address : ${address![0]?.addressLine1},'
+                                      '${address![0]?.addressLine2}'
+                                  : ''),
+                            ],
+                          ),
+                        ),
+                      ),
 
                       //Text('Phone: -$phonenum'),
                       // const SizedBox(height: 10),

@@ -113,9 +113,10 @@ class _ProfileState extends State<Profile> {
                         child: Column(
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(address != null
-                                    ? 'Patient Name : ${address![0]?.patientName}'
+                                    ? 'Name : ${address![0]?.patientName}'
                                     : ''),
                                 Text(address != null
                                     ? 'phone Number : ${address![0]?.phoneNumber}'
@@ -136,7 +137,7 @@ class _ProfileState extends State<Profile> {
                                     ? 'Address ID : ${address![0]?.addressId}'
                                     : ''),
                                 Text(address != null
-                                    ? 'Address : ${address![0]?.addressLine1}  '
+                                    ? 'Address : ${address![0]?.addressLine1},'
                                         '${address![0]?.addressLine2}'
                                     : ''),
                               ],
