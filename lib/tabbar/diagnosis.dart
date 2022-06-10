@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/model/addressmodel.dart';
 import 'package:tnshealth/model/diagnosis_order_model.dart';
@@ -172,18 +171,28 @@ class _DiagnosysState extends State<Diagnosys> {
               const SizedBox(height: 20),
               // Text('Mobile No.', style: kTabBar),
               // const SizedBox(height: 20),
-              IntlPhoneField(
+              TextFormField(
+                validator: (value) {
+                  RegExp regex = RegExp(r'^.{10,}$');
+                  if (value!.isEmpty) {
+                    return ("Please enterPhone Number");
+                  }
+                  if (!regex.hasMatch(value)) {
+                    return ("Enter Valid Mobile Number(Min. 10 Character)");
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  phonenumbercontroller.text = value!;
+                },
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
                 controller: phonenumbercontroller,
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.phone),
+                  border: OutlineInputBorder(),
                   labelText: 'Phone Number',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                  ),
                 ),
-                initialCountryCode: 'IN',
-                onChanged: (phone) {
-                  // print(phone.completeNumber);
-                },
               ),
               const SizedBox(height: 20),
               TextFormField(

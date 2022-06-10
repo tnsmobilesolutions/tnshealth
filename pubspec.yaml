@@ -16,8 +16,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  
-  intl_phone_field: ^2.1.0
   image_picker: ^0.8.4+4
   flutter_speed_dial: ^5.0.0+1
   firebase_auth: ^3.3.6
@@ -26,7 +24,7 @@ dependencies:
   animated_splash_screen: ^1.2.0
   uuid: ^3.0.6
   firebase_storage: ^10.2.16
-  intl: ^0.17.0
+  
   
   
   

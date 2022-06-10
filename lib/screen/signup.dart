@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/model/addressmodel.dart';
 import 'package:tnshealth/model/usermodel.dart';
@@ -34,6 +33,7 @@ class _SignupPageState extends State<SignupPage> {
   final weightcontroller = TextEditingController();
   final gendercontroller = TextEditingController();
   final addresstypecontroller = TextEditingController();
+  final countrycontroller = TextEditingController();
 
   final kTextStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
@@ -50,6 +50,7 @@ class _SignupPageState extends State<SignupPage> {
       textInputAction: TextInputAction.next,
       controller: fullnamecontroller,
       decoration: InputDecoration(
+          icon: const Icon(Icons.person),
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Name',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
@@ -87,6 +88,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       controller: emailcontroller,
       decoration: InputDecoration(
+          icon: const Icon(Icons.email),
           contentPadding: const EdgeInsets.all(15),
           hintText: 'Email Id',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
@@ -113,6 +115,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        icon: const Icon(Icons.password),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Password",
         border: OutlineInputBorder(
@@ -138,6 +141,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
+        icon: const Icon(Icons.password),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Confirm Password",
         border: OutlineInputBorder(
@@ -157,6 +161,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        icon: const Icon(Icons.height),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Height",
         border: OutlineInputBorder(
@@ -174,6 +179,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        icon: const Icon(Icons.monitor_weight),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Weight",
         border: OutlineInputBorder(
@@ -193,6 +199,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        icon: const Icon(Icons.bloodtype),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "BloodGroup",
         border: OutlineInputBorder(
@@ -212,6 +219,7 @@ class _SignupPageState extends State<SignupPage> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        icon: const Icon(Icons.male),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Gender",
         border: OutlineInputBorder(
@@ -234,7 +242,8 @@ class _SignupPageState extends State<SignupPage> {
             AppUser _appUser = AppUser(
               name: fullnamecontroller.text.trim(),
               email: emailcontroller.text.trim(),
-              phoneNumber: phonenumbercontroller.text,
+              country: countrycontroller.text,
+              phoneNumber: phonenumbercontroller.text.trim(),
               userId: const Uuid().v1(),
               address: [
                 Address(
@@ -271,7 +280,6 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               );
             } else {
-              print('AppUser is null');
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: Theme.of(context).iconTheme.color,
@@ -318,6 +326,7 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: adressline1namecontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.location_on),
                     border: OutlineInputBorder(),
                     labelText: 'Adress Line 1',
                   ),
@@ -327,6 +336,7 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: adressline2namecontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.location_on),
                     border: OutlineInputBorder(),
                     labelText: 'Adress Line 2',
                   ),
@@ -336,6 +346,7 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: citycontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.location_city),
                     border: OutlineInputBorder(),
                     labelText: 'City',
                   ),
@@ -345,6 +356,7 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: statecontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.my_location),
                     border: OutlineInputBorder(),
                     labelText: 'State',
                   ),
@@ -355,6 +367,7 @@ class _SignupPageState extends State<SignupPage> {
                   keyboardType: TextInputType.number,
                   controller: pincodecontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.location_pin),
                     border: OutlineInputBorder(),
                     labelText: 'PinCode',
                   ),
@@ -364,38 +377,72 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: addresstypecontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.location_searching),
                     border: OutlineInputBorder(),
                     labelText: 'Address Type',
                   ),
                 ),
                 const SizedBox(height: 20),
-                IntlPhoneField(
+                TextField(
                   textInputAction: TextInputAction.next,
+                  controller: countrycontroller,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.my_location),
+                    border: OutlineInputBorder(),
+                    labelText: 'Country',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
                   validator: (value) {
                     RegExp regex = RegExp(r'^.{10,}$');
                     if (value!.isEmpty) {
-                      return ("phone number cannot be Empty");
+                      return ("Please enter Phone Number");
                     }
                     if (!regex.hasMatch(value)) {
-                      return ("Enter Valid name(Min. 10 Character)");
+                      return ("Enter 10 Digit Mobile Number");
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    phonenumbercontroller.text = value!.toString();
+                    phonenumbercontroller.text = value!;
                   },
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
                   controller: phonenumbercontroller,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.phone),
+                    border: OutlineInputBorder(),
                     labelText: 'Phone Number',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
-                    ),
                   ),
-                  initialCountryCode: 'IN',
-                  onChanged: (phone) {
-                    // print(phone.completeNumber);
-                  },
                 ),
+                // IntlPhoneField(
+                //   textInputAction: TextInputAction.next,
+                //   validator: (value) {
+                //     RegExp regex = RegExp(r'^.{10,}$');
+                //     if (value!.isEmpty) {
+                //       return ("phone number cannot be Empty");
+                //     }
+                //     if (!regex.hasMatch(value)) {
+                //       return ("Enter Valid name(Min. 10 Character)");
+                //     }
+                //     return null;
+                //   },
+                //   onSaved: (value) {
+                //     phonenumbercontroller.text = value!.toString();
+                //   },
+                //   controller: phonenumbercontroller,
+                //   decoration: const InputDecoration(
+                //     labelText: 'Phone Number',
+                //     border: OutlineInputBorder(
+                //       borderSide: BorderSide(),
+                //     ),
+                //   ),
+                //   initialCountryCode: 'IN',
+                //   onChanged: (phone) {
+                //     // print(phone.completeNumber);
+                //   },
+                // ),
                 const SizedBox(height: 20),
                 password,
                 const SizedBox(height: 20),

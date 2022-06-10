@@ -82,6 +82,7 @@ class userAPI {
               'gender': _appUser.gender,
               'height': _appUser.height,
               'weight': _appUser.weight,
+              'country': _appUser.country,
               'phoneNumber': _appUser.phoneNumber,
               'address': [
                 {

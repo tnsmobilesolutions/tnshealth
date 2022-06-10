@@ -9,6 +9,7 @@ class AppUser {
   String? userId;
   String? name;
   String? phoneNumber;
+  String? country;
   String? email;
   String? gender;
   String? bloodGroup;
@@ -20,6 +21,7 @@ class AppUser {
     this.userId,
     this.name,
     this.phoneNumber,
+    this.country,
     this.email,
     this.gender,
     this.bloodGroup,
@@ -33,6 +35,7 @@ class AppUser {
     String? userId,
     String? name,
     String? phoneNumber,
+    String? country,
     String? email,
     String? gender,
     String? bloodGroup,
@@ -45,6 +48,7 @@ class AppUser {
       userId: userId ?? this.userId,
       name: name ?? this.name,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      country: country ?? this.country,
       email: email ?? this.email,
       gender: gender ?? this.gender,
       bloodGroup: bloodGroup ?? this.bloodGroup,
@@ -55,18 +59,43 @@ class AppUser {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'uid': uid,
-      'userId': userId,
-      'name': name,
-      'phoneNumber': phoneNumber,
-      'email': email,
-      'gender': gender,
-      'bloodGroup': bloodGroup,
-      'height': height,
-      'weight': weight,
-      'address': address?.map((x) => x?.toMap()).toList(),
-    };
+    final result = <String, dynamic>{};
+
+    if (uid != null) {
+      result.addAll({'uid': uid});
+    }
+    if (userId != null) {
+      result.addAll({'userId': userId});
+    }
+    if (name != null) {
+      result.addAll({'name': name});
+    }
+    if (phoneNumber != null) {
+      result.addAll({'phoneNumber': phoneNumber});
+    }
+    if (country != null) {
+      result.addAll({'country': country});
+    }
+    if (email != null) {
+      result.addAll({'email': email});
+    }
+    if (gender != null) {
+      result.addAll({'gender': gender});
+    }
+    if (bloodGroup != null) {
+      result.addAll({'bloodGroup': bloodGroup});
+    }
+    if (height != null) {
+      result.addAll({'height': height});
+    }
+    if (weight != null) {
+      result.addAll({'weight': weight});
+    }
+    if (address != null) {
+      result.addAll({'address': address!.map((x) => x?.toMap()).toList()});
+    }
+
+    return result;
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
@@ -75,6 +104,7 @@ class AppUser {
       userId: map['userId'],
       name: map['name'],
       phoneNumber: map['phoneNumber'],
+      country: map['country'],
       email: map['email'],
       gender: map['gender'],
       bloodGroup: map['bloodGroup'],
@@ -93,7 +123,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, userId: $userId, name: $name, phoneNumber: $phoneNumber, email: $email, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, address: $address)';
+    return 'AppUser(uid: $uid, userId: $userId, name: $name, phoneNumber: $phoneNumber, country: $country, email: $email, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, address: $address)';
   }
 
   @override
@@ -105,6 +135,7 @@ class AppUser {
         other.userId == userId &&
         other.name == name &&
         other.phoneNumber == phoneNumber &&
+        other.country == country &&
         other.email == email &&
         other.gender == gender &&
         other.bloodGroup == bloodGroup &&
@@ -119,6 +150,7 @@ class AppUser {
         userId.hashCode ^
         name.hashCode ^
         phoneNumber.hashCode ^
+        country.hashCode ^
         email.hashCode ^
         gender.hashCode ^
         bloodGroup.hashCode ^
