@@ -204,53 +204,50 @@ class _DiagnosysState extends State<Diagnosys> {
               ),
               Center(
                 child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState != null &&
-                          _formKey.currentState!.validate()) {
-                        DiagnosisOrder diagnosticOrderModel = DiagnosisOrder(
-                          diagnosisOrderId: const Uuid().v1(),
-                          diagnosisName: testnamecontroller.text,
-                          diagnosisOrderAddress: Address(
-                            addressId: '67890',
-                            patientName: patientnamecontroller.text,
-                            addressLine1: addressline1namecontroller.text,
-                            addressLine2: addressline2namecontroller.text,
-                            addressType: addresstypecontroller.text,
-                            city: citycontroller.text,
-                            state: statecontroller.text,
-                            pincode: int.tryParse(pincodecontroller.text),
-                            phoneNumber:
-                                int.tryParse(phonenumbercontroller.text),
-                          ),
-                        );
-                        // ignore: avoid_print
-                        print(diagnosticOrderModel);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                backgroundColor: Colors.red,
-                                elevation: 6,
-                                behavior: SnackBarBehavior.floating,
-                                content: Text('Order booked successfully')));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                backgroundColor: Colors.red,
-                                elevation: 6,
-                                behavior: SnackBarBehavior.floating,
-                                content: Text('error')));
-                      }
+                  onPressed: () {
+                    if (_formKey.currentState != null &&
+                        _formKey.currentState!.validate()) {
+                      DiagnosisOrder diagnosticOrderModel = DiagnosisOrder(
+                        diagnosisOrderId: const Uuid().v1(),
+                        diagnosisName: testnamecontroller.text,
+                        diagnosisOrderAddress: Address(
+                          addressId: const Uuid().v1(),
+                          patientName: patientnamecontroller.text,
+                          addressLine1: addressline1namecontroller.text,
+                          addressLine2: addressline2namecontroller.text,
+                          addressType: addresstypecontroller.text,
+                          city: citycontroller.text,
+                          state: statecontroller.text,
+                          pincode: int.tryParse(pincodecontroller.text),
+                          phoneNumber: int.tryParse(phonenumbercontroller.text),
+                        ),
+                      );
+                      // ignore: avoid_print
+                      print(diagnosticOrderModel);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          backgroundColor: Colors.red,
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: Text('Order booked successfully')));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          backgroundColor: Colors.red,
+                          elevation: 6,
+                          behavior: SnackBarBehavior.floating,
+                          content: Text('error')));
+                    }
 
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const DashBoard();
-                        },
-                      ));
-                    },
-                    child: const Text(
-                      'Book',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                    )),
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const DashBoard();
+                      },
+                    ));
+                  },
+                  child: const Text(
+                    'Book',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                ),
               )
             ],
           ),
