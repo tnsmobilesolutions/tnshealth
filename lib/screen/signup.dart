@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthshared/models/address_model.dart';
 
 import 'package:tnshealth/API/userAPI.dart';
-import 'package:tnshealth/model/addressmodel.dart';
+
 import 'package:tnshealth/model/usermodel.dart';
 
 import 'package:tnshealth/screen/Dashboard.dart';

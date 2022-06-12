@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/model/addressmodel.dart';
+import 'package:healthshared/models/address_model.dart';
 
 // ignore: must_be_immutable
 class UserAddress extends StatefulWidget {

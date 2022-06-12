@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/model/ordermodel.dart';
+import 'package:healthshared/models/order_model.dart';
+
 import 'package:tnshealth/widget.dart';
 import 'package:uuid/uuid.dart';
 

@@ -2,9 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthshared/models/address_model.dart';
+import 'package:healthshared/models/order_model.dart';
 import 'package:tnshealth/API/userAPI.dart';
-import 'package:tnshealth/model/addressmodel.dart';
-import 'package:tnshealth/model/ordermodel.dart';
+
 import 'package:tnshealth/model/usermodel.dart';
 
 class FirestoreData {

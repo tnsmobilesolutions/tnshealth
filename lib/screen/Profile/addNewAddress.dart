@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:healthshared/models/address_model.dart';
 
-import 'package:tnshealth/model/addressmodel.dart';
 import 'package:uuid/uuid.dart';
 
 class AddNewAddress extends StatefulWidget {
-  AddNewAddress({Key? key}) : super(key: key);
+  const AddNewAddress({Key? key}) : super(key: key);
 
   @override
   State<AddNewAddress> createState() => _AddNewAddressState();

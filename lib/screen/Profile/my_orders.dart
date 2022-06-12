@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/model/addressmodel.dart';
-import 'package:tnshealth/model/ordermodel.dart';
+import 'package:healthshared/models/address_model.dart';
+import 'package:healthshared/models/order_model.dart';
 
 import 'order_details.dart';
 

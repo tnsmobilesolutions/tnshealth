@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
-import 'package:tnshealth/model/addressmodel.dart';
+import 'package:healthshared/models/address_model.dart';
 
 class AppUser {
   String? uid;

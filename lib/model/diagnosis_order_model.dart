@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
-import 'package:tnshealth/model/addressmodel.dart';
+import 'package:healthshared/models/address_model.dart';
 
 class DiagnosisOrder {
   final String? diagnosisOrderId;

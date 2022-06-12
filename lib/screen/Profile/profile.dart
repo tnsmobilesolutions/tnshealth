@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthshared/models/address_model.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
-import 'package:tnshealth/model/addressmodel.dart';
 
 import 'package:tnshealth/screen/Profile/editprofile.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
-import 'package:tnshealth/widget.dart';
 
 const kprofiletext = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 
@@ -50,7 +49,7 @@ class _ProfileState extends State<Profile> {
         gender = names.gender;
         bloodGroup = names.bloodGroup;
         country = names.country;
-        address = names.address;
+        address = names.address?.cast<Address?>();
         phoneNumber = names.phoneNumber;
       } else {}
     }
@@ -102,7 +101,7 @@ class _ProfileState extends State<Profile> {
                     Text('Gender : - $gender'),
                     const SizedBox(height: 30),
                     Text('BloodGroup : - $bloodGroup'),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 30),
                     Text('Country : - $country'),
                     const SizedBox(height: 16),
                     //const Divider(color: Colors.black, thickness: 2.0),
