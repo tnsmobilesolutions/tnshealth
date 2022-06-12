@@ -74,7 +74,7 @@ class _SignupPageState extends State<SignupPage> {
                     if (value == null || value.isEmpty) {
                       return (" Name cannot be Empty");
                     }
-                    if (!regex.hasMatch(value)) {
+                    if (!regex.hasMatch(value) && value.length < 3) {
                       return ("Enter Valid name(Min. 3 Character)");
                     }
                     return null;
