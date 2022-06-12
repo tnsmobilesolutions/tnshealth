@@ -49,10 +49,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       backgroundImage: AssetImage('images/ben10.jpg'),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      '$name ',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                    Expanded(
+                      child: Text(
+                        '$name ',
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),

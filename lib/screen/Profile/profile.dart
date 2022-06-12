@@ -146,15 +146,17 @@ class _ProfileState extends State<Profile> {
                               children: [
                                 ElevatedButton(
                                     onPressed: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) {
-                                      //       return UserAddress(
-                                      //           userAddress: currentAddress);
-                                      //     },
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return UserAddress(
+                                              userAddress: address,
+                                              title: 'Edit Address',
+                                            );
+                                          },
+                                        ),
+                                      );
                                     },
                                     child: const Text('Edit')),
                                 ElevatedButton(
@@ -181,7 +183,9 @@ class _ProfileState extends State<Profile> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return UserAddress();
+                return UserAddress(
+                  title: 'Add New Address',
+                );
               },
             ),
           );
