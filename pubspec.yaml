@@ -14,6 +14,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  healthshared:
+    git:
+      url: https://github.com/tnsmobilesolutions/healthshared.git
+    
+      
 
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.4+4
