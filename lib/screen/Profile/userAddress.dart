@@ -1,19 +1,27 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
 
 // ignore: must_be_immutable
 class UserAddress extends StatefulWidget {
-  UserAddress({Key? key, this.userAddress, required this.title})
+  UserAddress(
+      {Key? key,
+      this.userAddress,
+      required this.title,
+      required this.buttonText})
       : super(key: key);
   List<Address?>? userAddress;
   String title;
+  String buttonText;
   @override
   State<UserAddress> createState() => _UserAddressState();
 }
 
 class _UserAddressState extends State<UserAddress> {
   final _formKey = GlobalKey<FormState>();
-  final addressline1namecontroller = TextEditingController();
+  final TextEditingController? addressline1namecontroller =
+      TextEditingController();
   final addressline2namecontroller = TextEditingController();
   final citycontroller = TextEditingController();
   final statecontroller = TextEditingController();
@@ -22,6 +30,9 @@ class _UserAddressState extends State<UserAddress> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      //addressline1namecontroller?.text = widget.userAddress![].addressLine1;
+    });
   }
 
   @override
@@ -214,8 +225,8 @@ class _UserAddressState extends State<UserAddress> {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: const Text(
-                      'Edit',
+                    child: Text(
+                      widget.buttonText,
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,

@@ -84,26 +84,26 @@ class _ProfileState extends State<Profile> {
               return Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //const Divider(color: Colors.black, thickness: 2.0),
 
                     //const SizedBox(height: 16),
-                    Text('Name : - $name'),
-                    const SizedBox(height: 30),
-                    Text('Email : - $email'),
-                    const SizedBox(height: 30),
-                    Text('Height : - $height'),
-                    const SizedBox(height: 30),
-                    Text('Weight : - $weight'),
-                    const SizedBox(height: 30),
-                    Text('Gender : - $gender'),
-                    const SizedBox(height: 30),
-                    Text('BloodGroup : - $bloodGroup'),
-                    const SizedBox(height: 30),
-                    Text('Country : - $country'),
-                    const SizedBox(height: 16),
+                    Text('Name - $name'),
+                    const SizedBox(height: 5),
+                    Text('Email - $email'),
+                    const SizedBox(height: 5),
+                    Text('Height - $height'),
+                    const SizedBox(height: 5),
+                    Text('Weight - $weight'),
+                    const SizedBox(height: 5),
+                    Text('Gender - $gender'),
+                    const SizedBox(height: 5),
+                    Text('BloodGroup - $bloodGroup'),
+                    const SizedBox(height: 5),
+                    Text('Country - $country'),
+                    const SizedBox(height: 10),
                     //const Divider(color: Colors.black, thickness: 2.0),
                     Card(
                       elevation: 5,
@@ -153,6 +153,7 @@ class _ProfileState extends State<Profile> {
                                             return UserAddress(
                                               userAddress: address,
                                               title: 'Edit Address',
+                                              buttonText: 'Edit',
                                             );
                                           },
                                         ),
@@ -185,6 +186,7 @@ class _ProfileState extends State<Profile> {
               builder: (context) {
                 return UserAddress(
                   title: 'Add New Address',
+                  buttonText: 'Add',
                 );
               },
             ),

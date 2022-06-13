@@ -187,7 +187,9 @@ class _MedicineState extends State<Medicine> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const AddNewAddress(),
+                                    builder: (context) => AddNewAddress(
+                                      buttonText: 'Add',
+                                    ),
                                   ));
                             },
                             icon: const Icon(Icons.add),

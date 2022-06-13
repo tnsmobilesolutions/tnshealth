@@ -118,8 +118,12 @@ class _SignupPageState extends State<SignupPage> {
                   },
                   textInputAction: TextInputAction.next,
                   validator: (value) {
+                    RegExp regex = RegExp(r'^[0-9,]$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your height';
+                    }
+                    if (!regex.hasMatch(value) && value.length < 3) {
+                      return ("Enter Valid name(Min. 3 Character)");
                     }
                     return null;
                   },
@@ -241,8 +245,12 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: citycontroller,
                   validator: (value) {
+                    RegExp regex = RegExp(r'^[a-zA-Z, ]+$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your city';
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid city");
                     }
                     return null;
                   },
@@ -257,8 +265,12 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   controller: statecontroller,
                   validator: (value) {
+                    RegExp regex = RegExp(r'^[a-zA-Z, ]+$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your state';
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid state");
                     }
                     return null;
                   },
@@ -273,9 +285,14 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
                   validator: (value) {
+                    RegExp regex = RegExp(r'^.{6}[0-9]$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your valid pincode';
                     }
+                    if (!regex.hasMatch(value) && value.length != 6) {
+                      return ("Enter 6 digit pincode");
+                    }
+
                     return null;
                   },
                   controller: pincodecontroller,
@@ -314,11 +331,11 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 20),
                 TextFormField(
                   validator: (value) {
-                    RegExp regex = RegExp(r'^.{10,}$');
+                    RegExp regex = RegExp(r'^.{10}$');
                     if (value!.isEmpty) {
                       return ("Please enter Phone Number");
                     }
-                    if (!regex.hasMatch(value)) {
+                    if (!regex.hasMatch(value) && value.length != 10) {
                       return ("Enter 10 Digit Mobile Number");
                     }
                     return null;
@@ -368,7 +385,7 @@ class _SignupPageState extends State<SignupPage> {
                   controller: passwordcontroller,
                   obscureText: true,
                   validator: (value) {
-                    RegExp regex = RegExp(r'^.{6,}$');
+                    RegExp regex = RegExp(r'^.{6,}[a-z A-Z 0-9]$');
                     if (value!.isEmpty) {
                       return ("Password is required for login");
                     }

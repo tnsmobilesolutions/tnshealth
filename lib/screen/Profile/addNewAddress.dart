@@ -1,11 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
 
 import 'package:uuid/uuid.dart';
 
 class AddNewAddress extends StatefulWidget {
-  const AddNewAddress({Key? key}) : super(key: key);
-
+  AddNewAddress({Key? key, required this.buttonText}) : super(key: key);
+  String buttonText;
   @override
   State<AddNewAddress> createState() => _AddNewAddressState();
 }
@@ -119,26 +121,27 @@ class _AddNewAddressState extends State<AddNewAddress> {
               ),
               const SizedBox(height: 20),
               Center(
-                  child: TextButton(
-                      onPressed: () {
-                        newAddress = Address(
-                          addressId: const Uuid().v1(),
-                          addressLine1: adressline1namecontroller.text,
-                          addressLine2: adressline2namecontroller.text,
-                          city: citycontroller.text,
-                          phoneNumber: int.tryParse(phonenumbercontroller.text),
-                          patientName: fullnamecontroller.text,
-                          pincode: int.tryParse(pincodecontroller.text),
-                          state: statecontroller.text,
-                          addressType: '',
-                        );
-                        print(newAddress);
-                      },
-                      child: const Text(
-                        'Add',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      )))
+                child: TextButton(
+                  onPressed: () {
+                    newAddress = Address(
+                      addressId: const Uuid().v1(),
+                      addressLine1: adressline1namecontroller.text,
+                      addressLine2: adressline2namecontroller.text,
+                      city: citycontroller.text,
+                      phoneNumber: int.tryParse(phonenumbercontroller.text),
+                      patientName: fullnamecontroller.text,
+                      pincode: int.tryParse(pincodecontroller.text),
+                      state: statecontroller.text,
+                      addressType: '',
+                    );
+                    print(newAddress);
+                  },
+                  child: Text(
+                    widget.buttonText,
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
             ],
           ),
         ),
