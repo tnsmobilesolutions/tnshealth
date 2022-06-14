@@ -206,8 +206,7 @@ class _DiagnosysState extends State<Diagnosys> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState != null &&
-                        _formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       DiagnosisOrder diagnosticOrderModel = DiagnosisOrder(
                         diagnosisOrderId: const Uuid().v1(),
                         diagnosisName: testnamecontroller.text,

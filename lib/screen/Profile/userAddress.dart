@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
+import 'package:tnshealth/screen/Dashboard.dart';
+import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class UserAddress extends StatefulWidget {
@@ -55,26 +57,18 @@ class _UserAddressState extends State<UserAddress> {
                   controller: addressline1namecontroller,
                   keyboardType: TextInputType.name,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Address';
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your address';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
+                  onSaved: (value) {
+                    addressline1namecontroller?.text = value!;
+                  },
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.location_on),
+                    border: OutlineInputBorder(),
                     labelText: 'Address Line 1',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.red),
                   ),
                 ),
                 const SizedBox(
@@ -83,27 +77,10 @@ class _UserAddressState extends State<UserAddress> {
                 TextFormField(
                   controller: addressline2namecontroller,
                   keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Address';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.location_on),
+                    border: OutlineInputBorder(),
                     labelText: 'Address Line 2',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.red),
                   ),
                 ),
                 const SizedBox(
@@ -113,26 +90,19 @@ class _UserAddressState extends State<UserAddress> {
                   controller: citycontroller,
                   keyboardType: TextInputType.name,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter city';
+                    RegExp regex = RegExp(r'^[a-zA-Z, ]+$');
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your city';
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid city");
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.location_city),
+                    border: OutlineInputBorder(),
                     labelText: 'City',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.red),
                   ),
                 ),
                 const SizedBox(
@@ -142,57 +112,39 @@ class _UserAddressState extends State<UserAddress> {
                   controller: statecontroller,
                   keyboardType: TextInputType.name,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter correct state';
+                    RegExp regex = RegExp(r'^[a-zA-Z, ]+$');
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your state';
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid state");
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.my_location),
+                    border: OutlineInputBorder(),
                     labelText: 'State',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.red),
                   ),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  controller: countrycontroller,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter correct country';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Country',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.red),
-                  ),
-                ),
+                // TextFormField(
+                //   controller: countrycontroller,
+                //   keyboardType: TextInputType.name,
+                //   validator: (value) {
+                //     if (value!.isEmpty) {
+                //       return 'Please Enter correct country';
+                //     }
+                //     return null;
+                //   },
+                //   decoration: const InputDecoration(
+                //     icon: Icon(Icons.location_city),
+                //     border: OutlineInputBorder(),
+                //     labelText: 'Country',
+                //   ),
+                // ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -200,31 +152,57 @@ class _UserAddressState extends State<UserAddress> {
                   keyboardType: TextInputType.number,
                   controller: pincodecontroller,
                   validator: (value) {
+                    RegExp regex = RegExp(r'^.{6}[0-9]$');
                     if (value!.isEmpty) {
                       return 'Please enter correct pin';
                     }
+                    if (!regex.hasMatch(value) && value.length != 6) {
+                      return ("Enter 6 digit pincode");
+                    }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.location_pin),
+                    border: OutlineInputBorder(),
                     labelText: 'Pincode',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.red),
                   ),
                 ),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
+                        Address newAddress = Address(
+                          addressId: const Uuid().v1(),
+                          addressLine1: addressline1namecontroller?.text,
+                          addressLine2: addressline2namecontroller.text,
+                          city: citycontroller.text,
+                          pincode: int.tryParse(pincodecontroller.text),
+                          state: statecontroller.text,
+                        );
+                        print(newAddress);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                backgroundColor: Colors.red,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
+                                content: Text('Order add')));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                backgroundColor: Colors.red,
+                                elevation: 6,
+                                behavior: SnackBarBehavior.floating,
+                                content: Text('error')));
+                      }
+
+                      // Navigator.push(context, MaterialPageRoute(
+                      //   builder: (context) {
+                      //     return const DashBoard();
+                      //   },
+                      // ));
+                    },
                     child: Text(
                       widget.buttonText,
                       style: TextStyle(

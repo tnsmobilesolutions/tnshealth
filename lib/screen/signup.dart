@@ -285,7 +285,7 @@ class _SignupPageState extends State<SignupPage> {
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
                   validator: (value) {
-                    RegExp regex = RegExp(r'^.{6}[0-9]$');
+                    RegExp regex = RegExp(r'^[0-9]$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your valid pincode';
                     }
@@ -297,7 +297,7 @@ class _SignupPageState extends State<SignupPage> {
                   },
                   controller: pincodecontroller,
                   decoration: const InputDecoration(
-                    icon: Icon(Icons.location_pin),
+                    icon: Icon(Icons.location_on_sharp),
                     border: OutlineInputBorder(),
                     labelText: 'PinCode',
                   ),
@@ -438,74 +438,75 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(30),
                   color: Colors.redAccent,
                   child: MaterialButton(
-                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                      minWidth: MediaQuery.of(context).size.width,
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          AppUser _appUser = AppUser(
-                            name: fullnamecontroller.text.trim(),
-                            email: emailcontroller.text.trim(),
-                            country: countrycontroller.text,
-                            phoneNumber: phonenumbercontroller.text.trim(),
-                            userId: const Uuid().v1(),
-                            address: [
-                              Address(
-                                patientName: fullnamecontroller.text.trim(),
-                                addressId: const Uuid().v1(),
-                                addressLine1: addressline1namecontroller.text,
-                                addressLine2: addressline2namecontroller.text,
-                                addressType: addresstypecontroller.text,
-                                city: citycontroller.text,
-                                state: statecontroller.text,
-                                pincode: int.tryParse(pincodecontroller.text),
-                                phoneNumber:
-                                    int.tryParse(phonenumbercontroller.text),
-                              )
-                            ],
-                            bloodGroup: bloodgroupcontroller.text,
-                            gender: gendercontroller.text,
-                            height: heightcontroller.text,
-                            weight: weightcontroller.text,
-                          );
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    minWidth: MediaQuery.of(context).size.width,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        AppUser _appUser = AppUser(
+                          name: fullnamecontroller.text.trim(),
+                          email: emailcontroller.text.trim(),
+                          country: countrycontroller.text,
+                          phoneNumber: phonenumbercontroller.text.trim(),
+                          userId: const Uuid().v1(),
+                          address: [
+                            Address(
+                              patientName: fullnamecontroller.text.trim(),
+                              addressId: const Uuid().v1(),
+                              addressLine1: addressline1namecontroller.text,
+                              addressLine2: addressline2namecontroller.text,
+                              addressType: addresstypecontroller.text,
+                              city: citycontroller.text,
+                              state: statecontroller.text,
+                              pincode: int.tryParse(pincodecontroller.text),
+                              phoneNumber:
+                                  int.tryParse(phonenumbercontroller.text),
+                            ),
+                          ],
+                          bloodGroup: bloodgroupcontroller.text,
+                          gender: gendercontroller.text,
+                          height: heightcontroller.text,
+                          weight: weightcontroller.text,
+                        );
 
-                          userAPI()
-                              .signUp(_appUser, passwordcontroller.text.trim());
-                          if (_appUser != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor:
-                                    Theme.of(context).iconTheme.color,
-                                behavior: SnackBarBehavior.floating,
-                                content:
-                                    const Text('Account created successfully'),
-                              ),
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DashBoard(),
-                              ),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor:
-                                    Theme.of(context).iconTheme.color,
-                                behavior: SnackBarBehavior.floating,
-                                content: const Text('Account already exists'),
-                              ),
-                            );
-                          }
+                        userAPI()
+                            .signUp(_appUser, passwordcontroller.text.trim());
+                        if (_appUser != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor:
+                                  Theme.of(context).iconTheme.color,
+                              behavior: SnackBarBehavior.floating,
+                              content:
+                                  const Text('Account created successfully'),
+                            ),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DashBoard(),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor:
+                                  Theme.of(context).iconTheme.color,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text('Account already exists'),
+                            ),
+                          );
                         }
-                      },
-                      child: const Text(
-                        "SignUp",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )),
+                      }
+                    },
+                    child: const Text(
+                      "SignUp",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 15),
               ],

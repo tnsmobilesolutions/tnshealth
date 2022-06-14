@@ -9,10 +9,8 @@ import 'package:tnshealth/screen/Profile/userAddress.dart';
 const kprofiletext = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 
 class Profile extends StatefulWidget {
-  const Profile({
-    Key? key,
-  }) : super(key: key);
-
+  Profile({Key? key, this.address}) : super(key: key);
+  List<Address?>? address;
   @override
   State<Profile> createState() => _ProfileState();
 }
