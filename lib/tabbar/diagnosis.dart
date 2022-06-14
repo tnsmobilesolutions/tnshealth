@@ -237,11 +237,11 @@ class _DiagnosysState extends State<Diagnosys> {
                           content: Text('error')));
                     }
 
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const DashBoard();
-                      },
-                    ));
+                    // Navigator.push(context, MaterialPageRoute(
+                    //   builder: (context) {
+                    //     return const DashBoard();
+                    //   },
+                    // ));
                   },
                   child: const Text(
                     'Book',
