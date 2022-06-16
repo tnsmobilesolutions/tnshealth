@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
-import 'package:tnshealth/screen/Dashboard.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -136,7 +135,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                         return 'Please enter your valid pincode';
                       }
                       if (!regex.hasMatch(value) && value.length != 6) {
-                        return ("Enter 6 digit pincode");
+                        return ("Enter atleast 6 digit");
                       }
 
                       return null;
@@ -209,15 +208,16 @@ class _AddNewAddressState extends State<AddNewAddress> {
                                   backgroundColor: Colors.red,
                                   elevation: 6,
                                   behavior: SnackBarBehavior.floating,
-                                  content: Text('Order add')));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  elevation: 6,
-                                  behavior: SnackBarBehavior.floating,
-                                  content: Text('error')));
+                                  content: Text('Order added')));
                         }
+                        // else {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //       const SnackBar(
+                        //           backgroundColor: Colors.red,
+                        //           elevation: 6,
+                        //           behavior: SnackBarBehavior.floating,
+                        //           content: Text('error')));
+                        // }
 
                         // Navigator.push(context, MaterialPageRoute(
                         //   builder: (context) {

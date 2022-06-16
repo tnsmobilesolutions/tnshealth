@@ -114,15 +114,15 @@ class FirestoreData {
         .collection('orders')
         .doc(orderModel.orderId)
         .set({
-      'Name': orderModel.name,
-      'PrescriptionURL': orderModel.prescriptionURL,
-      'OrderId': orderModel.orderId,
-      'OrderTime': orderModel.orderTime,
-      'OrderDate': orderModel.orderDate,
-      'DeliveryDate': orderModel.deliveryDate,
-      'DeliveryTime': orderModel.deliveryTime,
-      'UserID': orderModel.userId,
-      'VenderId': orderModel.vendorId,
+      'name': orderModel.name,
+      'prescriptionURL': orderModel.prescriptionURL,
+      'orderId': orderModel.orderId,
+      'orderTime': orderModel.orderTime,
+      'orderDate': orderModel.orderDate,
+      'deliveryDate': orderModel.deliveryDate,
+      'deliveryTime': orderModel.deliveryTime,
+      'userId': orderModel.userId,
+      'vendorId': orderModel.vendorId,
       'address': {
         'patientName': _address?.patientName,
         'addressId': _address?.addressId,

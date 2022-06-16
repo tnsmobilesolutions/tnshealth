@@ -33,7 +33,19 @@ class _UserAddressState extends State<UserAddress> {
   void initState() {
     super.initState();
     setState(() {
-      //addressline1namecontroller?.text = widget.userAddress![].addressLine1;
+      addressline1namecontroller?.text = (widget.userAddress != null
+          ? widget.userAddress![0]!.addressLine1
+          : '')!;
+      addressline2namecontroller.text = (widget.userAddress != null
+          ? widget.userAddress![0]!.addressLine2
+          : '')!;
+      citycontroller.text =
+          (widget.userAddress != null ? widget.userAddress![0]!.city : '')!;
+      statecontroller.text =
+          (widget.userAddress != null ? widget.userAddress![0]!.state : '')!;
+      pincodecontroller.text = (widget.userAddress != null
+          ? widget.userAddress![0]!.pincode.toString()
+          : '');
     });
   }
 
@@ -149,15 +161,16 @@ class _UserAddressState extends State<UserAddress> {
                   height: 15,
                 ),
                 TextFormField(
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.phone,
                   controller: pincodecontroller,
                   validator: (value) {
-                    RegExp regex = RegExp(r'^.{6}[0-9]$');
+                    RegExp regex = RegExp(
+                        r'^.{6}[0-9 \\( | \\) | \\. | \\, | \\+ | \\- | \\; | ||)]$');
                     if (value!.isEmpty) {
                       return 'Please enter correct pin';
                     }
                     if (!regex.hasMatch(value) && value.length != 6) {
-                      return ("Enter 6 digit pincode");
+                      return ("Enter atleast 6 digit");
                     }
                     return null;
                   },
