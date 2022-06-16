@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
+import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/model/usermodel.dart';
+import 'package:tnshealth/screen/Dashboard.dart';
 
+import 'package:tnshealth/screen/Profile/profile.dart';
 import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
@@ -22,6 +24,7 @@ class UserAddress extends StatefulWidget {
 
 class _UserAddressState extends State<UserAddress> {
   final _formKey = GlobalKey<FormState>();
+  final fullnamecontroller = TextEditingController();
   final TextEditingController? addressline1namecontroller =
       TextEditingController();
   final addressline2namecontroller = TextEditingController();
@@ -29,10 +32,21 @@ class _UserAddressState extends State<UserAddress> {
   final statecontroller = TextEditingController();
   final pincodecontroller = TextEditingController();
   final countrycontroller = TextEditingController();
+  final addresstypecontroller = TextEditingController();
+  final phonenumbercontroller = TextEditingController();
   @override
   void initState() {
     super.initState();
     setState(() {
+      fullnamecontroller.text = (widget.userAddress != null
+          ? widget.userAddress![0]!.patientName
+          : '')!;
+      phonenumbercontroller.text = (widget.userAddress != null
+          ? widget.userAddress![0]!.phoneNumber.toString()
+          : '');
+      addresstypecontroller.text = (widget.userAddress != null
+          ? widget.userAddress![0]!.addressType
+          : '')!;
       addressline1namecontroller?.text = (widget.userAddress != null
           ? widget.userAddress![0]!.addressLine1
           : '')!;
@@ -62,9 +76,31 @@ class _UserAddressState extends State<UserAddress> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 15,
+                const SizedBox(height: 15),
+                TextFormField(
+                  textInputAction: TextInputAction.next,
+                  controller: fullnamecontroller,
+                  decoration: InputDecoration(
+                      icon: const Icon(Icons.person),
+                      contentPadding: const EdgeInsets.all(15),
+                      hintText: 'Name',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                  validator: (value) {
+                    RegExp regex = RegExp(r'^.{3,}[a-z A-Z]$');
+                    if (value == null || value.isEmpty) {
+                      return (" Name cannot be Empty");
+                    }
+                    if (!regex.hasMatch(value) && value.length < 3) {
+                      return ("Enter Valid name(Min. 3 Character)");
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    value = fullnamecontroller.text;
+                  },
                 ),
+                const SizedBox(height: 15),
                 TextFormField(
                   controller: addressline1namecontroller,
                   keyboardType: TextInputType.name,
@@ -142,30 +178,11 @@ class _UserAddressState extends State<UserAddress> {
                 const SizedBox(
                   height: 15,
                 ),
-                // TextFormField(
-                //   controller: countrycontroller,
-                //   keyboardType: TextInputType.name,
-                //   validator: (value) {
-                //     if (value!.isEmpty) {
-                //       return 'Please Enter correct country';
-                //     }
-                //     return null;
-                //   },
-                //   decoration: const InputDecoration(
-                //     icon: Icon(Icons.location_city),
-                //     border: OutlineInputBorder(),
-                //     labelText: 'Country',
-                //   ),
-                // ),
-                const SizedBox(
-                  height: 15,
-                ),
                 TextFormField(
                   keyboardType: TextInputType.phone,
                   controller: pincodecontroller,
                   validator: (value) {
-                    RegExp regex = RegExp(
-                        r'^.{6}[0-9 \\( | \\) | \\. | \\, | \\+ | \\- | \\; | ||)]$');
+                    RegExp regex = RegExp(r'^.{6}[0-9)]$');
                     if (value!.isEmpty) {
                       return 'Please enter correct pin';
                     }
@@ -180,20 +197,63 @@ class _UserAddressState extends State<UserAddress> {
                     labelText: 'Pincode',
                   ),
                 ),
+                const SizedBox(height: 15),
+                TextFormField(
+                  validator: (value) {
+                    RegExp regex = RegExp(r'^.{10}$');
+                    if (value!.isEmpty) {
+                      return ("Please enter Phone Number");
+                    }
+                    if (!regex.hasMatch(value) && value.length != 10) {
+                      return ("Enter 10 Digit Mobile Number");
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    phonenumbercontroller.text = value!;
+                  },
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
+                  controller: phonenumbercontroller,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.phone),
+                    border: OutlineInputBorder(),
+                    labelText: 'Phone Number',
+                  ),
+                ),
+                const SizedBox(height: 15),
+                TextField(
+                  textInputAction: TextInputAction.next,
+                  controller: addresstypecontroller,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.location_searching),
+                    border: OutlineInputBorder(),
+                    labelText: 'Address Type',
+                  ),
+                ),
+                const SizedBox(height: 15),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState != null &&
                           _formKey.currentState!.validate()) {
-                        Address newAddress = Address(
-                          addressId: const Uuid().v1(),
-                          addressLine1: addressline1namecontroller?.text,
-                          addressLine2: addressline2namecontroller.text,
-                          city: citycontroller.text,
-                          pincode: int.tryParse(pincodecontroller.text),
-                          state: statecontroller.text,
+                        AppUser _appUser = AppUser(
+                          address: [
+                            Address(
+                              patientName: fullnamecontroller.text,
+                              addressType: addresstypecontroller.text,
+                              phoneNumber:
+                                  int.tryParse(phonenumbercontroller.text),
+                              addressId: const Uuid().v1(),
+                              addressLine1: addressline1namecontroller?.text,
+                              addressLine2: addressline2namecontroller.text,
+                              city: citycontroller.text,
+                              pincode: int.tryParse(pincodecontroller.text),
+                              state: statecontroller.text,
+                            )
+                          ],
                         );
-                        print(newAddress);
+                        // userAPI().newAddress(_appUser);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -210,15 +270,15 @@ class _UserAddressState extends State<UserAddress> {
                                 content: Text('error')));
                       }
 
-                      // Navigator.push(context, MaterialPageRoute(
-                      //   builder: (context) {
-                      //     return const DashBoard();
-                      //   },
-                      // ));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const DashBoard();
+                        },
+                      ));
                     },
                     child: Text(
                       widget.buttonText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),

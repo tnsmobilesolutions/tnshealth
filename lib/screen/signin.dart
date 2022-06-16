@@ -87,28 +87,32 @@ class _SignInState extends State<SignIn> {
       borderRadius: BorderRadius.circular(18),
       child: MaterialButton(
         onPressed: () async {
-          if (_formkey.currentState!.validate()) {
-            _loggedInUser = await userAPI().signIn(
-                emailController.text.trim(), passswordController.text.trim());
+          try {
+            if (_formkey.currentState!.validate()) {
+              _loggedInUser = await userAPI().signIn(
+                  emailController.text.trim(), passswordController.text.trim());
 
-            if (_loggedInUser != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DashBoard(),
-                ),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  elevation: 6,
-                  behavior: SnackBarBehavior.floating,
-                  content: Text(
-                    'Please check your Email/Password',
+              if (_loggedInUser != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashBoard(),
                   ),
-                ),
-              );
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    elevation: 6,
+                    behavior: SnackBarBehavior.floating,
+                    content: Text(
+                      'Please check your Email/Password',
+                    ),
+                  ),
+                );
+              }
             }
+          } catch (e) {
+            print(e);
           }
         },
         child: const Text(

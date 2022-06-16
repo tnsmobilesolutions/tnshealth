@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:healthshared/models/address_model.dart';
+
+import 'package:tnshealth/API/userAPI.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
+import 'package:tnshealth/screen/Profile/userAddress.dart';
 
 class EditProfile extends StatefulWidget {
   EditProfile({Key? key, this.currentuser}) : super(key: key);
@@ -11,42 +15,48 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  final nameController = TextEditingController();
-  final mobileController = TextEditingController();
-  final emailController = TextEditingController();
-  final genderController = TextEditingController();
+  final fullnamecontroller = TextEditingController();
+  final phonenumbercontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final gendercontroller = TextEditingController();
   final addressController = TextEditingController();
-  final bloodGroupController = TextEditingController();
-  final heightController = TextEditingController();
-  final weightController = TextEditingController();
+  final bloodgroupcontroller = TextEditingController();
+  final heightcontroller = TextEditingController();
+  final weightcontroller = TextEditingController();
+  final countrycontroller = TextEditingController();
+  List<Address?>? address;
 
   @override
   void initState() {
     super.initState();
     setState(
       () {
-        nameController.text =
-            widget.currentuser != null ? widget.currentuser!.name ?? '' : '';
-        mobileController.text = widget.currentuser != null
+        fullnamecontroller.text =
+            widget.currentuser != null ? widget.currentuser?.name ?? '' : '';
+        phonenumbercontroller.text = widget.currentuser != null
             ? widget.currentuser!.phoneNumber ?? ''
             : '';
-        emailController.text =
+        emailcontroller.text =
             widget.currentuser != null ? widget.currentuser!.email ?? '' : '';
-        bloodGroupController.text = widget.currentuser != null
+        bloodgroupcontroller.text = widget.currentuser != null
             ? widget.currentuser!.bloodGroup ?? ''
             : '';
-        genderController.text =
+        gendercontroller.text =
             widget.currentuser != null ? widget.currentuser!.gender ?? '' : '';
-        heightController.text =
+        heightcontroller.text =
             widget.currentuser != null ? widget.currentuser!.height ?? '' : '';
-        weightController.text =
+        weightcontroller.text =
             widget.currentuser != null ? widget.currentuser!.weight ?? '' : '';
+        countrycontroller.text =
+            widget.currentuser != null ? widget.currentuser!.country ?? '' : '';
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    address = widget.currentuser?.address;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Profile'),
@@ -60,222 +70,292 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: nameController,
-                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  controller: fullnamecontroller,
+                  decoration: InputDecoration(
+                      icon: const Icon(Icons.person),
+                      contentPadding: const EdgeInsets.all(15),
+                      hintText: 'Name',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Name';
+                    RegExp regex = RegExp(r'^.{3,}[a-z A-Z]$');
+                    if (value == null || value.isEmpty) {
+                      return (" Name cannot be Empty");
+                    }
+                    if (!regex.hasMatch(value) && value.length < 3) {
+                      return ("Enter Valid name(Min. 3 Character)");
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Name',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
+                  onSaved: (value) {
+                    value = fullnamecontroller.text;
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  validator: (value) {
+                    RegExp regex = RegExp(r'^.{10}$');
+                    if (value!.isEmpty) {
+                      return ("Please enter Phone Number");
+                    }
+                    if (!regex.hasMatch(value) && value.length != 10) {
+                      return ("Enter 10 Digit Mobile Number");
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    phonenumbercontroller.text = value!;
+                  },
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
+                  controller: phonenumbercontroller,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.phone),
+                    border: OutlineInputBorder(),
+                    labelText: 'Phone Number',
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: mobileController,
-                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Your Mobile No.';
+                    if (value == null || value.isEmpty) {
+                      return ("Please Enter Your Email");
+                    }
+                    // reg expression for email validation
+                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                        .hasMatch(value)) {
+                      return ("Please Enter a valid email");
                     }
                     return null;
                   },
+                  onSaved: (value) {
+                    emailcontroller.text = value!;
+                  },
+                  controller: emailcontroller,
                   decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
+                      icon: const Icon(Icons.email),
+                      contentPadding: const EdgeInsets.all(15),
+                      hintText: 'Email Id',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  // keyboardType: TextInputType.none,
+                  autofocus: false,
+                  controller: bloodgroupcontroller,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your bloodgroup';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    bloodgroupcontroller.text = value!;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.bloodtype),
+                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    hintText: "BloodGroup",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Mobile Number',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.name,
+                  // keyboardType: TextInputType.none,
+                  autofocus: false,
+                  controller: gendercontroller,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Your Email';
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter gender';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Email-Id',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // TextFormField(
-                //   controller: addressController,
-                //   keyboardType: TextInputType.name,
-                //   validator: (value) {
-                //     if (value!.isEmpty) {
-                //       return 'Please Enter Address';
-                //     }
-                //     return null;
-                //   },
-                //   decoration: InputDecoration(
-                //     focusedBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(15.0),
-                //       borderSide: const BorderSide(
-                //         color: Colors.orangeAccent,
-                //       ),
-                //     ),
-                //     enabledBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(15),
-                //       borderSide: const BorderSide(color: Colors.amber),
-                //     ),
-                //     contentPadding: const EdgeInsets.all(15),
-                //     labelText: ' Enter Your Address',
-                //     labelStyle:
-                //         const TextStyle(fontSize: 15.0, color: Colors.black),
-                //   ),
-                // ),
-                TextFormField(
-                  controller: bloodGroupController,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter bloodGroup';
-                    }
-                    return null;
+                  onSaved: (value) {
+                    gendercontroller.text = value!;
                   },
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
+                    icon: const Icon(Icons.male),
+                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    hintText: "Gender",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'BloodGroup',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: genderController,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
+                  autofocus: false,
+                  controller: heightcontroller,
+                  onSaved: (value) {
+                    heightcontroller.text = value!;
+                  },
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Choose Your Gender';
+                    RegExp regex = RegExp(r'^[0-9,]$');
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your height';
+                    }
+                    if (!regex.hasMatch(value) && value.length < 3) {
+                      return ("Enter Valid name(Min. 3 Character)");
                     }
                     return null;
                   },
                   decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
+                    icon: const Icon(Icons.height),
+                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    hintText: "Height",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Gender',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: heightController,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
+                  autofocus: false,
+                  controller: weightcontroller,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter your Height in Cm';
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your weight';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Height',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: weightController,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Enter Your Weight in Kg';
-                    }
-                    return null;
+                  onSaved: (value) {
+                    weightcontroller.text = value!;
                   },
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
+                    icon: const Icon(Icons.monitor_weight),
+                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    hintText: "Weight",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.amber),
-                    ),
-                    contentPadding: const EdgeInsets.all(15),
-                    labelText: 'Weight',
-                    labelStyle:
-                        const TextStyle(fontSize: 15.0, color: Colors.black),
                   ),
                 ),
                 const SizedBox(height: 40),
+                TextFormField(
+                  controller: countrycontroller,
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter correct country';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.location_city),
+                    border: OutlineInputBorder(),
+                    labelText: 'Country',
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Card(
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(address != null
+                                ? 'Name : ${address![0]?.patientName}'
+                                : ''),
+                            Text(address != null
+                                ? 'phone Number : ${address![0]?.phoneNumber}'
+                                : ''),
+                            Text(address != null
+                                ? 'City : ${address![0]?.city}'
+                                : ''),
+                            Text(address != null
+                                ? 'State : ${address![0]?.state}'
+                                : ''),
+                            Text(address != null
+                                ? 'Pincode : ${address![0]?.pincode}'
+                                : ''),
+                            Text(address != null
+                                ? 'Address Type : ${address![0]?.addressType}'
+                                : ''),
+                            Text(address != null
+                                ? 'Address ID : ${address![0]?.addressId}'
+                                : ''),
+                            Text(address != null
+                                ? 'Address : ${address![0]?.addressLine1},'
+                                    '${address![0]?.addressLine2}'
+                                : ''),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return UserAddress(
+                                          title: 'Edit Address',
+                                          buttonText: 'Update',
+                                          userAddress: address,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: const Text('Edit')),
+                            ElevatedButton(
+                                onPressed: () {}, child: const Text('Remove'))
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppUser _appUser = AppUser(
+                      name: fullnamecontroller.text.trim(),
+                      email: emailcontroller.text.trim(),
+                      country: countrycontroller.text,
+                      phoneNumber: phonenumbercontroller.text.trim(),
+                      bloodGroup: bloodgroupcontroller.text,
+                      gender: gendercontroller.text,
+                      height: heightcontroller.text,
+                      weight: weightcontroller.text,
+                    );
+
+                    userAPI().updateUserData(_appUser);
+
+                    if (_appUser != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Theme.of(context).iconTheme.color,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text('Updated User data successfully'),
+                        ),
+                      );
+                      Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Theme.of(context).iconTheme.color,
+                          behavior: SnackBarBehavior.floating,
+                          content: const Text('No Change'),
+                        ),
+                      );
+                    }
+                  },
                   child: const Text(
                     'Update',
                     style: TextStyle(fontSize: 20),

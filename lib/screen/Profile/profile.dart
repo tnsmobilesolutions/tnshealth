@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
+import 'package:tnshealth/model/usermodel.dart';
 
 import 'package:tnshealth/screen/Profile/editprofile.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
@@ -26,6 +27,7 @@ class _ProfileState extends State<Profile> {
   String? weight;
   String? bloodGroup;
   String? country;
+  AppUser? names;
 
   @override
   void initState() {
@@ -38,17 +40,18 @@ class _ProfileState extends State<Profile> {
       final User? user = FirebaseAuth.instance.currentUser;
       final uid = user?.uid;
       FirestoreData firestore = FirestoreData(uid: uid);
-      final names = await firestore.getCurrentUserData();
+      names = await firestore.getCurrentUserData();
       if (names != null) {
-        name = names.name;
-        email = names.email;
-        height = names.height;
-        weight = names.weight;
-        gender = names.gender;
-        bloodGroup = names.bloodGroup;
-        country = names.country;
-        address = names.address?.cast<Address?>();
-        phoneNumber = names.phoneNumber;
+        name = names?.name;
+        email = names?.email;
+        height = names?.height;
+        weight = names?.weight;
+        gender = names?.gender;
+        bloodGroup = names?.bloodGroup;
+        country = names?.country;
+        address = names?.address?.cast<Address?>();
+        phoneNumber = names?.phoneNumber;
+        country = names?.country;
       } else {}
     }
 
@@ -66,7 +69,7 @@ class _ProfileState extends State<Profile> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return EditProfile();
+                    return EditProfile(currentuser: names);
                   },
                 ),
               );
@@ -82,7 +85,7 @@ class _ProfileState extends State<Profile> {
               return Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //const Divider(color: Colors.black, thickness: 2.0),
@@ -139,30 +142,6 @@ class _ProfileState extends State<Profile> {
                                     : ''),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return UserAddress(
-                                              userAddress: address,
-                                              title: 'Edit Address',
-                                              buttonText: 'Edit',
-                                            );
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    child: const Text('Edit')),
-                                ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('Remove'))
-                              ],
-                            )
                           ],
                         ),
                       ),
@@ -183,8 +162,8 @@ class _ProfileState extends State<Profile> {
             MaterialPageRoute(
               builder: (context) {
                 return UserAddress(
-                  title: 'Add New Address',
                   buttonText: 'Add',
+                  title: 'Add New Address',
                 );
               },
             ),

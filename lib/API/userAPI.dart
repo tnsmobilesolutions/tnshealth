@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthshared/healthshared.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
 
@@ -208,5 +209,49 @@ class userAPI {
     }
     print('===$userID===');
     return userID;
+  }
+
+  // // add  new address
+
+  // Future<AppUser?> newAddress(AppUser _appUser) async {
+  //   var userCollection = FirebaseFirestore.instance.collection('users');
+
+  //   // String? docId = await getUserID();
+  //   final _address = _appUser.address?[0];
+  //   dynamic newaddress = userCollection.add({
+  //     'address': [
+  //       {
+  //         'patientName': _address?.patientName,
+  //         'addressId': _address?.addressId,
+  //         'addressLine1': _address?.addressLine1,
+  //         'addressLine2': _address?.addressLine2,
+  //         'city': _address?.city,
+  //         'addressType': _address?.addressType,
+  //         'phoneNumber': _address?.phoneNumber,
+  //         'pincode': _address?.pincode,
+  //         'state': _address?.state
+  //       }
+  //     ]
+  //   }).asStream();
+  //   return null;
+  // }
+
+  // update adress
+
+  Future<AppUser?> updateUserData(AppUser _appUser) async {
+    var collection = FirebaseFirestore.instance.collection('users');
+    String? docId = await getUserID();
+    collection
+        .doc(docId) // <-- Doc ID where data should be updated.
+        .update(_appUser.toMap());
+    return null;
+  }
+
+  //delete only address array
+  Future<AppUser?> deleteAddress(Address _address) async {
+    var collection = FirebaseFirestore.instance.collection('users');
+    String? docId = await getUserID();
+    collection.doc(docId).delete();
+    return null;
   }
 }

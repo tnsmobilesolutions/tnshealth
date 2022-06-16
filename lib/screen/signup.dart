@@ -237,7 +237,7 @@ class _SignupPageState extends State<SignupPage> {
                   decoration: const InputDecoration(
                     icon: Icon(Icons.location_on),
                     border: OutlineInputBorder(),
-                    labelText: 'Adress Line 2',
+                    labelText: 'Address Line 2',
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -352,33 +352,6 @@ class _SignupPageState extends State<SignupPage> {
                     labelText: 'Phone Number',
                   ),
                 ),
-                // IntlPhoneField(
-                //   textInputAction: TextInputAction.next,
-                //   validator: (value) {
-                //     RegExp regex = RegExp(r'^.{10,}$');
-                //     if (value!.isEmpty) {
-                //       return ("phone number cannot be Empty");
-                //     }
-                //     if (!regex.hasMatch(value)) {
-                //       return ("Enter Valid name(Min. 10 Character)");
-                //     }
-                //     return null;
-                //   },
-                //   onSaved: (value) {
-                //     phonenumbercontroller.text = value!.toString();
-                //   },
-                //   controller: phonenumbercontroller,
-                //   decoration: const InputDecoration(
-                //     labelText: 'Phone Number',
-                //     border: OutlineInputBorder(
-                //       borderSide: BorderSide(),
-                //     ),
-                //   ),
-                //   initialCountryCode: 'IN',
-                //   onChanged: (phone) {
-                //     // print(phone.completeNumber);
-                //   },
-                // ),
                 const SizedBox(height: 20),
                 TextFormField(
                   autofocus: false,
