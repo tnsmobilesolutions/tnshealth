@@ -182,7 +182,7 @@ class _UserAddressState extends State<UserAddress> {
                   keyboardType: TextInputType.phone,
                   controller: pincodecontroller,
                   validator: (value) {
-                    RegExp regex = RegExp(r'^.{6}[0-9)]$');
+                    RegExp regex = RegExp(r'^.{6}[0-9]$');
                     if (value!.isEmpty) {
                       return 'Please enter correct pin';
                     }
