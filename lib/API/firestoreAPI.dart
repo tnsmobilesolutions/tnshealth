@@ -69,7 +69,7 @@ class FirestoreData {
 
   Future<AppUser?> getCurrentUserData() async {
     String? userID = await userAPI().getUserID();
-    List<Address?>? address;
+    Address? address;
     AppUser? _appUser;
     try {
       DocumentSnapshot ds = await userCollection.doc(userID).get();
@@ -109,7 +109,7 @@ class FirestoreData {
   }
 
   createNewOrder(Order orderModel) {
-    final _address = orderModel.address?[0];
+    final _address = orderModel.address;
     FirebaseFirestore.instance
         .collection('orders')
         .doc(orderModel.orderId)

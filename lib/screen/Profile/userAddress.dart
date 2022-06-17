@@ -4,7 +4,6 @@ import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
-import 'package:tnshealth/screen/Profile/profile.dart';
 import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
@@ -253,14 +252,16 @@ class _UserAddressState extends State<UserAddress> {
                             )
                           ],
                         );
-                        // userAPI().newAddress(_appUser);
+                        widget.buttonText == 'Add'
+                            ? userAPI().newAddress(_appUser)
+                            : userAPI().updateUserData(_appUser);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 backgroundColor: Colors.red,
                                 elevation: 6,
                                 behavior: SnackBarBehavior.floating,
-                                content: Text('Order add')));
+                                content: Text('Address updated successfully')));
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

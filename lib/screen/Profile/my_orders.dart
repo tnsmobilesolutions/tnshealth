@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthshared/models/address_model.dart';
 import 'package:healthshared/models/order_model.dart';
 
 import 'order_details.dart';
@@ -12,50 +11,7 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-  List<Order> orderDetails = [
-    Order(
-        orderId: '123',
-        deliveryDate: '26/05/2022',
-        deliveryTime: '05.00 PM',
-        orderDate: '25/05/2022',
-        orderTime: '08.00 PM',
-        userId: 'abc',
-        vendorId: 'ABCD',
-        prescriptionURL: 'abababab',
-        address: [
-          Address(
-            addressId: '456',
-            addressLine1: 'Plot - 626 / 979',
-            addressLine2: 'AT - Naharkanta, PO - Balianta, PS - Hanshpal',
-            addressType: 'Home',
-            city: 'Bhubaneswar',
-            phoneNumber: 7008183804,
-            pincode: 752101,
-            state: 'Odisha',
-          ),
-        ]),
-    Order(
-        orderId: '456',
-        deliveryDate: '26/05/2022',
-        deliveryTime: '05.00 PM',
-        orderDate: '25/05/2022',
-        orderTime: '08.00 PM',
-        userId: 'abc',
-        vendorId: 'ABCD',
-        prescriptionURL: 'abababab',
-        address: [
-          Address(
-            addressId: '456',
-            addressLine1: 'Plot - 626 / 979',
-            addressLine2: 'AT - Naharkanta, PO - Balianta, PS - Hanshpal',
-            addressType: 'Home',
-            city: 'Bhubaneswar',
-            phoneNumber: 7008183804,
-            pincode: 752101,
-            state: 'Odisha',
-          ),
-        ]),
-  ];
+  List<Order> orderDetails = [];
 
   @override
   Widget build(BuildContext context) {

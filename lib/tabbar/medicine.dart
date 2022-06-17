@@ -140,7 +140,7 @@ class _MedicineState extends State<Medicine> {
                       const SizedBox(height: 10),
 
                       const SizedBox(height: 10),
-                      Container(
+                      SizedBox(
                         height: 230,
                         width: 600,
                         child: Padding(
@@ -265,18 +265,17 @@ class _MedicineState extends State<Medicine> {
                           // if (_formKey.currentState != null &&
                           //     _formKey.currentState!.validate()) {
                           Order orderModel = Order(
-                            name: name,
-                            deliveryDate: currentDate,
-                            deliveryTime: DateFormat("hh:mm:ss a").format(
-                                DateTime.now().add(const Duration(hours: 1))),
-                            orderDate: currentDate,
-                            orderTime: currentTime,
-                            orderId: const Uuid().v1(),
-                            prescriptionURL: prescriptionURL,
-                            userId: uid,
-                            vendorId: vendorID,
-                            address: [
-                              Address(
+                              name: name,
+                              deliveryDate: currentDate,
+                              deliveryTime: DateFormat("hh:mm:ss a").format(
+                                  DateTime.now().add(const Duration(hours: 1))),
+                              orderDate: currentDate,
+                              orderTime: currentTime,
+                              orderId: const Uuid().v1(),
+                              prescriptionURL: prescriptionURL,
+                              userId: uid,
+                              vendorId: vendorID,
+                              address: Address(
                                 patientName: address?[0]?.patientName,
                                 addressId: address?[0]?.addressId,
                                 addressLine1: address?[0]?.addressLine1,
@@ -286,9 +285,7 @@ class _MedicineState extends State<Medicine> {
                                 state: address?[0]?.state,
                                 pincode: address?[0]?.pincode,
                                 phoneNumber: address?[0]?.phoneNumber,
-                              )
-                            ],
-                          );
+                              ));
                           FirestoreData().createNewOrder(orderModel);
                           // } else {
                           //   print(
