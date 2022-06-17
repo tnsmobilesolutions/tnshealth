@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthshared/healthshared.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
+import 'package:tnshealth/screen/Profile/userAddress.dart';
 
 import 'firestoreAPI.dart';
 
@@ -170,19 +171,9 @@ class userAPI {
     if (names != null) {
       //name = names[0];
     } else {}
-    // return name;
   }
 
-  Future<String?> getDocumentID() async {
-    String? documentID;
-    var collection = FirebaseFirestore.instance.collection('orders');
-    var querySnapshots = await collection.get();
-    for (var snapshot in querySnapshots.docs) {
-      documentID = snapshot.id; // <-- Document ID
-    }
-    return documentID;
-  }
-
+//vendorId
   Future<String?> getVendorID() async {
     String? vendorID;
     var vendorCollection = FirebaseFirestore.instance.collection('vendors');
@@ -196,6 +187,7 @@ class userAPI {
     return vendorID;
   }
 
+// userId
   Future<String?> getUserID() async {
     String? userID;
     final User? user = FirebaseAuth.instance.currentUser;
@@ -211,29 +203,27 @@ class userAPI {
     return userID;
   }
 
-  // // add  new address
-
-  Future<AppUser?> newAddress(AppUser _appUser) async {
-    var userCollection = FirebaseFirestore.instance.collection('users');
-
+  // add  new address
+  Future<AppUser?> addNewAddress(Address address) async {
     String? docId = await getUserID();
-    final _address = _appUser.address?[0];
-    print(docId);
-    dynamic newaddress = userCollection.add({
-      'address': [
-        {
-          'patientName': _address?.patientName,
-          'addressId': _address?.addressId,
-          'addressLine1': _address?.addressLine1,
-          'addressLine2': _address?.addressLine2,
-          'city': _address?.city,
-          'addressType': _address?.addressType,
-          'phoneNumber': _address?.phoneNumber,
-          'pincode': _address?.pincode,
-          'state': _address?.state
-        }
-      ]
-    }).asStream();
+    var collection = FirebaseFirestore.instance.collection('users').doc(docId);
+    // Remove the 'capital' field from the document
+    Address _address = address;
+    final data = {
+      'patientName': _address.patientName,
+      'addressId': _address.addressId,
+      'addressLine1': _address.addressLine1,
+      'addressLine2': _address.addressLine2,
+      'city': _address.city,
+      'addressType': _address.addressType,
+      'phoneNumber': _address.phoneNumber,
+      'pincode': _address.pincode,
+      'state': _address.state
+    };
+    final updates = <String, dynamic>{
+      "address": FieldValue.arrayUnion([data]),
+    };
+    collection.update(updates);
     return null;
   }
 
@@ -248,10 +238,14 @@ class userAPI {
   }
 
   //delete only address array
-  Future<AppUser?> deleteAddress(Address _address) async {
-    var collection = FirebaseFirestore.instance.collection('users');
+  Future<AppUser?> deleteAddress() async {
     String? docId = await getUserID();
-    collection.doc(docId).delete();
+    var collection = FirebaseFirestore.instance.collection('users').doc(docId);
+    // Remove the 'capital' field from the document
+    final updates = <String, dynamic>{
+      "address": FieldValue.delete(),
+    };
+    collection.update(updates);
     return null;
   }
 }

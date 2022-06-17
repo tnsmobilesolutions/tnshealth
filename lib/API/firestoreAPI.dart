@@ -73,23 +73,9 @@ class FirestoreData {
     AppUser? _appUser;
     try {
       DocumentSnapshot ds = await userCollection.doc(userID).get();
-      // print(currentUser);
-
       final userdata = ds.data() as Map<String, dynamic>;
       _appUser = AppUser.fromMap(userdata);
 
-      // AppUser(
-      //   name: ds.get('name'),
-      //   email: ds.get('Email'),
-      //   phonenumber: ds.get('PhoneNumber'),
-      //   bloodgroup: ds.get('BloodGroup'),
-      //   gender: ds.get('Gender'),
-      //   height: ds.get('Height'),
-      //   uid: ds.get('uid'),
-      //   userID: ds.get('userId'),
-      //   weight: ds.get('Weight'),
-      //   address: ds.get('Address'),
-      // );
       print(_appUser);
       return _appUser;
     } catch (e) {

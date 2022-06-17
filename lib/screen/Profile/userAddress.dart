@@ -236,25 +236,20 @@ class _UserAddressState extends State<UserAddress> {
                     onPressed: () {
                       if (_formKey.currentState != null &&
                           _formKey.currentState!.validate()) {
-                        AppUser _appUser = AppUser(
-                          address: [
-                            Address(
-                              patientName: fullnamecontroller.text,
-                              addressType: addresstypecontroller.text,
-                              phoneNumber:
-                                  int.tryParse(phonenumbercontroller.text),
-                              addressId: const Uuid().v1(),
-                              addressLine1: addressline1namecontroller?.text,
-                              addressLine2: addressline2namecontroller.text,
-                              city: citycontroller.text,
-                              pincode: int.tryParse(pincodecontroller.text),
-                              state: statecontroller.text,
-                            )
-                          ],
+                        Address address = Address(
+                          patientName: fullnamecontroller.text,
+                          addressType: addresstypecontroller.text,
+                          phoneNumber: int.tryParse(phonenumbercontroller.text),
+                          addressId: const Uuid().v1(),
+                          addressLine1: addressline1namecontroller?.text,
+                          addressLine2: addressline2namecontroller.text,
+                          city: citycontroller.text,
+                          pincode: int.tryParse(pincodecontroller.text),
+                          state: statecontroller.text,
                         );
-                        widget.buttonText == 'Add'
-                            ? userAPI().newAddress(_appUser)
-                            : userAPI().updateUserData(_appUser);
+                        // widget.buttonText == 'Add'
+                        userAPI().addNewAddress(address);
+                        // : userAPI().updateUserData(address);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

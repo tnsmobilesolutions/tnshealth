@@ -358,7 +358,7 @@ class _SignupPageState extends State<SignupPage> {
                   controller: passwordcontroller,
                   obscureText: true,
                   validator: (value) {
-                    RegExp regex = RegExp(r'^.{6,}[a-z A-Z 0-9]$');
+                    RegExp regex = RegExp(r'^.{6,}$');
                     if (value!.isEmpty) {
                       return ("Password is required for login");
                     }

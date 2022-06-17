@@ -314,7 +314,10 @@ class _EditProfileState extends State<EditProfile> {
                                 },
                                 child: const Text('Edit')),
                             ElevatedButton(
-                                onPressed: () {}, child: const Text('Remove'))
+                                onPressed: () {
+                                  userAPI().deleteAddress();
+                                },
+                                child: const Text('Remove'))
                           ],
                         )
                       ],

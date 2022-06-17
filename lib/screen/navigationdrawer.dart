@@ -88,7 +88,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       },
                     ),
                   );
-                  print(await userAPI().getDocumentID());
+                  print(await userAPI().getUserID());
                 },
               ),
               ListTile(
