@@ -32,7 +32,7 @@ class Tnshealth extends StatelessWidget {
             image: AssetImage('images/logo.png'),
           ),
           splashIconSize: 200,
-          splashTransition: SplashTransition.rotationTransition,
+          splashTransition: SplashTransition.scaleTransition,
           nextScreen: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
@@ -56,7 +56,7 @@ class Tnshealth extends StatelessWidget {
                   );
                 }
               } else {
-                return SignIn();
+                return const SignIn();
               }
             },
           ),
