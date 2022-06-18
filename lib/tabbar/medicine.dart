@@ -75,13 +75,13 @@ class _MedicineState extends State<Medicine> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Order Date : $currentDate'),
-                      const SizedBox(height: 20),
+                      // Text('Order Date : $currentDate'),
+                      // const SizedBox(height: 20),
 
-                      Text('Order Time : $currentTime'),
-                      const SizedBox(height: 20),
+                      // Text('Order Time : $currentTime'),
+                      // const SizedBox(height: 20),
 
-                      Text('$name '),
+                      // Text('$name '),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
