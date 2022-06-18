@@ -227,7 +227,7 @@ class userAPI {
     return null;
   }
 
-  // update adress
+// update userData
   Future<AppUser?> updateUserData(AppUser _appUser) async {
     var collection = FirebaseFirestore.instance.collection('users');
     String? docId = await getUserID();

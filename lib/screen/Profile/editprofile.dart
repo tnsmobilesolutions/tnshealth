@@ -258,69 +258,86 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                Card(
-                  elevation: 5,
+                SizedBox(
+                  height: 260,
+                  width: 500,
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(address != null
-                                ? 'Name : ${address![0]?.patientName}'
-                                : ''),
-                            Text(address != null
-                                ? 'phone Number : ${address![0]?.phoneNumber}'
-                                : ''),
-                            Text(address != null
-                                ? 'City : ${address![0]?.city}'
-                                : ''),
-                            Text(address != null
-                                ? 'State : ${address![0]?.state}'
-                                : ''),
-                            Text(address != null
-                                ? 'Pincode : ${address![0]?.pincode}'
-                                : ''),
-                            Text(address != null
-                                ? 'Address Type : ${address![0]?.addressType}'
-                                : ''),
-                            Text(address != null
-                                ? 'Address ID : ${address![0]?.addressId}'
-                                : ''),
-                            Text(address != null
-                                ? 'Address : ${address![0]?.addressLine1},'
-                                    '${address![0]?.addressLine2}'
-                                : ''),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return UserAddress(
-                                          title: 'Edit Address',
-                                          buttonText: 'Update',
-                                          userAddress: address,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: const Text('Edit')),
-                            ElevatedButton(
-                                onPressed: () {
-                                  userAPI().deleteAddress();
-                                },
-                                child: const Text('Remove'))
-                          ],
-                        )
-                      ],
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: address?.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          child: Card(
+                            elevation: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(address != null
+                                          ? 'Name : ${address![index]?.patientName}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'phone Number : ${address![index]?.phoneNumber}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'City : ${address![index]?.city}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'State : ${address![index]?.state}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'Pincode : ${address![index]?.pincode}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'Address Type : ${address![index]?.addressType}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'Address ID : ${address![index]?.addressId}'
+                                          : ''),
+                                      Text(address != null
+                                          ? 'Address : ${address![index]?.addressLine1},'
+                                              '${address![index]?.addressLine2}'
+                                          : ''),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return UserAddress(
+                                                    title: 'Edit Address',
+                                                    buttonText: 'Update',
+                                                    userAddress: address,
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          child: const Text('Edit')),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            userAPI().deleteAddress();
+                                          },
+                                          child: const Text('Remove'))
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),

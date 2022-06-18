@@ -247,9 +247,10 @@ class _UserAddressState extends State<UserAddress> {
                           pincode: int.tryParse(pincodecontroller.text),
                           state: statecontroller.text,
                         );
+
                         // widget.buttonText == 'Add'
                         userAPI().addNewAddress(address);
-                        // : userAPI().updateUserData(address);
+                        // : userAPI().updateAddressData(address);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
