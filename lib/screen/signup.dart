@@ -441,7 +441,7 @@ class _SignupPageState extends State<SignupPage> {
                           weight: weightcontroller.text,
                         );
 
-                        userAPI()
+                        UserAPI()
                             .signUp(_appUser, passwordcontroller.text.trim());
                         if (_appUser != null) {
                           ScaffoldMessenger.of(context).showSnackBar(

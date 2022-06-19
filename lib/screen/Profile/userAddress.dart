@@ -249,7 +249,7 @@ class _UserAddressState extends State<UserAddress> {
                         );
 
                         // widget.buttonText == 'Add'
-                        userAPI().addNewAddress(address);
+                        UserAPI().addNewAddress(address);
                         // : userAPI().updateAddressData(address);
 
                         ScaffoldMessenger.of(context).showSnackBar(

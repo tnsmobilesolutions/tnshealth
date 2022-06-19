@@ -43,7 +43,7 @@ class Tnshealth extends StatelessWidget {
                   return const SignIn();
                 } else {
                   return FutureBuilder<AppUser?>(
-                    future: userAPI().getAppUserFromUid(user.uid),
+                    future: UserAPI().getAppUserFromUid(user.uid),
                     builder: (_, snap) {
                       if (snap.hasData) {
                         return const DashBoard();

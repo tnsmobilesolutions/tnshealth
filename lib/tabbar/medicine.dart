@@ -258,7 +258,7 @@ class _MedicineState extends State<Medicine> {
                           child: FloatingActionButton.extended(
                         heroTag: 'btn2',
                         onPressed: () async {
-                          vendorID = await userAPI().getVendorID();
+                          vendorID = await UserAPI().getVendorID();
                           prescriptionURL = await uploadImagetoFirebadseStorage(
                               imageFromUploadButton!);
 

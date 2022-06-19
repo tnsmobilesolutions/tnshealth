@@ -21,6 +21,7 @@ class _SignInState extends State<SignIn> {
   final TextEditingController passswordController = TextEditingController();
   AppUser? _loggedInUser;
 
+  @override
   void initState() {
     super.initState();
   }
@@ -44,6 +45,7 @@ class _SignInState extends State<SignIn> {
         if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
           return ("Please Enter a valid email");
         }
+        return null;
       },
       onSaved: (value) {
         value = emailController.text;
@@ -70,6 +72,7 @@ class _SignInState extends State<SignIn> {
         if (!regex.hasMatch(value)) {
           return "Please Enter Correct Password of 6 digit";
         }
+        return null;
       },
       onSaved: (value) {
         value = passswordController.text;
@@ -89,7 +92,7 @@ class _SignInState extends State<SignIn> {
         onPressed: () async {
           try {
             if (_formkey.currentState!.validate()) {
-              _loggedInUser = await userAPI().signIn(
+              _loggedInUser = await UserAPI().signIn(
                   emailController.text.trim(), passswordController.text.trim());
 
               if (_loggedInUser != null) {

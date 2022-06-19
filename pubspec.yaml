@@ -30,6 +30,8 @@ dependencies:
   uuid: ^3.0.6
   firebase_storage: ^10.2.16
   google_fonts: ^3.0.1
+  full_screen_image_null_safe: ^2.0.0
+  photo_view: ^0.14.0
   
   
   

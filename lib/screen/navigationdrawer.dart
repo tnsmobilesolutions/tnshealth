@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthshared/models/order_model.dart';
+import 'package:tnshealth/API/orderAPI.dart';
 
 import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/screen/Profile/my_orders.dart';
@@ -80,15 +82,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   ],
                 ),
                 onTap: () async {
+                  List<Order>? myOrders = await OrdersAPI().fetchMyOrders();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const MyOrders();
+                        return MyOrders(myAllOrders: myOrders);
                       },
                     ),
                   );
-                  print(await userAPI().getUserID());
                 },
               ),
               ListTile(
@@ -119,7 +121,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   ],
                 ),
                 onTap: () async {
-                  await userAPI().logout();
+                  await UserAPI().logout();
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return const SignIn();

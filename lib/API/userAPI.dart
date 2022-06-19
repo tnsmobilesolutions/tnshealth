@@ -5,11 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthshared/healthshared.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
-import 'package:tnshealth/screen/Profile/userAddress.dart';
 
 import 'firestoreAPI.dart';
 
-class userAPI {
+class UserAPI {
   static AppUser? _loggedInUser;
 
   static AppUser? get loggedInUser {

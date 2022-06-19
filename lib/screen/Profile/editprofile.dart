@@ -327,7 +327,7 @@ class _EditProfileState extends State<EditProfile> {
                                           child: const Text('Edit')),
                                       ElevatedButton(
                                           onPressed: () {
-                                            userAPI().deleteAddress();
+                                            UserAPI().deleteAddress();
                                           },
                                           child: const Text('Remove'))
                                     ],
@@ -355,7 +355,7 @@ class _EditProfileState extends State<EditProfile> {
                       weight: weightcontroller.text,
                     );
 
-                    userAPI().updateUserData(_appUser);
+                    UserAPI().updateUserData(_appUser);
 
                     if (_appUser != null) {
                       ScaffoldMessenger.of(context).showSnackBar(

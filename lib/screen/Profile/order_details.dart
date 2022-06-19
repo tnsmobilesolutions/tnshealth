@@ -1,47 +1,188 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 import 'package:healthshared/models/order_model.dart';
+import 'package:photo_view/photo_view.dart';
 
-import 'package:tnshealth/widget.dart';
-import 'package:uuid/uuid.dart';
+class OrderDetails extends StatefulWidget {
+  OrderDetails({Key? key, this.order}) : super(key: key);
+  Order? order;
+  @override
+  State<OrderDetails> createState() => _OrderDetailsState();
+}
 
-class OrderDetails extends StatelessWidget {
-  const OrderDetails({Key? key, required this.order}) : super(key: key);
-  final Order order;
+class _OrderDetailsState extends State<OrderDetails> {
+  String prescriptionUrl = '';
+  @override
+  void initState() {
+    super.initState();
+    prescriptionUrl = widget.order?.prescriptionURL as String;
+  }
 
   @override
   Widget build(BuildContext context) {
-    var uuid = const Uuid();
-
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Order Details'),
-        ),
-        body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Order Detail'),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(26, 15, 26, 30),
+            padding: EdgeInsets.all(15),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Center(),
-                const SizedBox(height: 16),
-                const Divider(color: Colors.black, thickness: 2.0),
-                const SizedBox(height: 16),
-                Widgets().myOrders('Order Id  :  ', uuid.v1()),
-                const SizedBox(height: 30),
-                Widgets().myOrders('Order Date : ', '${order.orderDate}'),
-                const SizedBox(height: 30),
-                Widgets().myOrders('Order Time  : ', '${order.orderTime}'),
-                const SizedBox(height: 30),
-                Widgets()
-                    .myOrders('Delivery Date  : ', '${order.deliveryDate}'),
-                const SizedBox(height: 30),
-                Widgets()
-                    .myOrders('Delivery Time  :  ', '${order.deliveryTime}'),
-                const SizedBox(height: 30),
-                Widgets().myOrders('Order Address  :  ', '${order.address}'),
-                const SizedBox(height: 16),
-                const Divider(color: Colors.black, thickness: 2.0),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text('Customer Name : '),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '${widget.order?.name}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Order Id : ',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '${widget.order?.orderId}',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Order Date : ',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '${widget.order?.orderDate}',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Order Time : ',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '${widget.order?.orderTime}',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Payment Status : ',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '${widget.order?.paymentStatus}',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Address : ',
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text('Patient Name : '),
+                              Expanded(
+                                child: Text(
+                                  '${widget.order?.address?.patientName}',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                              'Address ID : ${widget.order?.address?.addressId}'),
+                          SizedBox(height: 10),
+                          Text(
+                              'Contact No. : ${widget.order?.address?.phoneNumber}'),
+                          SizedBox(height: 10),
+                          Text(
+                              'Address Type : ${widget.order?.address?.addressType}'),
+                          SizedBox(height: 10),
+                          Text('City : ${widget.order?.address?.city}'),
+                          SizedBox(height: 10),
+                          Text('Sate : ${widget.order?.address?.state}'),
+                          SizedBox(height: 10),
+                          Text('${widget.order?.address?.addressLine1}'),
+                          SizedBox(height: 10),
+                          Text('${widget.order?.address?.addressLine2}'),
+                          SizedBox(height: 10),
+                          Text('Pincode : ${widget.order?.address?.pincode}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                //
+                FullScreenWidget(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.height,
+                    child: PhotoView(
+                      backgroundDecoration: BoxDecoration(
+                          //color: CustomColor.black,
+                          borderRadius: BorderRadius.circular(10)),
+                      imageProvider: NetworkImage(prescriptionUrl),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

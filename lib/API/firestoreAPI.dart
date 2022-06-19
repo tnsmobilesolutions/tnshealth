@@ -68,7 +68,7 @@ class FirestoreData {
   // get Data from FireBase
 
   Future<AppUser?> getCurrentUserData() async {
-    String? userID = await userAPI().getUserID();
+    String? userID = await UserAPI().getUserID();
     Address? address;
     AppUser? _appUser;
     try {
