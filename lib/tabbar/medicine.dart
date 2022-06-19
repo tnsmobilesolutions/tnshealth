@@ -26,8 +26,8 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
-  String? prescriptionURL;
-  XFile? imageFromUploadButton;
+  String prescriptionURL = '';
+  late XFile imageFromUploadButton;
   // final _formKey = GlobalKey<FormState>();
   String? medicineType;
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
@@ -254,7 +254,7 @@ class _MedicineState extends State<Medicine> {
                         onPressed: () async {
                           vendorID = await UserAPI().getVendorID();
                           prescriptionURL = await uploadImagetoFirebadseStorage(
-                              imageFromUploadButton!);
+                              imageFromUploadButton) as String;
 
                           // if (_formKey.currentState != null &&
                           //     _formKey.currentState!.validate()) {
