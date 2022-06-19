@@ -77,92 +77,89 @@ class _ProfileState extends State<Profile> {
           )
         ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: FutureBuilder(
-            future: currentData(),
-            builder: (context, snapshot) {
-              return Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //const Divider(color: Colors.black, thickness: 2.0),
+      body: SingleChildScrollView(
+        child: FutureBuilder(
+          future: currentData(),
+          builder: (context, snapshot) {
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //const Divider(color: Colors.black, thickness: 2.0),
 
-                    //const SizedBox(height: 16),
-                    Text('Name - $name'),
-                    const SizedBox(height: 5),
-                    Text('Email - $email'),
-                    const SizedBox(height: 5),
-                    Text('Height - $height'),
-                    const SizedBox(height: 5),
-                    Text('Weight - $weight'),
-                    const SizedBox(height: 5),
-                    Text('Gender - $gender'),
-                    const SizedBox(height: 5),
-                    Text('BloodGroup - $bloodGroup'),
-                    const SizedBox(height: 5),
-                    Text('Country - $country'),
-                    const SizedBox(height: 10),
-                    //const Divider(color: Colors.black, thickness: 2.0),
-                    SizedBox(
-                      height: 230,
-                      width: 600,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          //scrollDirection: Axis.horizontal,
-                          itemCount: address?.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              child: Card(
-                                elevation: 10,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(address != null
-                                          ? 'Name : ${address![index]?.patientName}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'phone Number : ${address![index]?.phoneNumber}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'City : ${address![index]?.city}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'State : ${address![index]?.state}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Pincode : ${address![index]?.pincode}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Address Type : ${address![index]?.addressType}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Address ID : ${address![index]?.addressId}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Address : ${address![index]?.addressLine1},'
-                                              '${address![index]?.addressLine2}'
-                                          : ''),
-                                    ],
-                                  ),
+                  //const SizedBox(height: 16),
+                  Text('Name - $name'),
+                  const SizedBox(height: 5),
+                  Text('Email - $email'),
+                  const SizedBox(height: 5),
+                  Text('Height - $height'),
+                  const SizedBox(height: 5),
+                  Text('Weight - $weight'),
+                  const SizedBox(height: 5),
+                  Text('Gender - $gender'),
+                  const SizedBox(height: 5),
+                  Text('BloodGroup - $bloodGroup'),
+                  const SizedBox(height: 5),
+                  Text('Country - $country'),
+                  const SizedBox(height: 10),
+                  //const Divider(color: Colors.black, thickness: 2.0),
+                  SizedBox(
+                    height: 230,
+                    width: 600,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: address?.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            child: Card(
+                              elevation: 10,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(address != null
+                                        ? 'Name : ${address![index]?.patientName}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'phone Number : ${address![index]?.phoneNumber}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'City : ${address![index]?.city}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'State : ${address![index]?.state}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'Pincode : ${address![index]?.pincode}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'Address Type : ${address![index]?.addressType}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'Address ID : ${address![index]?.addressId}'
+                                        : ''),
+                                    Text(address != null
+                                        ? 'Address : ${address![index]?.addressLine1},'
+                                            '${address![index]?.addressLine2}'
+                                        : ''),
+                                  ],
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
