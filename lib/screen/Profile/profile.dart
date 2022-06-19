@@ -112,7 +112,7 @@ class _ProfileState extends State<Profile> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
+                          //scrollDirection: Axis.horizontal,
                           itemCount: address?.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(

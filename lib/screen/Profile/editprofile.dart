@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
 
@@ -59,22 +61,22 @@ class _EditProfileState extends State<EditProfile> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: Text('Edit Profile'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15),
+            padding: EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   controller: fullnamecontroller,
                   decoration: InputDecoration(
-                      icon: const Icon(Icons.person),
-                      contentPadding: const EdgeInsets.all(15),
+                      icon: Icon(Icons.person),
+                      contentPadding: EdgeInsets.all(15),
                       hintText: 'Name',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15))),
@@ -92,7 +94,7 @@ class _EditProfileState extends State<EditProfile> {
                     value = fullnamecontroller.text;
                   },
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   validator: (value) {
                     RegExp regex = RegExp(r'^.{10}$');
@@ -110,13 +112,13 @@ class _EditProfileState extends State<EditProfile> {
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
                   controller: phonenumbercontroller,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     icon: Icon(Icons.phone),
                     border: OutlineInputBorder(),
                     labelText: 'Phone Number',
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   validator: (value) {
@@ -135,13 +137,13 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   controller: emailcontroller,
                   decoration: InputDecoration(
-                      icon: const Icon(Icons.email),
-                      contentPadding: const EdgeInsets.all(15),
+                      icon: Icon(Icons.email),
+                      contentPadding: EdgeInsets.all(15),
                       hintText: 'Email Id',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15))),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   // keyboardType: TextInputType.none,
                   autofocus: false,
@@ -157,15 +159,15 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.bloodtype),
-                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    icon: Icon(Icons.bloodtype),
+                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "BloodGroup",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   // keyboardType: TextInputType.none,
                   autofocus: false,
@@ -181,15 +183,15 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.male),
-                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    icon: Icon(Icons.male),
+                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Gender",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: false,
@@ -209,15 +211,15 @@ class _EditProfileState extends State<EditProfile> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.height),
-                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    icon: Icon(Icons.height),
+                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Height",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: false,
@@ -233,15 +235,15 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.monitor_weight),
-                    contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    icon: Icon(Icons.monitor_weight),
+                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Weight",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
                 TextFormField(
                   controller: countrycontroller,
                   keyboardType: TextInputType.name,
@@ -251,18 +253,18 @@ class _EditProfileState extends State<EditProfile> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     icon: Icon(Icons.location_city),
                     border: OutlineInputBorder(),
                     labelText: 'Country',
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 SizedBox(
                   height: 260,
-                  width: 500,
+                  width: 400,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: address?.length,
@@ -271,45 +273,46 @@ class _EditProfileState extends State<EditProfile> {
                           child: Card(
                             elevation: 10,
                             child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(address != null
-                                          ? 'Name : ${address![index]?.patientName}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'phone Number : ${address![index]?.phoneNumber}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'City : ${address![index]?.city}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'State : ${address![index]?.state}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Pincode : ${address![index]?.pincode}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Address Type : ${address![index]?.addressType}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Address ID : ${address![index]?.addressId}'
-                                          : ''),
-                                      Text(address != null
-                                          ? 'Address : ${address![index]?.addressLine1},'
-                                              '${address![index]?.addressLine2}'
-                                          : ''),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      ElevatedButton(
+                              padding: EdgeInsets.all(10),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(address != null
+                                            ? 'Name : ${address![index]?.patientName}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'phone Number : ${address![index]?.phoneNumber}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'City : ${address![index]?.city}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'State : ${address![index]?.state}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'Pincode : ${address![index]?.pincode}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'Address Type : ${address![index]?.addressType}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'Address ID : ${address![index]?.addressId}'
+                                            : ''),
+                                        Text(address != null
+                                            ? 'Address : ${address![index]?.addressLine1},'
+                                                '\n${address![index]?.addressLine2}'
+                                            : ''),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
                                           onPressed: () {
                                             Navigator.push(
                                               context,
@@ -324,15 +327,18 @@ class _EditProfileState extends State<EditProfile> {
                                               ),
                                             );
                                           },
-                                          child: const Text('Edit')),
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            UserAPI().deleteAddress();
-                                          },
-                                          child: const Text('Remove'))
-                                    ],
-                                  ),
-                                ],
+                                          child: Text('Edit'),
+                                        ),
+                                        SizedBox(width: 30),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              UserAPI().deleteAddress();
+                                            },
+                                            child: Text('Remove'))
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -341,7 +347,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 ElevatedButton(
                   onPressed: () {
                     AppUser _appUser = AppUser(
@@ -362,7 +368,7 @@ class _EditProfileState extends State<EditProfile> {
                         SnackBar(
                           backgroundColor: Theme.of(context).iconTheme.color,
                           behavior: SnackBarBehavior.floating,
-                          content: const Text('Updated User data successfully'),
+                          content: Text('Updated User data successfully'),
                         ),
                       );
                       Navigator.pop(context);
@@ -371,12 +377,12 @@ class _EditProfileState extends State<EditProfile> {
                         SnackBar(
                           backgroundColor: Theme.of(context).iconTheme.color,
                           behavior: SnackBarBehavior.floating,
-                          content: const Text('No Change'),
+                          content: Text('No Change'),
                         ),
                       );
                     }
                   },
-                  child: const Text(
+                  child: Text(
                     'Update',
                     style: TextStyle(fontSize: 20),
                   ),

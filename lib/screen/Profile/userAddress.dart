@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
 import 'package:tnshealth/API/userAPI.dart';
-import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 
 import 'package:uuid/uuid.dart';
@@ -248,9 +247,9 @@ class _UserAddressState extends State<UserAddress> {
                           state: statecontroller.text,
                         );
 
-                        // widget.buttonText == 'Add'
+                        // widget.buttonText == 'Add' ?
                         UserAPI().addNewAddress(address);
-                        // : userAPI().updateAddressData(address);
+                        //: UserAPI().updateAddressData(address);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

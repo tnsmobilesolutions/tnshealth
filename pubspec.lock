@@ -231,8 +231,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "1d3acff289909a3ca40af7eb8fb7b5ad5731fdd9"
-      url: "https://github.com/tnsmobilesolutions/healthshared.git"
+      resolved-ref: "7c457eb5923220927a8f977e5393bfe062d7c028"
+      url: "https://github.com/tnsmobilesolutions/healthshared"
     source: git
     version: "0.0.1"
   http:
