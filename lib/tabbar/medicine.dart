@@ -10,11 +10,11 @@ import 'package:intl/intl.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/medicine/fileupload.dart';
-// import 'package:tnshealth/model/addressmodel.dart';
-//import 'package:tnshealth/model/ordermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/Profile/addNewAddress.dart';
 import 'package:uuid/uuid.dart';
+// import 'package:tnshealth/model/addressmodel.dart';
+//import 'package:tnshealth/model/ordermodel.dart';
 
 class Medicine extends StatefulWidget {
   const Medicine({
@@ -71,17 +71,11 @@ class _MedicineState extends State<Medicine> {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               return SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      // Text('Order Date : $currentDate'),
-                      // const SizedBox(height: 20),
-
-                      // Text('Order Time : $currentTime'),
-                      // const SizedBox(height: 20),
-
-                      // Text('$name '),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

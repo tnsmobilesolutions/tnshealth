@@ -33,6 +33,67 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     return name;
   }
 
+  Future<void> showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Center(child: Text('Sign Out')),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Center(child: Text('Do you want to sign out ?')),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'No',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () async {
+                    await UserAPI().logout();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignIn(),
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.red,
+                        elevation: 6,
+                        behavior: SnackBarBehavior.floating,
+                        content: Text(
+                          'You are Logged Out',
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -113,22 +174,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 },
               ),
               ListTile(
-                title: Row(
-                  children: const <Widget>[
-                    Icon(Icons.logout),
-                    SizedBox(width: 5),
-                    Text('Logout'),
-                  ],
-                ),
-                onTap: () async {
-                  await UserAPI().logout();
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const SignIn();
-                    },
-                  ));
-                },
-              ),
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.logout),
+                      SizedBox(width: 5),
+                      Text('Log Out'),
+                    ],
+                  ),
+                  onTap: showMyDialog),
             ],
           ),
         );
