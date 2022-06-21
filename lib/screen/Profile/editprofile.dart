@@ -70,7 +70,7 @@ class _EditProfileState extends State<EditProfile> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   controller: fullnamecontroller,
@@ -94,7 +94,7 @@ class _EditProfileState extends State<EditProfile> {
                     value = fullnamecontroller.text;
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   validator: (value) {
                     RegExp regex = RegExp(r'^.{10}$');
@@ -114,11 +114,12 @@ class _EditProfileState extends State<EditProfile> {
                   controller: phonenumbercontroller,
                   decoration: InputDecoration(
                     icon: Icon(Icons.phone),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     labelText: 'Phone Number',
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   validator: (value) {
@@ -143,7 +144,7 @@ class _EditProfileState extends State<EditProfile> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15))),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   // keyboardType: TextInputType.none,
                   autofocus: false,
@@ -160,14 +161,14 @@ class _EditProfileState extends State<EditProfile> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     icon: Icon(Icons.bloodtype),
-                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     hintText: "BloodGroup",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   // keyboardType: TextInputType.none,
                   autofocus: false,
@@ -184,14 +185,14 @@ class _EditProfileState extends State<EditProfile> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     icon: Icon(Icons.male),
-                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     hintText: "Gender",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: false,
@@ -212,14 +213,14 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   decoration: InputDecoration(
                     icon: Icon(Icons.height),
-                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     hintText: "Height",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: false,
@@ -236,14 +237,14 @@ class _EditProfileState extends State<EditProfile> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     icon: Icon(Icons.monitor_weight),
-                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     hintText: "Weight",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 15),
                 TextFormField(
                   controller: countrycontroller,
                   keyboardType: TextInputType.name,
@@ -255,13 +256,14 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   decoration: InputDecoration(
                     icon: Icon(Icons.location_city),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     labelText: 'Country',
                   ),
                 ),
                 SizedBox(height: 15),
                 SizedBox(
-                  height: 260,
+                  height: 280,
                   width: 400,
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
@@ -310,7 +312,7 @@ class _EditProfileState extends State<EditProfile> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
@@ -385,7 +387,7 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   child: Text(
                     'Update',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 15),
                   ),
                 )
               ],
