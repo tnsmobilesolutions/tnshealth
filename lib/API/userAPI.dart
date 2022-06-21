@@ -228,8 +228,12 @@ class UserAPI {
 
   Future<AppUser?> updateUserAddress(Address address) async {
     String? docId = await getUserID();
-    DocumentReference userCollection =
+    DocumentReference userDocument =
         FirebaseFirestore.instance.collection('users').doc(docId);
+    var userDetails = userDocument.get();
+    userDetails.then((value) {
+      print(value);
+    });
     return null;
   }
 
