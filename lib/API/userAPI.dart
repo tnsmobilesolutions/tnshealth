@@ -226,8 +226,15 @@ class UserAPI {
     return null;
   }
 
+  Future<AppUser?> updateUserAddress(Address address) async {
+    String? docId = await getUserID();
+    DocumentReference userCollection =
+        FirebaseFirestore.instance.collection('users').doc(docId);
+    return null;
+  }
+
 // update userData
-  Future<AppUser?> updateUserData(AppUser _appUser) async {
+  Future<AppUser?> updateUserProfile(AppUser _appUser) async {
     var collection = FirebaseFirestore.instance.collection('users');
     String? docId = await getUserID();
     collection

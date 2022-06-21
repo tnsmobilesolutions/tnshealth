@@ -322,6 +322,7 @@ class _EditProfileState extends State<EditProfile> {
                                                     title: 'Edit Address',
                                                     buttonText: 'Update',
                                                     userAddress: address,
+                                                    index: index,
                                                   );
                                                 },
                                               ),
@@ -361,7 +362,7 @@ class _EditProfileState extends State<EditProfile> {
                       weight: weightcontroller.text,
                     );
 
-                    UserAPI().updateUserData(_appUser);
+                    UserAPI().updateUserProfile(_appUser);
 
                     if (_appUser != null) {
                       ScaffoldMessenger.of(context).showSnackBar(

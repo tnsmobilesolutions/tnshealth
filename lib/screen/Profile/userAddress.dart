@@ -7,15 +7,17 @@ import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class UserAddress extends StatefulWidget {
-  UserAddress(
-      {Key? key,
-      this.userAddress,
-      required this.title,
-      required this.buttonText})
-      : super(key: key);
+  UserAddress({
+    Key? key,
+    this.userAddress,
+    required this.title,
+    required this.buttonText,
+    this.index,
+  }) : super(key: key);
   List<Address?>? userAddress;
   String title;
   String buttonText;
+  int? index;
   @override
   State<UserAddress> createState() => _UserAddressState();
 }
@@ -37,26 +39,28 @@ class _UserAddressState extends State<UserAddress> {
     super.initState();
     setState(() {
       fullnamecontroller.text = (widget.userAddress != null
-          ? widget.userAddress![0]!.patientName
+          ? widget.userAddress![widget.index as int]!.patientName
           : '')!;
       phonenumbercontroller.text = (widget.userAddress != null
-          ? widget.userAddress![0]!.phoneNumber.toString()
+          ? widget.userAddress![widget.index as int]!.phoneNumber.toString()
           : '');
       addresstypecontroller.text = (widget.userAddress != null
-          ? widget.userAddress![0]!.addressType
+          ? widget.userAddress![widget.index as int]!.addressType
           : '')!;
       addressline1namecontroller?.text = (widget.userAddress != null
-          ? widget.userAddress![0]!.addressLine1
+          ? widget.userAddress![widget.index as int]!.addressLine1
           : '')!;
       addressline2namecontroller.text = (widget.userAddress != null
-          ? widget.userAddress![0]!.addressLine2
+          ? widget.userAddress![widget.index as int]!.addressLine2
           : '')!;
-      citycontroller.text =
-          (widget.userAddress != null ? widget.userAddress![0]!.city : '')!;
-      statecontroller.text =
-          (widget.userAddress != null ? widget.userAddress![0]!.state : '')!;
+      citycontroller.text = (widget.userAddress != null
+          ? widget.userAddress![widget.index as int]!.city
+          : '')!;
+      statecontroller.text = (widget.userAddress != null
+          ? widget.userAddress![widget.index as int]!.state
+          : '')!;
       pincodecontroller.text = (widget.userAddress != null
-          ? widget.userAddress![0]!.pincode.toString()
+          ? widget.userAddress![widget.index as int]!.pincode.toString()
           : '');
     });
   }
