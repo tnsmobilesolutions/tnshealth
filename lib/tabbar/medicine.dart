@@ -253,38 +253,34 @@ class _MedicineState extends State<Medicine> {
                         heroTag: 'btn2',
                         onPressed: () async {
                           vendorID = await UserAPI().getVendorID();
-                          prescriptionURL = await uploadImagetoFirebadseStorage(
+                          prescriptionURL = await uploadImageToFirebaseStorage(
                               imageFromUploadButton) as String;
 
-                          // if (_formKey.currentState != null &&
-                          //     _formKey.currentState!.validate()) {
                           Order orderModel = Order(
-                              name: name,
-                              deliveryDate: currentDate,
-                              deliveryTime: DateFormat("hh:mm:ss a").format(
-                                  DateTime.now().add(const Duration(hours: 1))),
-                              orderDate: currentDate,
-                              orderTime: currentTime,
-                              orderId: const Uuid().v1(),
-                              prescriptionURL: prescriptionURL,
-                              userId: uid,
-                              vendorId: vendorID,
-                              address: Address(
-                                patientName: address?[0]?.patientName,
-                                addressId: address?[0]?.addressId,
-                                addressLine1: address?[0]?.addressLine1,
-                                addressLine2: address?[0]?.addressLine2,
-                                addressType: address?[0]?.addressType,
-                                city: address?[0]?.city,
-                                state: address?[0]?.state,
-                                pincode: address?[0]?.pincode,
-                                phoneNumber: address?[0]?.phoneNumber,
-                              ));
+                            name: name,
+                            deliveryDate: currentDate,
+                            deliveryTime: DateFormat("hh:mm:ss a").format(
+                                DateTime.now().add(const Duration(hours: 1))),
+                            orderStatus: 'placed',
+                            orderDate: currentDate,
+                            orderTime: currentTime,
+                            orderId: const Uuid().v1(),
+                            prescriptionURL: prescriptionURL,
+                            userId: uid,
+                            vendorId: vendorID,
+                            address: Address(
+                              patientName: address?[0]?.patientName,
+                              addressId: address?[0]?.addressId,
+                              addressLine1: address?[0]?.addressLine1,
+                              addressLine2: address?[0]?.addressLine2,
+                              addressType: address?[0]?.addressType,
+                              city: address?[0]?.city,
+                              state: address?[0]?.state,
+                              pincode: address?[0]?.pincode,
+                              phoneNumber: address?[0]?.phoneNumber,
+                            ),
+                          );
                           FirestoreData().createNewOrder(orderModel);
-                          // } else {
-                          //   print(
-                          //       '*HELLO*********$uploadImagetoFirebadseStorage(previewImage!)}*********HELLO*');
-                          // }
 
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
@@ -313,7 +309,7 @@ class _MedicineState extends State<Medicine> {
   }
 
   //uploading to firebasee
-  Future<String?> uploadImagetoFirebadseStorage(XFile image) async {
+  Future<String?> uploadImageToFirebaseStorage(XFile image) async {
     // print('**************${getImageName(image)}**************');
     Reference db = FirebaseStorage.instance.ref('$name/${getImageName(image)}');
     await db.putFile(File(image.path));

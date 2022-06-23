@@ -96,30 +96,30 @@ class FirestoreData {
 
   createNewOrder(Order orderModel) {
     final _address = orderModel.address;
-    FirebaseFirestore.instance
-        .collection('orders')
-        .doc(orderModel.orderId)
-        .set({
-      'name': orderModel.name,
-      'prescriptionURL': orderModel.prescriptionURL,
-      'orderId': orderModel.orderId,
-      'orderTime': orderModel.orderTime,
-      'orderDate': orderModel.orderDate,
-      'deliveryDate': orderModel.deliveryDate,
-      'deliveryTime': orderModel.deliveryTime,
-      'userId': orderModel.userId,
-      'vendorId': orderModel.vendorId,
-      'address': {
-        'patientName': _address?.patientName,
-        'addressId': _address?.addressId,
-        'addressLine1': _address?.addressLine1,
-        'addressLine2': _address?.addressLine2,
-        'city': _address?.city,
-        'addressType': _address?.addressType,
-        'phoneNumber': _address?.phoneNumber,
-        'pincode': _address?.pincode,
-        'state': _address?.state
-      }
-    });
+    FirebaseFirestore.instance.collection('orders').doc(orderModel.orderId).set(
+      {
+        'name': orderModel.name,
+        'prescriptionURL': orderModel.prescriptionURL,
+        'orderStatus': orderModel.orderStatus,
+        'orderId': orderModel.orderId,
+        'orderTime': orderModel.orderTime,
+        'orderDate': orderModel.orderDate,
+        'deliveryDate': orderModel.deliveryDate,
+        'deliveryTime': orderModel.deliveryTime,
+        'userId': orderModel.userId,
+        'vendorId': orderModel.vendorId,
+        'address': {
+          'patientName': _address?.patientName,
+          'addressId': _address?.addressId,
+          'addressLine1': _address?.addressLine1,
+          'addressLine2': _address?.addressLine2,
+          'city': _address?.city,
+          'addressType': _address?.addressType,
+          'phoneNumber': _address?.phoneNumber,
+          'pincode': _address?.pincode,
+          'state': _address?.state
+        }
+      },
+    );
   }
 }
