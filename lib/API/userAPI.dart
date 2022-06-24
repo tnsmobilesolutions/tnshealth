@@ -226,16 +226,46 @@ class UserAPI {
     return null;
   }
 
-  Future<AppUser?> updateUserAddress(Address address) async {
-    String? docId = await getUserID();
-    DocumentReference userDocument =
-        FirebaseFirestore.instance.collection('users').doc(docId);
-    var userDetails = userDocument.get();
-    userDetails.then((value) {
-      print(value);
-    });
-    return null;
-  }
+// //  step 1 : find address from user document which needs to be updated
+//   Future<AppUser?> updateAddress(
+//       Address address, List<Address?>? userAddress) async {
+//     String? docId = await getUserID();
+//     var collection = FirebaseFirestore.instance.collection('users').doc(docId);
+
+//     Address _address = address;
+//     // step 2 : replace that adrress with new address parameter
+//     AppUser newData = AppUser(
+//       address: [address],
+//     );
+//     // {
+//     //   'patientName': _address.patientName,
+//     //   'addressId': _address.addressId,
+//     //   'addressLine1': _address.addressLine1,
+//     //   'addressLine2': _address.addressLine2,
+//     //   'city': _address.city,
+//     //   'addressType': _address.addressType,
+//     //   'phoneNumber': _address.phoneNumber,
+//     //   'pincode': _address.pincode,
+//     //   'state': _address.state
+//     //   };
+
+//     final updates = await <String, dynamic>{
+//       "address": FieldValue.arrayRemove([newData.address])
+//     };
+//     //  step 3 : update this user document
+//     final add = <String, dynamic>{
+//       "address": FieldValue.arrayUnion([newData.address]),
+//     };
+//     collection.update(add);
+//     return null;
+//   }
+
+//   //  step 1 : find address from user document which needs to be updated
+//   //  step 2 : replace that adrress with new address parameter
+//   //  step 3 : update this user document
+
+//   // loop through the user doc. address array searching for the  addressId in address parameter
+//   //update each address field maping the respective address field from address parameter
 
 // update userData
   Future<AppUser?> updateUserProfile(AppUser _appUser) async {
@@ -247,15 +277,82 @@ class UserAPI {
     return null;
   }
 
-  //delete only address array
-  Future<AppUser?> deleteAddress() async {
+  //update address
+  Future<Address?> updateAddress(
+    Address? newAddress,
+    Address? oldAddress,
+  ) async {
     String? docId = await getUserID();
     var collection = FirebaseFirestore.instance.collection('users').doc(docId);
-    // Remove the 'capital' field from the document
-    final updates = <String, dynamic>{
-      "address": FieldValue.delete(),
+
+    //store addresses array from this doc.
+    // loop through address array and dlt the parameter address from array.
+    // update the modify array in firestore.
+
+    final remove = {
+      'address': FieldValue.arrayRemove([
+        {
+          "addressId": oldAddress?.addressId,
+          "addressLine1": oldAddress?.addressLine1,
+          "oldAddressLine2": oldAddress?.addressLine2,
+          "city": oldAddress?.city,
+          "patientName": oldAddress?.patientName,
+          "oldAddressType": oldAddress?.addressType,
+          "phoneNumber": oldAddress?.phoneNumber,
+          "pincode": oldAddress?.pincode,
+          "state": oldAddress?.state
+        }
+      ])
     };
-    collection.update(updates);
+    final add = {
+      'address': FieldValue.arrayUnion([
+        {
+          "addressId": oldAddress?.addressId,
+          "addressLine1": newAddress?.addressLine1,
+          "addressLine2": newAddress?.addressLine2,
+          "city": newAddress?.city,
+          "patientName": newAddress?.patientName,
+          "newaddressType": newAddress?.addressType,
+          "phoneNumber": newAddress?.phoneNumber,
+          "pincode": newAddress?.pincode,
+          "state": newAddress?.state
+        }
+      ])
+    };
+
+    await deleteAddress(oldAddress);
+    await collection.update(add);
+
+    return null;
+  }
+
+  //delete only address array
+  Future<Address?> deleteAddress(Address? address) async {
+    String? docId = await getUserID();
+    var collection = FirebaseFirestore.instance.collection('users').doc(docId);
+
+    //store addresses array from this doc.
+    // loop through address array and dlt the parameter address from array.
+    // update the modify array in firestore.
+
+    final remove = {
+      'address': FieldValue.arrayRemove([
+        {
+          "addressId": address?.addressId,
+          "addressLine1": address?.addressLine1,
+          "addressLine2": address?.addressLine2,
+          "city": address?.city,
+          "patientName": address?.patientName,
+          "addressType": address?.addressType,
+          "phoneNumber": address?.phoneNumber,
+          "pincode": address?.pincode,
+          "state": address?.state
+        }
+      ])
+    };
+
+    collection.update(remove);
+
     return null;
   }
 }

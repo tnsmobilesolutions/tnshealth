@@ -335,7 +335,9 @@ class _EditProfileState extends State<EditProfile> {
                                         SizedBox(width: 30),
                                         ElevatedButton(
                                             onPressed: () {
-                                              UserAPI().deleteAddress();
+                                              UserAPI().deleteAddress(
+                                                address?[index],
+                                              );
                                             },
                                             child: Text('Remove'))
                                       ],

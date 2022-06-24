@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthshared/models/address_model.dart';
 import 'package:tnshealth/API/userAPI.dart';
+
 import 'package:tnshealth/screen/Dashboard.dart';
 
 import 'package:uuid/uuid.dart';
@@ -239,7 +240,7 @@ class _UserAddressState extends State<UserAddress> {
                     onPressed: () {
                       if (_formKey.currentState != null &&
                           _formKey.currentState!.validate()) {
-                        Address address = Address(
+                        Address newaddress = Address(
                           patientName: fullnamecontroller.text,
                           addressType: addresstypecontroller.text,
                           phoneNumber: int.tryParse(phonenumbercontroller.text),
@@ -250,10 +251,31 @@ class _UserAddressState extends State<UserAddress> {
                           pincode: int.tryParse(pincodecontroller.text),
                           state: statecontroller.text,
                         );
-
-                        // widget.buttonText == 'Add' ?
-                        UserAPI().addNewAddress(address);
-                        //: UserAPI().updateAddressData(address);
+                        Address oldaddress = Address(
+                          patientName: widget
+                              .userAddress?[widget.index as int]?.patientName,
+                          addressType: widget
+                              .userAddress?[widget.index as int]?.addressType,
+                          phoneNumber: widget
+                              .userAddress?[widget.index as int]?.phoneNumber,
+                          addressId: widget
+                              .userAddress?[widget.index as int]?.addressId,
+                          addressLine1: widget
+                              .userAddress?[widget.index as int]?.addressLine1,
+                          addressLine2: widget
+                              .userAddress?[widget.index as int]?.addressLine2,
+                          city: widget.userAddress?[widget.index as int]?.city,
+                          pincode:
+                              widget.userAddress?[widget.index as int]?.pincode,
+                          state:
+                              widget.userAddress?[widget.index as int]?.state,
+                        );
+                        widget.buttonText == 'Add'
+                            ? UserAPI().addNewAddress(newaddress)
+                            : UserAPI().updateAddress(
+                                newaddress,
+                                oldaddress,
+                              );
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

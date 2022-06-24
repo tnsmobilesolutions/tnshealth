@@ -12,6 +12,7 @@ import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/medicine/fileupload.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/Profile/addNewAddress.dart';
+import 'package:tnshealth/screen/Profile/userAddress.dart';
 import 'package:uuid/uuid.dart';
 // import 'package:tnshealth/model/addressmodel.dart';
 //import 'package:tnshealth/model/ordermodel.dart';
@@ -231,12 +232,16 @@ class _MedicineState extends State<Medicine> {
                           TextButton.icon(
                             onPressed: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AddNewAddress(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return UserAddress(
                                       buttonText: 'Add',
-                                    ),
-                                  ));
+                                      title: 'Add New Address',
+                                    );
+                                  },
+                                ),
+                              );
                             },
                             icon: const Icon(Icons.add),
                             label: const Text('Add New Address'),
