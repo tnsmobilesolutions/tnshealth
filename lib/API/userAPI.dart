@@ -226,46 +226,12 @@ class UserAPI {
     return null;
   }
 
-// //  step 1 : find address from user document which needs to be updated
-//   Future<AppUser?> updateAddress(
-//       Address address, List<Address?>? userAddress) async {
-//     String? docId = await getUserID();
-//     var collection = FirebaseFirestore.instance.collection('users').doc(docId);
+  //  step 1 : find address from user document which needs to be updated
+  //  step 2 : replace that adrress with new address parameter
+  //  step 3 : update this user document
 
-//     Address _address = address;
-//     // step 2 : replace that adrress with new address parameter
-//     AppUser newData = AppUser(
-//       address: [address],
-//     );
-//     // {
-//     //   'patientName': _address.patientName,
-//     //   'addressId': _address.addressId,
-//     //   'addressLine1': _address.addressLine1,
-//     //   'addressLine2': _address.addressLine2,
-//     //   'city': _address.city,
-//     //   'addressType': _address.addressType,
-//     //   'phoneNumber': _address.phoneNumber,
-//     //   'pincode': _address.pincode,
-//     //   'state': _address.state
-//     //   };
-
-//     final updates = await <String, dynamic>{
-//       "address": FieldValue.arrayRemove([newData.address])
-//     };
-//     //  step 3 : update this user document
-//     final add = <String, dynamic>{
-//       "address": FieldValue.arrayUnion([newData.address]),
-//     };
-//     collection.update(add);
-//     return null;
-//   }
-
-//   //  step 1 : find address from user document which needs to be updated
-//   //  step 2 : replace that adrress with new address parameter
-//   //  step 3 : update this user document
-
-//   // loop through the user doc. address array searching for the  addressId in address parameter
-//   //update each address field maping the respective address field from address parameter
+  // loop through the user doc. address array searching for the  addressId in address parameter
+  //update each address field maping the respective address field from address parameter
 
 // update userData
   Future<AppUser?> updateUserProfile(AppUser _appUser) async {
