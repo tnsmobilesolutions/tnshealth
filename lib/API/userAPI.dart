@@ -226,13 +226,6 @@ class UserAPI {
     return null;
   }
 
-  //  step 1 : find address from user document which needs to be updated
-  //  step 2 : replace that adrress with new address parameter
-  //  step 3 : update this user document
-
-  // loop through the user doc. address array searching for the  addressId in address parameter
-  //update each address field maping the respective address field from address parameter
-
 // update userData
   Future<AppUser?> updateUserProfile(AppUser _appUser) async {
     var collection = FirebaseFirestore.instance.collection('users');
@@ -242,6 +235,13 @@ class UserAPI {
         .update(_appUser.toMap());
     return null;
   }
+
+  //  step 1 : find address from user document which needs to be updated
+  //  step 2 : replace that adrress with new address parameter
+  //  step 3 : update this user document
+
+  // loop through the user doc. address array searching for the  addressId in address parameter
+  //update each address field maping the respective address field from address parameter
 
   //update address
   Future<Address?> updateAddress(
@@ -260,10 +260,10 @@ class UserAPI {
         {
           "addressId": oldAddress?.addressId,
           "addressLine1": oldAddress?.addressLine1,
-          "oldAddressLine2": oldAddress?.addressLine2,
+          "AddressLine2": oldAddress?.addressLine2,
           "city": oldAddress?.city,
           "patientName": oldAddress?.patientName,
-          "oldAddressType": oldAddress?.addressType,
+          "addressType": oldAddress?.addressType,
           "phoneNumber": oldAddress?.phoneNumber,
           "pincode": oldAddress?.pincode,
           "state": oldAddress?.state
@@ -278,7 +278,7 @@ class UserAPI {
           "addressLine2": newAddress?.addressLine2,
           "city": newAddress?.city,
           "patientName": newAddress?.patientName,
-          "newaddressType": newAddress?.addressType,
+          "addressType": newAddress?.addressType,
           "phoneNumber": newAddress?.phoneNumber,
           "pincode": newAddress?.pincode,
           "state": newAddress?.state
