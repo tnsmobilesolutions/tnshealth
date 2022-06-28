@@ -39,7 +39,7 @@ class _MedicineState extends State<Medicine> {
   String? phonenum;
   String? uid;
   String? vendorID;
-
+  int? selectedindex;
   bool isTapped = false;
   String currentDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
   String currentTime = DateFormat("hh:mm:ss a").format(DateTime.now());
@@ -148,12 +148,12 @@ class _MedicineState extends State<Medicine> {
                             itemCount: address?.length,
                             itemBuilder: (context, index) {
                               return GestureDetector(
-                                onTap: onCardTapped(index),
-                                //  (() {
-                                //   setState(() {
-                                //     selectedCard = !selectedCard;
-                                //   });
-                                // }),
+                                onTap: (() {
+                                  setState(() {
+                                    selectedCard = true;
+                                    selectedindex = index;
+                                  });
+                                }),
                                 child: Card(
                                   key: ValueKey(address?[index]),
                                   shape: selectedCard
@@ -250,18 +250,24 @@ class _MedicineState extends State<Medicine> {
                             userId: uid,
                             vendorId: vendorID,
                             address: Address(
-                              patientName: address![0]?.patientName,
-                              addressId: address?[0]?.addressId,
-                              addressLine1: address?[0]?.addressLine1,
-                              addressLine2: address?[0]?.addressLine2,
-                              addressType: address?[0]?.addressType,
-                              city: address?[0]?.city,
-                              state: address?[0]?.state,
-                              pincode: address?[0]?.pincode,
-                              phoneNumber: address?[0]?.phoneNumber,
+                              patientName:
+                                  address![selectedindex as int]?.patientName,
+                              addressId:
+                                  address?[selectedindex as int]?.addressId,
+                              addressLine1:
+                                  address?[selectedindex as int]?.addressLine1,
+                              addressLine2:
+                                  address?[selectedindex as int]?.addressLine2,
+                              addressType:
+                                  address?[selectedindex as int]?.addressType,
+                              city: address?[selectedindex as int]?.city,
+                              state: address?[selectedindex as int]?.state,
+                              pincode: address?[selectedindex as int]?.pincode,
+                              phoneNumber:
+                                  address?[selectedindex as int]?.phoneNumber,
                             ),
                           );
-                          print(orderModel);
+                          print('************$orderModel******************');
                           FirestoreData().createNewOrder(orderModel);
 
                           Navigator.push(context, MaterialPageRoute(
