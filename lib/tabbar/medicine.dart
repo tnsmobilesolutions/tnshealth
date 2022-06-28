@@ -11,7 +11,6 @@ import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/medicine/fileupload.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
-import 'package:tnshealth/screen/Profile/addNewAddress.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
 import 'package:uuid/uuid.dart';
 // import 'package:tnshealth/model/addressmodel.dart';
@@ -31,20 +30,24 @@ class _MedicineState extends State<Medicine> {
   late XFile imageFromUploadButton;
   // final _formKey = GlobalKey<FormState>();
   String? medicineType;
+
   final kTabBar = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   final kTextStyle = const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   String? name;
   List<Address?>? address;
+  bool selectedCard = false;
   String? phonenum;
   String? uid;
   String? vendorID;
+
+  bool isTapped = false;
   String currentDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
   String currentTime = DateFormat("hh:mm:ss a").format(DateTime.now());
 
   @override
   void initState() {
     super.initState();
-    // FirestoreData().getCurrentUserData();
+
     medicineType = 'Allopathy';
   }
 
@@ -145,7 +148,18 @@ class _MedicineState extends State<Medicine> {
                             itemCount: address?.length,
                             itemBuilder: (context, index) {
                               return GestureDetector(
+                                onTap: onCardTapped(index),
+                                //  (() {
+                                //   setState(() {
+                                //     selectedCard = !selectedCard;
+                                //   });
+                                // }),
                                 child: Card(
+                                  key: ValueKey(address?[index]),
+                                  shape: selectedCard
+                                      ? const RoundedRectangleBorder(
+                                          side: BorderSide(color: Colors.black))
+                                      : null,
                                   elevation: 10,
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
@@ -187,45 +201,7 @@ class _MedicineState extends State<Medicine> {
                           ),
                         ),
                       ),
-                      // Card(
-                      //   elevation: 5,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.all(10),
-                      //     child: Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Text(address != null
-                      //             ? 'Name : ${address![0]?.patientName}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'phone Number : ${address![0]?.phoneNumber}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'City : ${address![0]?.city}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'State : ${address![0]?.state}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'Pincode : ${address![0]?.pincode}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'Address Type : ${address![0]?.addressType}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'Address ID : ${address![0]?.addressId}'
-                      //             : ''),
-                      //         Text(address != null
-                      //             ? 'Address : ${address![0]?.addressLine1},'
-                      //                 '${address![0]?.addressLine2}'
-                      //             : ''),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
 
-                      //Text('Phone: -$phonenum'),
-                      // const SizedBox(height: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -274,7 +250,7 @@ class _MedicineState extends State<Medicine> {
                             userId: uid,
                             vendorId: vendorID,
                             address: Address(
-                              patientName: address?[0]?.patientName,
+                              patientName: address![0]?.patientName,
                               addressId: address?[0]?.addressId,
                               addressLine1: address?[0]?.addressLine1,
                               addressLine2: address?[0]?.addressLine2,
@@ -285,6 +261,7 @@ class _MedicineState extends State<Medicine> {
                               phoneNumber: address?[0]?.phoneNumber,
                             ),
                           );
+                          print(orderModel);
                           FirestoreData().createNewOrder(orderModel);
 
                           Navigator.push(context, MaterialPageRoute(
@@ -324,5 +301,10 @@ class _MedicineState extends State<Medicine> {
   //return image name
   String getImageName(XFile image) {
     return image.path.split("/").last;
+  }
+
+  // select card
+  onCardTapped(int index) {
+    print('Card $index tapped');
   }
 }
