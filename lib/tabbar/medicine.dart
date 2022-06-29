@@ -13,8 +13,6 @@ import 'package:tnshealth/medicine/fileupload.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
 import 'package:uuid/uuid.dart';
-// import 'package:tnshealth/model/addressmodel.dart';
-//import 'package:tnshealth/model/ordermodel.dart';
 
 class Medicine extends StatefulWidget {
   const Medicine({
@@ -39,7 +37,7 @@ class _MedicineState extends State<Medicine> {
   String? phonenum;
   String? uid;
   String? vendorID;
-  int? selectedindex;
+  int selectedindex = 0;
   bool isTapped = false;
   String currentDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
   String currentTime = DateFormat("hh:mm:ss a").format(DateTime.now());
@@ -137,68 +135,70 @@ class _MedicineState extends State<Medicine> {
 
                       const SizedBox(height: 10),
 
-                      const SizedBox(height: 10),
                       SizedBox(
-                        height: 230,
-                        width: 600,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: address?.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: (() {
-                                  setState(() {
-                                    selectedCard = true;
-                                    selectedindex = index;
-                                  });
-                                }),
-                                child: Card(
-                                  key: ValueKey(address?[index]),
-                                  shape: selectedCard
-                                      ? const RoundedRectangleBorder(
-                                          side: BorderSide(color: Colors.black))
-                                      : null,
-                                  elevation: 10,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(address != null
-                                            ? 'Name : ${address![index]?.patientName}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'phone Number : ${address![index]?.phoneNumber}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'City : ${address![index]?.city}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'State : ${address![index]?.state}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'Pincode : ${address![index]?.pincode}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'Address Type : ${address![index]?.addressType}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'Address ID : ${address![index]?.addressId}'
-                                            : ''),
-                                        Text(address != null
-                                            ? 'Address : ${address![index]?.addressLine1},'
-                                                '${address![index]?.addressLine2}'
-                                            : ''),
-                                      ],
+                        height: 200,
+                        width: 500,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: address?.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: (() {
+                                setState(() {
+                                  selectedCard = !selectedCard;
+                                  selectedindex = index;
+                                });
+                              }),
+                              child: Card(
+                                elevation: 20,
+                                child: SizedBox(
+                                  height: 210,
+                                  width: 500,
+                                  child: ListTile(
+                                    selected: index == selectedindex,
+                                    shape: selectedindex == index
+                                        ? const RoundedRectangleBorder(
+                                            side:
+                                                BorderSide(color: Colors.black))
+                                        : null,
+                                    title: Text(address != null
+                                        ? '${address![index]?.patientName}'
+                                        : ''),
+                                    subtitle: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(address != null
+                                              ? 'phone Number : ${address![index]?.phoneNumber}'
+                                              : ''),
+                                          Text(address != null
+                                              ? 'City : ${address![index]?.city}'
+                                              : ''),
+                                          Text(address != null
+                                              ? 'State : ${address![index]?.state}'
+                                              : ''),
+                                          Text(address != null
+                                              ? 'Pincode : ${address![index]?.pincode}'
+                                              : ''),
+                                          Text(address != null
+                                              ? 'Address Type : ${address![index]?.addressType}'
+                                              : ''),
+                                          Text(address != null
+                                              ? 'Address ID : ${address![index]?.addressId}'
+                                              : ''),
+                                          Text(address != null
+                                              ? 'Address : ${address![index]?.addressLine1},'
+                                                  '${address![index]?.addressLine2}'
+                                              : ''),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
 
@@ -267,7 +267,7 @@ class _MedicineState extends State<Medicine> {
                                   address?[selectedindex as int]?.phoneNumber,
                             ),
                           );
-                          print('************$orderModel******************');
+
                           FirestoreData().createNewOrder(orderModel);
 
                           Navigator.push(context, MaterialPageRoute(
@@ -275,7 +275,16 @@ class _MedicineState extends State<Medicine> {
                               return const DashBoard();
                             },
                           ));
+                          await ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                                  backgroundColor: Colors.blueAccent,
+                                  elevation: 6,
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text(
+                                    'Order Placed',
+                                  )));
                         },
+
                         label: const Text(
                           'Submit',
                           style: TextStyle(

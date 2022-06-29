@@ -48,6 +48,14 @@ class _imageUploadToFirebaseState extends State<imageUploadToFirebase> {
                             heroTag: '3',
                             onPressed: () async {
                               Navigator.pop(context, previewImage);
+                              await ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                      backgroundColor: Colors.red,
+                                      elevation: 6,
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text(
+                                        'Prescription Uploaded',
+                                      )));
                             },
                           ),
                         ),
@@ -95,11 +103,6 @@ class _imageUploadToFirebaseState extends State<imageUploadToFirebase> {
     final uid = user?.uid;
     FirestoreData firestore = FirestoreData(uid: uid);
     final names = await firestore.getCurrentUserData();
-    // if (names != null) {
-    //   return names[0];
-    // } else {
-    //   print('names = null************$uid***********');
-    // }
   }
 }
 
