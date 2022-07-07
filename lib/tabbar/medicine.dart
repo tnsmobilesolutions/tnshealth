@@ -119,12 +119,16 @@ class _MedicineState extends State<Medicine> {
                               icon: const Icon(Icons.file_upload_outlined),
                               backgroundColor: Colors.blueAccent,
                               onPressed: () async {
-                                imageFromUploadButton = await Navigator.push(
-                                    context, MaterialPageRoute(
-                                  builder: (context) {
-                                    return const imageUploadToFirebase();
-                                  },
-                                ));
+                                try {
+                                  imageFromUploadButton = await Navigator.push(
+                                      context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return const imageUploadToFirebase();
+                                    },
+                                  ));
+                                } catch (e) {
+                                  print(e);
+                                }
                               }),
                         ],
                       ),

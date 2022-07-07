@@ -6,6 +6,7 @@ import 'package:healthshared/models/address_model.dart';
 import 'package:tnshealth/API/userAPI.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
+import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
 
 class EditProfile extends StatefulWidget {
@@ -338,6 +339,12 @@ class _EditProfileState extends State<EditProfile> {
                                               UserAPI().deleteAddress(
                                                 address?[index],
                                               );
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DashBoard(),
+                                                  ));
                                             },
                                             child: Text('Remove'))
                                       ],

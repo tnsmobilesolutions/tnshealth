@@ -47,15 +47,26 @@ class _imageUploadToFirebaseState extends State<imageUploadToFirebase> {
                             ),
                             heroTag: '3',
                             onPressed: () async {
-                              Navigator.pop(context, previewImage);
-                              await ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                      backgroundColor: Colors.red,
-                                      elevation: 6,
-                                      behavior: SnackBarBehavior.floating,
-                                      content: Text(
-                                        'Prescription Uploaded',
-                                      )));
+                              if (previewImage != null) {
+                                Navigator.pop(context, previewImage);
+                                await ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        elevation: 6,
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text(
+                                          'Prescription Uploaded',
+                                        )));
+                              } else {
+                                await ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        elevation: 6,
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text(
+                                          'Please Upload any Prescription',
+                                        )));
+                              }
                             },
                           ),
                         ),

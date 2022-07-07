@@ -225,9 +225,19 @@ class _UserAddressState extends State<UserAddress> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                TextField(
+                TextFormField(
                   textInputAction: TextInputAction.next,
                   controller: addresstypecontroller,
+                  validator: (value) {
+                    RegExp regex = RegExp(r'^[a-zA-Z, ]+$');
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your Address Type(eg. Home,Office,....)';
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid Address Type(eg. Home,Office,....)");
+                    }
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     icon: Icon(Icons.location_searching),
                     border: OutlineInputBorder(),
@@ -237,7 +247,7 @@ class _UserAddressState extends State<UserAddress> {
                 const SizedBox(height: 15),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState != null &&
                           _formKey.currentState!.validate()) {
                         Address newaddress = Address(
@@ -276,27 +286,14 @@ class _UserAddressState extends State<UserAddress> {
                                 newaddress,
                                 oldaddress,
                               );
-
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        Navigator.pop(context);
+                        await ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 backgroundColor: Colors.red,
                                 elevation: 6,
                                 behavior: SnackBarBehavior.floating,
                                 content: Text('Address updated successfully')));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                backgroundColor: Colors.red,
-                                elevation: 6,
-                                behavior: SnackBarBehavior.floating,
-                                content: Text('error')));
                       }
-
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const DashBoard();
-                        },
-                      ));
                     },
                     child: Text(
                       widget.buttonText,
