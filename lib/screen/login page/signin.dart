@@ -27,11 +27,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    const logo = CircleAvatar(
-      radius: 60,
-      backgroundImage: AssetImage('images/logo.png'),
-    );
-
     //email field
     final emailField = TextFormField(
       autofocus: false,
@@ -142,14 +137,16 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      logo,
-                      const SizedBox(height: 5),
-                      const Text(
-                        'TNS Health',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
+                      const Image(
+                        image: AssetImage('images/logo.png'),
                       ),
-                      const SizedBox(height: 20),
+                      // const SizedBox(height: 5),
+                      // const Text(
+                      //   'TNS Health',
+                      //   style: TextStyle(
+                      //       fontSize: 30, fontWeight: FontWeight.bold),
+                      // ),
+                      // const SizedBox(height: 20),
                       emailField,
                       const SizedBox(height: 20),
                       passwordField,
