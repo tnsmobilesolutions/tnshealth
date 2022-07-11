@@ -9,9 +9,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tnshealth/API/firestoreAPI.dart';
 import 'package:tnshealth/API/userAPI.dart';
-import 'package:tnshealth/medicine/fileupload.dart';
+
 import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/Profile/userAddress.dart';
+import 'package:tnshealth/screen/image%20upload/fileupload.dart';
+
 import 'package:uuid/uuid.dart';
 
 class Medicine extends StatefulWidget {

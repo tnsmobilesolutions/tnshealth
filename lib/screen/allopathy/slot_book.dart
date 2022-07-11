@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:tnshealth/allopathy/stateless_page.dart';
+import 'package:tnshealth/screen/allopathy/stateless_page.dart';
 
 class SlotBook extends StatefulWidget {
   const SlotBook({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tnshealth/screen/allopathy/slot_book.dart';
 
-import 'package:tnshealth/allopathy/slot_book.dart';
-import 'package:tnshealth/ayurvedic/ayurvedic.dart';
-import 'package:tnshealth/homeopathy/homeopathy.dart';
+import 'package:tnshealth/screen/ayurvedic/ayurvedic.dart';
+import 'package:tnshealth/screen/homeopathy/homeopathy.dart';
 
 class Consult extends StatefulWidget {
   const Consult({Key? key}) : super(key: key);

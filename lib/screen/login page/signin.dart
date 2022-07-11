@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
-
-import 'package:tnshealth/screen/signup.dart';
+import 'package:tnshealth/screen/login%20page/signup.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
