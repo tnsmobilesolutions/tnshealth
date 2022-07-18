@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/bloc/login_bloc/login_bloc.dart';
 import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/login%20page/signup.dart';
@@ -28,99 +30,112 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     //email field
-    final emailField = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Please Enter yor Email";
-        }
-        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-          return ("Please Enter a valid email");
-        }
-        return null;
+    final emailField = BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return TextFormField(
+          autofocus: false,
+          controller: emailController,
+          keyboardType: TextInputType.emailAddress,
+          onSaved: (value) {
+            value = emailController.text;
+          },
+          onChanged: (val) {
+            BlocProvider.of<LoginBloc>(context).add(LoginTextChanged(
+                emailValue: emailController.text,
+                passwordValue: passswordController.text));
+          },
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.email),
+              contentPadding: const EdgeInsets.all(15),
+              hintText: 'Email',
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        );
       },
-      onSaved: (value) {
-        value = emailController.text;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.email),
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Email',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
 
     //password field
-    final passwordField = TextFormField(
-      obscureText: true,
-      autofocus: false,
-      controller: passswordController,
-      keyboardType: TextInputType.visiblePassword,
-      validator: (value) {
-        RegExp regex = RegExp(r'^.{6,}$');
-        if (value!.isEmpty) {
-          return "Please Enter your Password";
-        }
-        if (!regex.hasMatch(value)) {
-          return "Please Enter Correct Password of 6 digit";
-        }
-        return null;
+    final passwordField = BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return TextFormField(
+          obscureText: true,
+          autofocus: false,
+          controller: passswordController,
+          keyboardType: TextInputType.visiblePassword,
+          onSaved: (value) {
+            value = passswordController.text;
+          },
+          onChanged: (val) {
+            BlocProvider.of<LoginBloc>(context).add(LoginTextChanged(
+                passwordValue: passswordController.text,
+                emailValue: emailController.text));
+          },
+          textInputAction: TextInputAction.done,
+          decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.vpn_key),
+              contentPadding: const EdgeInsets.all(15),
+              hintText: 'Password',
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        );
       },
-      onSaved: (value) {
-        value = passswordController.text;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
-          contentPadding: const EdgeInsets.all(15),
-          hintText: 'Password',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
     );
-    final loginbutton = Material(
-      color: Colors.redAccent,
-      elevation: 5,
-      borderRadius: BorderRadius.circular(18),
-      child: MaterialButton(
-        onPressed: () async {
-          try {
-            if (_formkey.currentState!.validate()) {
-              _loggedInUser = await UserAPI().signIn(
-                  emailController.text.trim(), passswordController.text.trim());
+    //LogInButton
 
-              if (_loggedInUser != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DashBoard(),
-                  ),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    elevation: 6,
-                    behavior: SnackBarBehavior.floating,
-                    content: Text(
-                      'Please check your Email/Password',
-                    ),
-                  ),
-                );
+    final loginbutton = BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return Material(
+          color: Colors.redAccent,
+          elevation: 5,
+          borderRadius: BorderRadius.circular(18),
+          child: MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            color: (state is LoginValid) ? Colors.blue : Colors.grey,
+            onPressed: () async {
+              try {
+                if (_formkey.currentState!.validate()) {
+                  _loggedInUser = await UserAPI().signIn(
+                      emailController.text.trim(),
+                      passswordController.text.trim());
+
+                  if (_loggedInUser != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DashBoard(),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        elevation: 6,
+                        behavior: SnackBarBehavior.floating,
+                        content: Text(
+                          'Please check your Email/Password',
+                        ),
+                      ),
+                    );
+                  }
+                }
+              } catch (e) {
+                print(e);
               }
-            }
-          } catch (e) {
-            print(e);
-          }
-        },
-        child: const Text(
-          'SignIn',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        padding: const EdgeInsets.all(8),
-        minWidth: MediaQuery.of(context).size.width,
-      ),
+            },
+            child: const Text(
+              'SignIn',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            padding: const EdgeInsets.all(8),
+            minWidth: MediaQuery.of(context).size.width,
+          ),
+        );
+      },
     );
 
     return Scaffold(
@@ -151,6 +166,17 @@ class _SignInState extends State<SignIn> {
                       const SizedBox(height: 20),
                       passwordField,
                       const SizedBox(height: 20),
+                      BlocBuilder<LoginBloc, LoginState>(
+                        builder: (context, state) {
+                          if (state is LoginError) {
+                            return Text(
+                              state.errorMessage,
+                              style: TextStyle(color: Colors.red),
+                            );
+                          }
+                          return Container();
+                        },
+                      ),
                       loginbutton,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

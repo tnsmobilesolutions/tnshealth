@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tnshealth/constants.dart';
+import 'package:tnshealth/const/validator/constants.dart';
 import 'package:tnshealth/screen/button.dart';
 
 class Allopathy extends StatefulWidget {

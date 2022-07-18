@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:healthshared/healthshared.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
@@ -9,11 +10,11 @@ import 'package:tnshealth/model/usermodel.dart';
 import 'firestoreAPI.dart';
 
 class UserAPI {
-  static AppUser? _loggedInUser;
+  // static AppUser? _loggedInUser;
 
-  static AppUser? get loggedInUser {
-    return _loggedInUser;
-  }
+  // static AppUser? get loggedInUser {
+  //   return _loggedInUser;
+  // }
 
   final _auth = FirebaseAuth.instance;
 
@@ -26,16 +27,18 @@ class UserAPI {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => uid);
 
-      CollectionReference users =
+      CollectionReference usercollection =
           FirebaseFirestore.instance.collection('users');
 
-      final user =
-          users.where("uid", isEqualTo: userCredential?.user?.uid).get().then(
+      final user = usercollection
+          .where("uid", isEqualTo: userCredential?.user?.uid)
+          .get()
+          .then(
         (querySnapshot) {
           final userData =
               querySnapshot.docs.first.data() as Map<String, dynamic>;
           final user = AppUser.fromMap(userData);
-          _loggedInUser = user;
+          // _loggedInUser = user;
           return user;
         },
       );
@@ -45,7 +48,7 @@ class UserAPI {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         //print('No user found for that email.');
-        return null;
+        const Text('data');
       } else if (e.code == 'wrong-password') {
         //print('Wrong password provided for that user.');
         return null;
@@ -105,8 +108,8 @@ class UserAPI {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        print('Email already is in use');
-        return null;
+        return const Text('Email already is in use');
+        // return null;
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
         return null;
@@ -139,7 +142,7 @@ class UserAPI {
           final userData =
               querySnapshot.docs.first.data() as Map<String, dynamic>;
           final user = AppUser.fromMap(userData);
-          _loggedInUser = user;
+          // _loggedInUser = user;
           return user;
         },
       );
