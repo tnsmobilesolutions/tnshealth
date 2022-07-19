@@ -154,7 +154,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           SizedBox(height: 10),
                           Text('City : ${widget.order?.address?.city}'),
                           SizedBox(height: 10),
-                          Text('Sate : ${widget.order?.address?.state}'),
+                          Text('State : ${widget.order?.address?.state}'),
                           SizedBox(height: 10),
                           Text('${widget.order?.address?.addressLine1}'),
                           SizedBox(height: 10),

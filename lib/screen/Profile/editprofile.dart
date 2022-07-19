@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthshared/models/address_model.dart';
 
 import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/bloc/profile/profile_bloc.dart';
 
 import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
@@ -360,44 +362,50 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 SizedBox(height: 15),
-                ElevatedButton(
-                  onPressed: () {
-                    AppUser _appUser = AppUser(
-                      name: fullnamecontroller.text.trim(),
-                      email: emailcontroller.text.trim(),
-                      country: countrycontroller.text,
-                      phoneNumber: phonenumbercontroller.text.trim(),
-                      bloodGroup: bloodgroupcontroller.text,
-                      gender: gendercontroller.text,
-                      height: heightcontroller.text,
-                      weight: weightcontroller.text,
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        AppUser _appUser = AppUser(
+                          name: fullnamecontroller.text.trim(),
+                          email: emailcontroller.text.trim(),
+                          country: countrycontroller.text,
+                          phoneNumber: phonenumbercontroller.text.trim(),
+                          bloodGroup: bloodgroupcontroller.text,
+                          gender: gendercontroller.text,
+                          height: heightcontroller.text,
+                          weight: weightcontroller.text,
+                        );
+
+                        UserAPI().updateUserProfile(_appUser);
+
+                        if (_appUser != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor:
+                                  Theme.of(context).iconTheme.color,
+                              behavior: SnackBarBehavior.floating,
+                              content: Text('Updated User data successfully'),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor:
+                                  Theme.of(context).iconTheme.color,
+                              behavior: SnackBarBehavior.floating,
+                              content: Text('No Change'),
+                            ),
+                          );
+                        }
+                      },
+                      child: Text(
+                        'Update',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     );
-
-                    UserAPI().updateUserProfile(_appUser);
-
-                    if (_appUser != null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: Theme.of(context).iconTheme.color,
-                          behavior: SnackBarBehavior.floating,
-                          content: Text('Updated User data successfully'),
-                        ),
-                      );
-                      Navigator.pop(context);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: Theme.of(context).iconTheme.color,
-                          behavior: SnackBarBehavior.floating,
-                          content: Text('No Change'),
-                        ),
-                      );
-                    }
                   },
-                  child: Text(
-                    'Update',
-                    style: TextStyle(fontSize: 15),
-                  ),
                 )
               ],
             ),

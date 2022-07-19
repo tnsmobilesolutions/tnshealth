@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tnshealth/bloc/internet_connectivity/internet_connectivity_bloc.dart';
 
 import 'package:tnshealth/screen/navigationdrawer.dart';
 import 'package:tnshealth/screen/tabbar/consult.dart';
@@ -52,7 +54,11 @@ class _DashBoardState extends State<DashBoard> {
             ],
           ),
         ),
-        body: const TabBarView(children: [Consult(), Diagnosys(), Medicine()]),
+        body: const TabBarView(children: [
+          Consult(),
+          Diagnosys(),
+          Medicine(),
+        ]),
       ),
     );
   }

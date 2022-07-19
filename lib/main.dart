@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tnshealth/API/userAPI.dart';
+import 'package:tnshealth/bloc/internet_connectivity/internet_connectivity_bloc.dart';
 import 'package:tnshealth/bloc/login_bloc/login_bloc.dart';
 import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
@@ -22,8 +23,15 @@ class Tnshealth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => InternetBloc(),
+        ),
+        BlocProvider(
+          create: (context) => LoginBloc(),
+        ),
+      ],
       child: MaterialApp(
         title: 'TNS Health',
         theme: ThemeData(
@@ -51,7 +59,36 @@ class Tnshealth extends StatelessWidget {
                       future: UserAPI().getAppUserFromUid(user.uid),
                       builder: (_, snap) {
                         if (snap.hasData) {
-                          return const DashBoard();
+                          return BlocListener<InternetBloc, InternetState>(
+                            listener: (context, state) {
+                              if (state is InternetGainState) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Internet is Connected'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              } else if (state is InternetLossState) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    duration: const Duration(days: 365),
+                                    action: SnackBarAction(
+                                      label: 'Dismiss',
+                                      disabledTextColor: Colors.white,
+                                      textColor: Colors.white,
+                                      onPressed: () {
+                                        //Do whnaciatever you want
+                                      },
+                                    ),
+                                    content:
+                                        const Text('Internet is Not Connected'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              }
+                            },
+                            child: const DashBoard(),
+                          );
                         } else {
                           return const Center(
                             child: CircularProgressIndicator(),

@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 
 import 'package:meta/meta.dart';
+import 'package:tnshealth/API/userAPI.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -11,7 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       //EmailValidator
       if (event.emailValue.isEmpty) {
         emit(LoginError('Please Enter Your Email id'));
-      } else if (!(RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]+"))
+      } else if (!(RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z]+\.[a-zA-Z]+"))
           .hasMatch(event.emailValue)) {
         emit(LoginError('Please Enter a valid email'));
       }
@@ -24,6 +26,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginValid());
       }
     });
-    on<LoginSubmitted>((event, emit) => LoginLoading());
+    on<LoginButton>((event, emit) => {
+          UserAPI().signIn(event.email, event.password),
+          emit(LoginSuccefull()),
+        });
   }
 }

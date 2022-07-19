@@ -12,10 +12,10 @@ class LoginTextChanged extends LoginEvent {
   });
 }
 
-class LoginSubmitted extends LoginEvent {
+class LoginButton extends LoginEvent {
   final String email;
   final String password;
-  LoginSubmitted({
+  LoginButton({
     required this.email,
     required this.password,
   });

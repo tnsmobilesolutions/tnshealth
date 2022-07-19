@@ -85,55 +85,37 @@ class _SignInState extends State<SignIn> {
 
     final loginbutton = BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        return Material(
-          color: Colors.redAccent,
-          elevation: 5,
-          borderRadius: BorderRadius.circular(18),
-          child: MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: (state is LoginValid) ? Colors.blue : Colors.grey,
-            onPressed: () async {
-              try {
-                if (_formkey.currentState!.validate()) {
-                  _loggedInUser = await UserAPI().signIn(
-                      emailController.text.trim(),
-                      passswordController.text.trim());
-
-                  if (_loggedInUser != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DashBoard(),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        elevation: 6,
-                        behavior: SnackBarBehavior.floating,
-                        content: Text(
-                          'Please check your Email/Password',
-                        ),
-                      ),
-                    );
-                  }
-                }
-              } catch (e) {
-                print(e);
+        return MaterialButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          color: (state is LoginValid) ? Colors.blue : Colors.grey,
+          onPressed: () async {
+            try {
+              if (_formkey.currentState!.validate()) {
+                BlocProvider.of<LoginBloc>(context).add(LoginButton(
+                    email: emailController.text,
+                    password: passswordController.text));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  elevation: 6,
+                  behavior: SnackBarBehavior.floating,
+                  content: Text(
+                    'Please check your Email/Password',
+                  ),
+                ));
               }
-            },
-            child: const Text(
-              'SignIn',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            padding: const EdgeInsets.all(8),
-            minWidth: MediaQuery.of(context).size.width,
+            } catch (e) {
+              print(e);
+            }
+          },
+          child: const Text(
+            'SignIn',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           ),
+          padding: const EdgeInsets.all(8),
+          minWidth: MediaQuery.of(context).size.width,
         );
       },
     );
@@ -171,7 +153,7 @@ class _SignInState extends State<SignIn> {
                           if (state is LoginError) {
                             return Text(
                               state.errorMessage,
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             );
                           }
                           return Container();
