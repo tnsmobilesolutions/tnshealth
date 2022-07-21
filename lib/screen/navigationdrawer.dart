@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthshared/models/order_model.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 import 'package:tnshealth/API/orderAPI.dart';
 
 import 'package:tnshealth/API/userAPI.dart';
@@ -175,6 +176,17 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   );
                 },
               ),
+              ListTile(
+                  title: Row(
+                    children: const <Widget>[
+                      Icon(Icons.details),
+                      SizedBox(width: 5),
+                      Text('Order Status'),
+                    ],
+                  ),
+                  onTap: (() {
+                    MaterialPageRoute(builder: (context) => TimelineTile());
+                  })),
               ListTile(
                   title: Row(
                     children: const <Widget>[

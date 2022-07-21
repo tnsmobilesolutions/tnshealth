@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tnshealth/API/userAPI.dart';
 import 'package:tnshealth/bloc/internet_connectivity/internet_connectivity_bloc.dart';
 import 'package:tnshealth/bloc/login_bloc/login_bloc.dart';
+import 'package:tnshealth/bloc/profile/profile_bloc.dart';
 import 'package:tnshealth/model/usermodel.dart';
 import 'package:tnshealth/screen/Dashboard.dart';
 import 'package:tnshealth/screen/login%20page/signin.dart';
@@ -30,6 +31,9 @@ class Tnshealth extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ProfileBloc(),
         ),
       ],
       child: MaterialApp(
